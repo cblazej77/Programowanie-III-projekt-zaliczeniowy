@@ -4,8 +4,12 @@ import javax.persistence.*;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
-@Entity
-@Table
+@Entity (
+        name = "nauczycieleprzedmiotow"
+)
+@Table (
+        name = "nauczycieleprzedmiotow"
+)
 public class NauczycielePrzedmiotow {
 
     @Id
