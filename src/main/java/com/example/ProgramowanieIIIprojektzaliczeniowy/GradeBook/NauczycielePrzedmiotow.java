@@ -1,14 +1,23 @@
 package com.example.ProgramowanieIIIprojektzaliczeniowy.GradeBook;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
+
+import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 @Table
 public class NauczycielePrzedmiotow {
 
     @Id
+    @SequenceGenerator(
+            name = "nauczycieleprzedmiotow_sequence",
+            sequenceName = "nauczycieleprzedmiotow_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "nauczycieleprzedmiotow_sequence"
+    )
     private Long idnp;
     private Long idn;
     private Long idp;

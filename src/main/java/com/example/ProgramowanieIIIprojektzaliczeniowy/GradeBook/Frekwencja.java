@@ -1,15 +1,28 @@
 package com.example.ProgramowanieIIIprojektzaliczeniowy.GradeBook;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDate;
+
+import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
 @Table
 public class Frekwencja {
 
     @Id
+    @SequenceGenerator(
+            name = "frekwencja_sequence",
+            sequenceName = "frekwencja_sequence",
+            allocationSize = 1
+    )
+    @GeneratedValue(
+            strategy = SEQUENCE,
+            generator = "frekwencja_sequence"
+    )
+    @Column(
+            name = "idf",
+            updatable = false
+    )
     private Long idf;
     private Long idp;
     private Long iducz;
