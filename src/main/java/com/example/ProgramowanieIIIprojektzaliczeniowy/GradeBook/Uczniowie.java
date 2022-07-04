@@ -1,5 +1,10 @@
 package com.example.ProgramowanieIIIprojektzaliczeniowy.GradeBook;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
+
+@Entity
+@Table
 public class Uczniowie {
 
     private Long iducz;

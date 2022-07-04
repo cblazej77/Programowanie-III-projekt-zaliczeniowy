@@ -1,7 +1,11 @@
 package com.example.ProgramowanieIIIprojektzaliczeniowy.GradeBook;
 
+import javax.persistence.Entity;
+import javax.persistence.Table;
 import java.time.LocalDate;
 
+@Entity
+@Table
 public class Frekwencja {
 
     private Long idf;
