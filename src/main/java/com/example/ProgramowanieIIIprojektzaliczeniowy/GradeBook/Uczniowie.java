@@ -1,12 +1,14 @@
 package com.example.ProgramowanieIIIprojektzaliczeniowy.GradeBook;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 
 @Entity
 @Table
 public class Uczniowie {
 
+    @Id
     private Long iducz;
     private Long nrwdzienniku;
     private Long idk;

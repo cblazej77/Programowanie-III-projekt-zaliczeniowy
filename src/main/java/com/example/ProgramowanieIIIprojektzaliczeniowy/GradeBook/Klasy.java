@@ -1,6 +1,8 @@
 package com.example.ProgramowanieIIIprojektzaliczeniowy.GradeBook;
 
 import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.PostUpdate;
 import javax.persistence.Table;
 import java.time.LocalDate;
 
@@ -8,6 +10,7 @@ import java.time.LocalDate;
 @Table
 public class Klasy {
 
+    @Id
     private Long idk;
     private String nazwa;
     private LocalDate datarozpoczecia;
@@ -70,4 +73,6 @@ public class Klasy {
                 ", nauczyciel_idn=" + nauczyciel_idn +
                 '}';
     }
+
+
 }
