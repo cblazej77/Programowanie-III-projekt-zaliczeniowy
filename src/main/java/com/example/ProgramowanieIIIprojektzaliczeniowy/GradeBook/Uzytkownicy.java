@@ -2,6 +2,9 @@ package com.example.ProgramowanieIIIprojektzaliczeniowy.GradeBook;
 
 import javax.persistence.*;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
@@ -18,12 +21,69 @@ public class Uzytkownicy {
             strategy = SEQUENCE,
             generator = "uzytkownicy_sequence"
     )
+    @Column(
+            name = "idu",
+            updatable = false
+    )
     private Long idu;
+    @Column(
+            name = "login",
+            nullable = false
+    )
     private String login;
+    @Column(
+            name = "haslo",
+            nullable = false
+    )
     private String haslo;
+    @Column(
+            name = "imie",
+            nullable = false
+    )
     private String imie;
+    @Column(
+            name = "nazwisko",
+            nullable = false
+    )
     private String nazwisko;
+    @Column(
+            name = "rola",
+            nullable = false
+    )
     private String rola;
+
+    @OneToMany(mappedBy = "idu")
+    private Set<Nauczyciele> nauczycieles = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "idurodzica")
+    private Set<Uczniowie> uczniowies = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "iduucznia")
+    private Set<Uczniowie> uczniowies1 = new LinkedHashSet<>();
+
+    public Set<Uczniowie> getUczniowies1() {
+        return uczniowies1;
+    }
+
+    public void setUczniowies1(Set<Uczniowie> uczniowies1) {
+        this.uczniowies1 = uczniowies1;
+    }
+
+    public Set<Uczniowie> getUczniowies() {
+        return uczniowies;
+    }
+
+    public void setUczniowies(Set<Uczniowie> uczniowies) {
+        this.uczniowies = uczniowies;
+    }
+
+    public Set<Nauczyciele> getNauczycieles() {
+        return nauczycieles;
+    }
+
+    public void setNauczycieles(Set<Nauczyciele> nauczycieles) {
+        this.nauczycieles = nauczycieles;
+    }
 
     public Uzytkownicy() {
     }

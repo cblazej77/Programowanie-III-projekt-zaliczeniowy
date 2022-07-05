@@ -2,6 +2,9 @@ package com.example.ProgramowanieIIIprojektzaliczeniowy.GradeBook;
 
 import javax.persistence.*;
 
+import java.util.LinkedHashSet;
+import java.util.Set;
+
 import static javax.persistence.GenerationType.SEQUENCE;
 
 @Entity
@@ -18,8 +21,38 @@ public class Nauczyciele {
             strategy = SEQUENCE,
             generator = "nauczyciele_sequence"
     )
+    @Column(
+            name = "idn",
+            updatable = false
+    )
     private Long idn;
+    @Column(
+            name = "idu",
+            nullable = false
+    )
     private Long idu;
+
+    @OneToMany(mappedBy = "nauczyciel_idn")
+    private Set<Klasy> klasies = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "idn")
+    private Set<NauczycielePrzedmiotow> nauczycieleprzedmiotows = new LinkedHashSet<>();
+
+    public Set<NauczycielePrzedmiotow> getNauczycieleprzedmiotows() {
+        return nauczycieleprzedmiotows;
+    }
+
+    public void setNauczycieleprzedmiotows(Set<NauczycielePrzedmiotow> nauczycieleprzedmiotows) {
+        this.nauczycieleprzedmiotows = nauczycieleprzedmiotows;
+    }
+
+    public Set<Klasy> getKlasies() {
+        return klasies;
+    }
+
+    public void setKlasies(Set<Klasy> klasies) {
+        this.klasies = klasies;
+    }
 
     public Nauczyciele() {
     }

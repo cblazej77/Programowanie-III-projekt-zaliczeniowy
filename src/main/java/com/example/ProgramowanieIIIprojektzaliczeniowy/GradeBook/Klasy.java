@@ -2,6 +2,8 @@ package com.example.ProgramowanieIIIprojektzaliczeniowy.GradeBook;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import static javax.persistence.GenerationType.SEQUENCE;
 
@@ -19,10 +21,48 @@ public class Klasy {
             strategy = SEQUENCE,
             generator = "klasy_sequence"
     )
+    @Column(
+            name = "idk",
+            updatable = false
+    )
     private Long idk;
+    @Column(
+            name = "nazwa",
+            nullable = false
+    )
     private String nazwa;
+    @Column(
+            name = "datarozpoczecia",
+            nullable = false
+    )
     private LocalDate datarozpoczecia;
+    @Column(
+            name = "nauczyciel_idn",
+            nullable = false
+    )
     private Integer nauczyciel_idn;
+
+    @OneToMany(mappedBy = "idk")
+    private Set<Uczniowie> uczniowies = new LinkedHashSet<>();
+
+    @OneToMany(mappedBy = "idk")
+    private Set<PrzedmiotyKlas> przedmiotyklas = new LinkedHashSet<>();
+
+    public Set<PrzedmiotyKlas> getPrzedmiotyklas() {
+        return przedmiotyklas;
+    }
+
+    public void setPrzedmiotyklas(Set<PrzedmiotyKlas> przedmiotyklas) {
+        this.przedmiotyklas = przedmiotyklas;
+    }
+
+    public Set<Uczniowie> getUczniowies() {
+        return uczniowies;
+    }
+
+    public void setUczniowies(Set<Uczniowie> uczniowies) {
+        this.uczniowies = uczniowies;
+    }
 
     public Klasy() {
     }

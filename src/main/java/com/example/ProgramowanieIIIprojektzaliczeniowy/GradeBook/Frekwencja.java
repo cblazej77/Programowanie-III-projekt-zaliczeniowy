@@ -24,10 +24,31 @@ public class Frekwencja {
             updatable = false
     )
     private Long idf;
+    @Column(
+            name = "idp",
+            nullable = false
+    )
     private Long idp;
+
+    @Column(
+            name = "iducz",
+            nullable = false
+    )
     private Long iducz;
+    @Column(
+            name = "data",
+            nullable = false
+    )
     private LocalDate data;
+    @Column(
+            name = "godzina",
+            nullable = false
+    )
     private Integer godzina;
+    @Column(
+            name = "rodzaj",
+            nullable = false
+    )
     private String rodzaj;
 
     public Frekwencja() {

@@ -18,10 +18,31 @@ public class Oceny {
             strategy = SEQUENCE,
             generator = "oceny_sequence"
     )
+    @Column(
+            name = "ido",
+            updatable = false
+    )
     private Long ido;
+    @Column(
+            name = "nazwa",
+            nullable = false
+    )
     private String nazwa;
+    @Column(
+            name = "ocena",
+            nullable = false
+    )
     private Double ocena;
+
+    @Column(
+            name = "idu",
+            nullable = false
+    )
     private Long idu;
+    @Column(
+            name = "idp",
+            nullable = false
+    )
     private Long idp;
 
     public Oceny() {

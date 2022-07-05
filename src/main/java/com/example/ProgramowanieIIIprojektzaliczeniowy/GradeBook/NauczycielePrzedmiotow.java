@@ -22,8 +22,20 @@ public class NauczycielePrzedmiotow {
             strategy = SEQUENCE,
             generator = "nauczycieleprzedmiotow_sequence"
     )
+    @Column(
+            name = "idnp",
+            updatable = false
+    )
     private Long idnp;
+    @Column(
+            name = "idn",
+            nullable = false
+    )
     private Long idn;
+    @Column(
+            name = "idp",
+            nullable = false
+    )
     private Long idp;
 
     public NauczycielePrzedmiotow() {

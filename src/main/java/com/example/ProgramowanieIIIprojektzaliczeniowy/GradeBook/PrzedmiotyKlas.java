@@ -22,8 +22,20 @@ public class PrzedmiotyKlas {
             strategy = SEQUENCE,
             generator = "przedmiotyklas_sequence"
     )
+    @Column(
+            name = "idpk",
+            updatable = false
+    )
     private Long idpk;
+    @Column(
+            name = "idp",
+            nullable = false
+    )
     private Long idp;
+    @Column(
+            name = "idk",
+            nullable = false
+    )
     private Long idk;
 
     public PrzedmiotyKlas() {
