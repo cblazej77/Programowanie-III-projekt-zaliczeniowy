@@ -13,6 +13,7 @@ import java.util.List;
 public class ProgramowanieIiiProjektZaliczeniowyApplication {
 
 	public static void main(String[] args) {
+		Server server = new Server();
 		SpringApplication.run(ProgramowanieIiiProjektZaliczeniowyApplication.class, args);
 	}
 
