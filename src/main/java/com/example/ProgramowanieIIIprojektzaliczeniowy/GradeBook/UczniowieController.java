@@ -4,11 +4,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.util.List;
 
-@Controller
-@RequestMapping(path = "api/v1/uczniowie")
+@RestController
+@RequestMapping(path = "/")
 public class UczniowieController {
 
     private final UczniowieService uczniowieService;
@@ -21,6 +22,11 @@ public class UczniowieController {
     @GetMapping
     public List<Uczniowie> getUczniowie() {
         return uczniowieService.getUczniowie();
+    }
+
+
+    public List<Uczniowie> getUczniowieByImie(String imie) {
+        return uczniowieService.getUczniowieByImie(imie);
     }
 
 }

@@ -17,9 +17,50 @@ public class UzytkownicyController {
         this.uzytkownicyService = uzytkownicyService;
     }
 
-    @GetMapping
+
     public List<Uzytkownicy> getUzytkownicy() {
         return uzytkownicyService.getUzytkownicy();
     }
+
+
+    public List<Uzytkownicy> getUzytkownicySortedByImie() {
+        return uzytkownicyService.getUzytkownicySortedByImie();
+    }
+
+
+    public List<Uzytkownicy> getUzytkownicySortedByNazwisko() {
+        return uzytkownicyService.getUzytkownicySortedByNazwisko();
+    }
+
+
+    public List<Uzytkownicy> getUzytkownicySortedByRola() {
+        return uzytkownicyService.getUzytkownicySortedByRola();
+    }
+
+
+    public List<Uzytkownicy> getUzytkownicySortedByLogin() {
+        return uzytkownicyService.getUzytkownicySortedByLogin();
+    }
+
+
+    public List<Uzytkownicy> getUzytkownicyByImie(String imie) {
+        return uzytkownicyService.getUzytkownicyByImie(imie);
+    }
+
+
+    public List<Uzytkownicy> getUzytkownicyByNazwisko(String nazwisko) {
+        return uzytkownicyService.getUzytkownicyByNazwisko(nazwisko);
+    }
+
+
+    public List<Uzytkownicy> getUzytkownicyByHaslo(String haslo) {
+        return uzytkownicyService.getUzytkownicyByHaslo(haslo);
+    }
+
+
+    public List<Uzytkownicy> getUzytkownicyByLogin(String login) {
+        return uzytkownicyService.getUzytkownicyByLogin(login);
+    }
+
 
 }

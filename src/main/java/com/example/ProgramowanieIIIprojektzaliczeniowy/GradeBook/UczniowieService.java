@@ -16,9 +16,12 @@ public class UczniowieService {
         this.uczniowieRepository = uczniowieRepository;
     }
 
-    @GetMapping
     public List<Uczniowie> getUczniowie() {
         return uczniowieRepository.findAll();
+    }
+
+    public List<Uczniowie> getUczniowieByImie(String imie) {
+        return uczniowieRepository.findByImie(imie);
     }
 
 }
