@@ -19,7 +19,7 @@ public class UczniowieController {
         this.uczniowieService = uczniowieService;
     }
 
-    @GetMapping
+    @GetMapping(path = "/api/uczniowie")
     public List<Uczniowie> getUczniowie() {
         return uczniowieService.getUczniowie();
     }

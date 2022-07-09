@@ -24,4 +24,12 @@ public class UczniowieService {
         return uczniowieRepository.findByImie(imie);
     }
 
+    public List<Uczniowie> getUczniowieByNazwisko(String nazwisko) {
+        return uczniowieRepository.findByNazwisko(nazwisko);
+    }
+
+    public List<Uczniowie> getUczniowieByNrwDzienniku(Integer nrwDzienniku) {
+        return uczniowieRepository.findByNrwdzienniku(nrwDzienniku);
+    }
+
 }
