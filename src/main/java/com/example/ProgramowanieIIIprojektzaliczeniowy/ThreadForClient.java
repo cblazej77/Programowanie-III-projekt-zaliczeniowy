@@ -1,12 +1,8 @@
 package com.example.ProgramowanieIIIprojektzaliczeniowy;
 
-import com.example.ProgramowanieIIIprojektzaliczeniowy.GradeBook.UzytkownicyController;
-import com.example.ProgramowanieIIIprojektzaliczeniowy.GradeBook.UzytkownicyRepository;
-
-import java.io.BufferedWriter;
-import java.io.IOException;
-import java.io.OutputStreamWriter;
+import java.io.*;
 import java.net.Socket;
+
 
 public class ThreadForClient extends Thread{
 
@@ -21,12 +17,21 @@ public class ThreadForClient extends Thread{
     public void run() {
         System.out.println("Client: " + socket.getInetAddress().getHostName() + " connected.");
         BufferedWriter bw = null;
+        BufferedReader br = null;
+        String login;
         try {
             bw = new BufferedWriter(new
                     OutputStreamWriter(socket.getOutputStream()));
             bw.write("Connection accepted");
             bw.newLine();
             bw.flush();
+
+            br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+            login = br.readLine();
+
+
+
+
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
