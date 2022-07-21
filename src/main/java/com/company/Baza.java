@@ -15,8 +15,8 @@ public class Baza {
     public void add_Uzytkownik(int id, String login, String haslo, String imie, String nazwisko, String rola) throws SQLException {
         Statement stmt = connection.createStatement();
         String sql = "INSERT INTO Uzytkownicy (idU,Login,Haslo,Imie,Nazwisko,Rola) "
-                + "VALUES (" + id + " , '" + login + "', " + haslo + ", '" +
-                imie + "', " + nazwisko + "', " + rola + ");";
+                + "VALUES (" + id + " , '" + login + "', '" + haslo + "', '" +
+                imie + "', '" + nazwisko + "', '" + rola + "');";
         stmt.executeUpdate(sql);
         stmt.close();
     }
@@ -31,17 +31,8 @@ public class Baza {
             String imie = result.getString("Imie");
             String nazwisko = result.getString("Nazwisko");
             String rola = result.getString("Rola");
-            System.out.println("" + id + " " + login + " " + haslo + " " + imie + " " + nazwisko + " " + rola);
+            System.out.println("" + id + " '" + login + "' '" + haslo + "' '" + imie + "' '" + nazwisko + "' '" + rola + "'");
         }
-    }
-
-    public double getAvg() throws SQLException {
-        Statement stmt = connection.createStatement();
-        double avg = 0;
-        ResultSet result = stmt.executeQuery("SELECT AVG(salary) FROM COMPANY;");
-        result.next();
-        avg = result.getDouble("avg");
-        return avg;
     }
 
 }
