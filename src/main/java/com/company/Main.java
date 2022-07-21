@@ -7,6 +7,7 @@ public class Main {
     public static void main(String[] args) {
         try {
             Baza baza = new Baza();
+            //test
             //baza.wypiszAll();
             //baza.add(6, "Katarzyna Szulc", 32, "Piotrkow", 1239);
             //baza.add(7, "Justyna Bialka", 54, "Torun", 8423);
