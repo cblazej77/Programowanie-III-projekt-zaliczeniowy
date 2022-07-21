@@ -12,25 +12,26 @@ public class Baza {
                 "ikyxpswp", "G-Quql5IbyfaoXEIg8OSmjolzoKo50kT");
     }
 
-    public void add_Uzytkownik(int id, String name, int age, String adress, double salary) throws SQLException {
+    public void add_Uzytkownik(int id, String login, String haslo, String imie, String nazwisko, String rola) throws SQLException {
         Statement stmt = connection.createStatement();
-        String sql = "INSERT INTO COMPANY (ID,NAME,AGE,ADDRESS,SALARY) "
-                + "VALUES (" + id + " , '" + name + "', " + age + ", '" +
-                adress + "', " + salary + " );";
+        String sql = "INSERT INTO Uzytkownicy (idU,Login,Haslo,Imie,Nazwisko,Rola) "
+                + "VALUES (" + id + " , '" + login + "', " + haslo + ", '" +
+                imie + "', " + nazwisko + "', " + rola + ");";
         stmt.executeUpdate(sql);
         stmt.close();
     }
 
     public void wypiszAll() throws SQLException {
         Statement stmt = connection.createStatement();
-        ResultSet result = stmt.executeQuery("SELECT * FROM COMPANY WHERE AGE > 40;");
+        ResultSet result = stmt.executeQuery("SELECT * FROM Uzytkownicy;");
         while(result.next()) {
-            int id = result.getInt("id");
-            String name = result.getString("name");
-            int age = result.getInt("age");
-            String adres = result.getString("address");
-            double salary = result.getDouble("salary");
-            System.out.println("" + id + " " + name + " " + age + " " + adres + " " + salary);
+            int id = result.getInt("IdU");
+            String login = result.getString("Login");
+            String haslo = result.getString("Haslo");
+            String imie = result.getString("Imie");
+            String nazwisko = result.getString("Nazwisko");
+            String rola = result.getString("Rola");
+            System.out.println("" + id + " " + login + " " + haslo + " " + imie + " " + nazwisko + " " + rola);
         }
     }
 
@@ -41,6 +42,6 @@ public class Baza {
         result.next();
         avg = result.getDouble("avg");
         return avg;
-    }*/
+    }
 
 }
