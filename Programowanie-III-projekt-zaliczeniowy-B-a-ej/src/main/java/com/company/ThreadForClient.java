@@ -26,9 +26,9 @@ public class ThreadForClient extends Thread{
         try {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            bw.write("Connection accepted");
-            bw.newLine();
-            bw.flush();
+            //bw.write("Connection accepted");
+            //bw.newLine();
+            //bw.flush();
 
             //zczytanie z jasona hasla i loginu wpisanego przez uzytkownika
 
@@ -53,7 +53,7 @@ public class ThreadForClient extends Thread{
 
             if (bHaslo.equals(uhaslo)) {
                 autoryzacjaKlienta("accept", bw);
-                podstawoweDane(baza, bw, uLogin);
+               // podstawoweDane(baza, bw, uLogin);//nie zaimplementowalem jeszcze tego w kliencie
                 System.out.println("Uzytkownik o loginie:" + uLogin + " poprawnie sie zalogowal");
                 check = 4;
             }else autoryzacjaKlienta("declined", bw);
