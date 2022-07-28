@@ -8,7 +8,7 @@ import javafx.stage.Stage;
 import java.io.IOException;
 
 
-public class Application extends javafx.application.Application {
+public class Application extends javafx.application.Application{
 
     public static Scene scene;
 
@@ -29,18 +29,8 @@ public class Application extends javafx.application.Application {
         return fxmlLoader.load();
     }
 
-    public static void main(String[] args) {
-        launch();
+    public static void main(String[] args) {launch();
     }
+
+
 }
-
-/*@Override
-    public void start(Stage stage) throws IOException {
-        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("loginWindow.fxml"));
-        Scene scene = new Scene(fxmlLoader.load(), 667, 452);
-        stage.setTitle("Online gradebook!");
-        stage.setScene(scene);
-        stage.show();
-    }
-
- */
