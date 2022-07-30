@@ -1,0 +1,133 @@
+--SELECT * FROM uzytkownicy;
+--ID_uzytkownika, Login, Haslo, Imie, Nazwisko, Rola
+INSERT INTO uzytkownicy VALUES('0', 'admin', 'admin', 'Admin', 'admiN', 'ADMIN');
+--uczniowie Pierwszej klasy, 4 kobiety, 3 mezczyzn
+INSERT INTO uzytkownicy VALUES('1', 'KD001', 'haslo', 'Karolina', 'Sumosia', 'UCZEN');
+INSERT INTO uzytkownicy VALUES('2', 'KD002', 'haslo', 'Bianka', 'Makowska', 'UCZEN');
+INSERT INTO uzytkownicy VALUES('3', 'KD003', 'haslo', 'Karolina', 'Wojciechowska', 'UCZEN');
+INSERT INTO uzytkownicy VALUES('4', 'KD004', 'haslo', 'Paula', 'Sokołowska', 'UCZEN');
+INSERT INTO uzytkownicy VALUES('5', 'KD005', 'haslo', 'Jakub', 'Szewczyk', 'UCZEN');
+INSERT INTO uzytkownicy VALUES('6', 'KD006', 'haslo', 'Andrzej', 'Mazur', 'UCZEN');
+INSERT INTO uzytkownicy VALUES('7', 'KD007', 'haslo', 'Cezary', 'Tomaszewski', 'UCZEN');
+
+--rodzice uczniow, jest zachowana kolejnosc rodzicow(czyli Karolina(1) to córka Eugeniusza(8));
+INSERT INTO uzytkownicy VALUES('8', 'KD008', 'haslo', 'Eugeniusz', 'Sumosia', 'RODZIC');
+INSERT INTO uzytkownicy VALUES('9', 'KD009', 'haslo', 'Beata', 'Makowska', 'RODZIC');
+INSERT INTO uzytkownicy VALUES('10', 'KD010', 'haslo', 'Aleksy', 'Wojciechowski', 'RODZIC');
+INSERT INTO uzytkownicy VALUES('11', 'KD011', 'haslo', 'Lila', 'Sokołowska', 'RODZIC');
+INSERT INTO uzytkownicy VALUES('12', 'KD012', 'haslo', 'Jedrzej', 'Szewczyk', 'RODZIC');
+INSERT INTO uzytkownicy VALUES('13', 'KD013', 'haslo', 'Milan', 'Mazur', 'RODZIC');
+INSERT INTO uzytkownicy VALUES('14', 'KD014', 'haslo', 'Julia', 'Tomaszewska', 'RODZIC');
+--nauczyciele tutaj
+INSERT INTO uzytkownicy VALUES('15', 'KD015', 'haslo', 'Ambroży ', 'Kleks', 'DYREKTOR'); --dyrektor
+INSERT INTO uzytkownicy VALUES('16', 'KD016', 'haslo', 'Wiktoria', 'Stanko', 'NAUCZYCIEL'); --matematyka
+INSERT INTO uzytkownicy VALUES('17', 'KD017', 'haslo', 'Agnieszka', 'Bytnar', 'NAUCZYCIEL'); --JezykAngielski
+INSERT INTO uzytkownicy VALUES('18', 'KD018', 'haslo', 'Dominika', 'Cieslinska', 'NAUCZYCIEL'); --JezykAngielski
+INSERT INTO uzytkownicy VALUES('19', 'KD019', 'haslo', 'Krystian', 'Włodarczyk', 'NAUCZYCIEL'); --matematyka
+
+--SELECT * FROM nauczyciele;
+--ID_nauczyciela, ID_uzytkownika
+INSERT INTO nauczyciele VALUES('0', '16');
+INSERT INTO nauczyciele VALUES('1', '17');
+INSERT INTO nauczyciele VALUES('2', '18');
+INSERT INTO nauczyciele VALUES('3', '19');
+
+--SELECT * FROM klasy;
+--ID_klasy, NazwaKlasy, dataRozpoczaciaNauki, ID_Wychowawcy
+INSERT INTO klasy VALUES('0', 'A2021', '01.09.2021', '0');
+
+--SELECT * FROM uczniowie;
+--ID_ucznia, numerWDzienniku(alfabetycznie, nazwiskiem), ID_klasy, ID_uzytkownika, ID_rodzica
+INSERT INTO uczniowie VALUES('0', '4', '0', '1', '8');--Sumosia
+INSERT INTO uczniowie VALUES('1', '1', '0', '2', '9');--Makowska
+INSERT INTO uczniowie VALUES('2', '7', '0', '3', '10');--Wojciechowska
+INSERT INTO uczniowie VALUES('3', '3', '0', '4', '11');--Sokołowska
+INSERT INTO uczniowie VALUES('4', '5', '0', '5', '12');--Szewczyk
+INSERT INTO uczniowie VALUES('5', '2', '0', '6', '13');--Mazur
+INSERT INTO uczniowie VALUES('6', '6', '0', '7', '14');--Tomaszewski
+
+
+--SELECT * FROM przedmioty;
+--ID_przedmiotu, nazwaPrzedmiotu
+INSERT INTO przedmioty VALUES('0', 'JezykAngielski');
+INSERT INTO przedmioty VALUES('1', 'JezykPolski');
+INSERT INTO przedmioty VALUES('2', 'matematyka');
+
+--SELECT * FROM NauczycielePrzedmiotow
+--ID_np, ID_nauczyciela, ID_przedmiotu
+INSERT INTO NauczycielePrzedmiotow VALUES('0', '0', '2');--Stanko -> matematyka
+INSERT INTO NauczycielePrzedmiotow VALUES('1', '0', '0');--Stanko -> JezykAngielski
+INSERT INTO NauczycielePrzedmiotow VALUES('2', '1', '1');--Bytnar -> JezykPolski
+INSERT INTO NauczycielePrzedmiotow VALUES('3', '2', '0');--Cieslinska-> JezykAngielski
+INSERT INTO NauczycielePrzedmiotow VALUES('4', '3', '2');--Włodarczyk-> matematyka
+
+--SELECT * FROM oceny;
+--ID_oceny, zaCO, ocena, ID_ucznia, ID_przedmiotu
+--Sprawdzian, Kartowka, Odpowiedz, Projekt
+--oceny z matematyki
+INSERT INTO oceny VALUES('0', 'Kartowka',	'5', '0', '2');	--Sumosia
+INSERT INTO oceny VALUES('1', 'Odpowiedz',	'4', '0', '2');--Sumosia
+INSERT INTO oceny VALUES('2', 'Kartowka', 	'2', '3', '2');	--Wojciechowska
+INSERT INTO oceny VALUES('3', 'Kartowka', 	'3', '6', '2');	--Tomaszewski
+INSERT INTO oceny VALUES('4', 'Odpowiedz', 	'5', '6', '2');--Tomaszewski
+INSERT INTO oceny VALUES('5', 'Kartowka', 	'3', '5', '2');	--Szewczyk
+--oceny z JezykPolski
+INSERT INTO oceny VALUES('6', 'Odpowiedz', 	'4.5',  '0', '1');--Sumosia
+INSERT INTO oceny VALUES('7', 'Projekt', 	'3', 	'5', '1');--Szewczyk
+INSERT INTO oceny VALUES('8', 'Odpowiedz', 	'5', 	'3', '1');--Wojciechowska
+INSERT INTO oceny VALUES('9', 'Projekt', 	'3', 	'0', '1');--Sumosia
+--oceny z JezykAngielski
+INSERT INTO oceny VALUES('10', 'Sprawdzian', '5', '0', '0');--Sumosia
+INSERT INTO oceny VALUES('11', 'Sprawdzian', '2', '1', '0');--Makowska
+INSERT INTO oceny VALUES('12', 'Sprawdzian', '4', '2', '0');--Wojciechowska
+INSERT INTO oceny VALUES('13', 'Sprawdzian', '3', '3', '0');--Sokołowska
+INSERT INTO oceny VALUES('14', 'Sprawdzian', '5', '4', '0');--Szewczyk
+INSERT INTO oceny VALUES('15', 'Sprawdzian', '2', '5', '0');--Mazur
+INSERT INTO oceny VALUES('16', 'Sprawdzian', '5', '6', '0');--Tomaszewski
+
+
+--SELECT * FROM frekwencja;
+--ID_frekfencja, ID_przedmiotu, ID_ucznia, data, godzinaLekcyjna, obecnosc(varchar) -- na razie godzinaLekcyjna - 0,1,2,3,4,5,6,7,8
+--0 ->7:45-8:30, 1->8:40-9:25, 2->9:35-10:20, 3->10:35-11:20, 4->11:30-12:15, 5->12:25-13:10, 6->13:20-14:05, 7->13:15-15:00, 8->15:05-15:50
+--'O' - obecnosc, 'S' - spoznienie, 'NB' - nie obecnosc
+--Dzien pierwszy
+INSERT INTO frekwencja VALUES('0', '0', '0', '01.01.2022', '0', 'O');
+INSERT INTO frekwencja VALUES('1', '0', '1', '01.01.2022', '0', 'O');
+INSERT INTO frekwencja VALUES('2', '0', '2', '01.01.2022', '0', 'S');
+INSERT INTO frekwencja VALUES('3', '0', '3', '01.01.2022', '0', 'O');
+INSERT INTO frekwencja VALUES('4', '0', '4', '01.01.2022', '0', 'O');
+INSERT INTO frekwencja VALUES('5', '0', '5', '01.01.2022', '0', 'NB');
+INSERT INTO frekwencja VALUES('6', '0', '6', '01.01.2022', '0', 'O');
+
+INSERT INTO frekwencja VALUES('7', '1', '0', '01.01.2022', '1', 'O');
+INSERT INTO frekwencja VALUES('8', '1', '1', '01.01.2022', '1', 'O');
+INSERT INTO frekwencja VALUES('9', '1', '2', '01.01.2022', '1', 'O');
+INSERT INTO frekwencja VALUES('10', '1', '3', '01.01.2022', '1', 'O');
+INSERT INTO frekwencja VALUES('11', '1', '4', '01.01.2022', '1', 'O');
+INSERT INTO frekwencja VALUES('12', '1', '5', '01.01.2022', '1', 'NB');
+INSERT INTO frekwencja VALUES('13', '1', '6', '01.01.2022', '1', 'O');
+
+INSERT INTO frekwencja VALUES('14', '2', '0', '01.01.2022', '2', 'O');
+INSERT INTO frekwencja VALUES('15', '2', '1', '01.01.2022', '2', 'S');
+INSERT INTO frekwencja VALUES('16', '2', '2', '01.01.2022', '2', 'O');
+INSERT INTO frekwencja VALUES('17', '2', '3', '01.01.2022', '2', 'S');
+INSERT INTO frekwencja VALUES('18', '2', '4', '01.01.2022', '2', 'O');
+INSERT INTO frekwencja VALUES('19', '2', '5', '01.01.2022', '2', 'S');
+INSERT INTO frekwencja VALUES('20', '2', '6', '01.01.2022', '2', 'O');
+
+--Dzien drugi
+INSERT INTO frekwencja VALUES('21', '1', '0', '02.01.2022', '1', 'NB');
+INSERT INTO frekwencja VALUES('22', '1', '1', '02.01.2022', '1', 'O');
+INSERT INTO frekwencja VALUES('23', '1', '2', '02.01.2022', '1', 'O');
+INSERT INTO frekwencja VALUES('24', '1', '3', '02.01.2022', '1', 'NB');
+INSERT INTO frekwencja VALUES('25', '1', '4', '02.01.2022', '1', 'O');
+INSERT INTO frekwencja VALUES('26', '1', '5', '02.01.2022', '1', 'NB');
+INSERT INTO frekwencja VALUES('27', '1', '6', '02.01.2022', '1', 'NB');
+
+INSERT INTO frekwencja VALUES('28', '0', '0', '02.01.2022', '2', 'O');
+INSERT INTO frekwencja VALUES('29', '0', '1', '02.01.2022', '2', 'O');
+INSERT INTO frekwencja VALUES('30', '0', '2', '02.01.2022', '2', 'O');
+INSERT INTO frekwencja VALUES('31', '0', '3', '02.01.2022', '2', 'O');
+INSERT INTO frekwencja VALUES('32', '0', '4', '02.01.2022', '2', 'O');
+INSERT INTO frekwencja VALUES('33', '0', '5', '02.01.2022', '2', 'O');
+INSERT INTO frekwencja VALUES('34', '0', '6', '02.01.2022', '2', 'O');

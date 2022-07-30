@@ -1,0 +1,22 @@
+Pytania do bazy
+0)To bardziej jest librus dla liceum czy usos na studiach, bo delikatnie sie roznia te programy
+1)Nowa tabela, dla nazw za co jest ocena, albo to wyjebac. Chyba, że to ma byc komentarz dla ucznia, to zostawić XD
+2)Jak działa godzina lekcyjna, podajemy o której się zajęcia zaczeły, czy na sztywno sa podane np0 -> 8:00-8:45, 1->8:50-9:45. Powrót do podpunktu 0)
+
+Do projektu:
+zrobić przycisk do wyłączania programu, takiego, żeby serwer to łapał. Na pierwszej i drugiej scenie(powinen być w tym samym miejscu)
+haszowanie haseł, aby było bardziej profesjonalne
+Czy robimy dyrektora, który będzie miał super moce, typu dodanie ucznia, przeniesienie go itp
+Jak coś to user 0 - to admin
+Jak ma wyglądać druga scena, rozrysować to trzeba
+
+Srednia dla wszystkich uczniow z matmy
+SELECT uz.login, uz.imie, AVG(o.ocena), p.nazwa FROM oceny o INNER JOIN przedmioty p ON o.idp = p.idp INNER JOIN uczniowie u ON u.iducz=o.idu
+INNER JOIN uzytkownicy uz ON uz.idu = u.iduucznia WHERE p.nazwa = 'matematyka' GROUP BY uz.login, uz.imie, p.nazwa ORDER BY uz.login;
+
+
+Imie nazwisko rodzica po id ucznia
+SELECT uz.imie, uz.nazwisko, idurodzica FROM uczniowie INNER JOIN uzytkownicy uz ON uz.idu = idurodzica WHERE iduucznia = '3';
+
+imie nazwsko rodzica po loginie ucznia
+SELECT imie, nazwisko, idu FROM uzytkownicy WHERE idu = (SELECT idurodzica FROM uczniowie INNER JOIN uzytkownicy uz ON uz.idu = iduucznia WHERE login = 'KD007');
