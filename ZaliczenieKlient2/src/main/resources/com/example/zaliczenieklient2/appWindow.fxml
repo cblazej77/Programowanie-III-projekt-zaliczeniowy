@@ -3,12 +3,17 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox prefHeight="452.0" prefWidth="667.0" xmlns="http://javafx.com/javafx/17" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zaliczenieklient2.AppWindowController">
   <children>
     <AnchorPane maxHeight="-1.0" maxWidth="-1.0" prefHeight="-1.0" prefWidth="-1.0" VBox.vgrow="ALWAYS">
          <children>
-            <Label fx:id="helloUser" layoutX="190.0" layoutY="208.0" prefHeight="18.0" prefWidth="333.0" text="Ten teks ma sie zmienic" />
+            <Label fx:id="helloUser" layoutX="190.0" layoutY="208.0" prefHeight="18.0" prefWidth="333.0" text="Twój login :)" />
+            <Label fx:id="userData" alignment="TOP_LEFT" layoutX="14.0" layoutY="14.0" prefHeight="32.0" prefWidth="600.0" text="Dzien Dobry, Anon Anonkowski, zalogowany jestes na konto ucznia" AnchorPane.leftAnchor="7.0" AnchorPane.topAnchor="7.0">
+               <font>
+                  <Font size="17.0" />
+               </font></Label>
          </children></AnchorPane>
   </children>
 </VBox>

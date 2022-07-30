@@ -1,11 +1,14 @@
 package com.example.zaliczenieklient2;
 
 
+import javafx.scene.Scene;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
 import java.net.Socket;
+
+import static com.example.zaliczenieklient2.LoginWindowController.*;
 
 public class Client {
 
@@ -27,7 +30,18 @@ public class Client {
         }
     }
 
-    public void sendLogPassToSerwer(String login, String password){//Wysyla login i haslo w JONSONie do serwera, po wcisnieciu przycisku zaloguj
+    public JSONObject getData(){
+        JSONObject serwer = null;
+        try {
+            serwer = new JSONObject(br.readLine());
+            String imie = serwer.optString("imie");
+            String nazwisko = serwer.optString("nazwisko");
+            String rola = serwer.optString("rola");
+        }catch (IOException | JSONException e){e.printStackTrace();}
+        return serwer;
+    }
+
+    public boolean sendLogPassToSerwer(String login, String password){//Wysyla login i haslo w JONSONie do serwera, po wcisnieciu przycisku zaloguj
         try{
             json = new JSONObject();
             json.put("login", login);
@@ -35,10 +49,12 @@ public class Client {
             bw.write(json.toString());
             bw.newLine();
             bw.flush();
+            return false;
         }catch(IOException | JSONException e){
             e.printStackTrace();
-            System.out.println("Error to send login&pass(json) to the serwer");
             closeEvrything(socket, bw, br);
+            System.out.println("Error to send login&pass(json) to the serwer");
+            return true;
         }
     }
 
@@ -58,6 +74,4 @@ public class Client {
             if(socket != null) socket.close();
         }catch(IOException e){e.printStackTrace();}
     }
-
-
 }

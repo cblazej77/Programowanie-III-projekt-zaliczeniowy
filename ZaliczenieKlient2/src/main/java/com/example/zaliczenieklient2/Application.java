@@ -6,10 +6,10 @@ import javafx.scene.Scene;
 import javafx.stage.Stage;
 
 import java.io.IOException;
+import java.net.Socket;
 
 
 public class Application extends javafx.application.Application{
-
     public static Scene scene;
 
     @Override
@@ -23,7 +23,6 @@ public class Application extends javafx.application.Application{
     static void setRoot(String fxml) throws IOException{
         scene.setRoot(loadFXML(fxml));
     }
-
     private static Parent loadFXML(String fxml) throws IOException{
         FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource(fxml + ".fxml"));
         return fxmlLoader.load();
@@ -34,3 +33,14 @@ public class Application extends javafx.application.Application{
 
 
 }
+
+/*
+    @Override
+    public void start(Stage stage) throws IOException{
+        FXMLLoader fxmlLoader = new FXMLLoader(Application.class.getResource("loginWindow.fxml"));
+        Scene scene = new Scene(fxmlLoader.load(), 667, 452);
+        stage.setTitle("Online gradebook!");
+        stage.setScene(scene);
+        stage.show();
+    }
+    */
