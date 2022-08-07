@@ -10,6 +10,8 @@ zrobić przycisk do wyłączania programu, takiego, żeby serwer to łapał. Na 
 haszowanie haseł, aby było bardziej profesjonalne
 Czy robimy dyrektora, który będzie miał super moce, typu dodanie ucznia, przeniesienie go itp 
   -Moge zrobic cos takiego po stronie serwera by admin mial takie mozliwosci, typowy interfejs tekstowy, nwm jak wy uważacie //Konrad
+  -Można dodać takiego admina //Błażej
+  
 Jak coś to user 0 - to admin
 Jak ma wyglądać druga scena, rozrysować to trzeba
   -Masz na myśli jak ma wyglądać dziennik użytkownika po zalogowaniu tak?
