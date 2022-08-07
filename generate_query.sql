@@ -1,7 +1,7 @@
 CREATE TABLE frekwencja (
     idf     INTEGER NOT NULL,
     idp     INTEGER NOT NULL,
-    iducz   INTEGER NOT NULL,
+    idu     INTEGER NOT NULL,
     data    DATE,
     godzina INTEGER,
     rodzaj  VARCHAR(20)
@@ -13,14 +13,26 @@ CREATE TABLE klasy (
     idk             INTEGER NOT NULL,
     nazwa           VARCHAR(20) NOT NULL,
     datarozpoczecia DATE,
-    nauczyciel_idn  INTEGER NOT NULL
+    wychowawca      INTEGER NOT NULL
 );
 
 ALTER TABLE klasy ADD CONSTRAINT idk PRIMARY KEY ( idk );
 
+CREATE TABLE lekcje (
+    idl        INTEGER NOT NULL,
+    semestr    INTEGER,
+    dzien      VARCHAR(20),
+    godzina    INTEGER,
+    klasa      INTEGER NOT NULL,
+    przedmiot  INTEGER NOT NULL,
+    nauczyciel INTEGER NOT NULL
+);
+
+ALTER TABLE lekcje ADD CONSTRAINT lekcje_pk PRIMARY KEY ( idl );
+
 CREATE TABLE nauczyciele (
-    idn INTEGER NOT NULL,
-    idu INTEGER NOT NULL
+    idn  INTEGER NOT NULL,
+    idus INTEGER NOT NULL
 );
 
 ALTER TABLE nauczyciele ADD CONSTRAINT nauczyciel_pk PRIMARY KEY ( idn );
@@ -59,17 +71,17 @@ CREATE TABLE przedmiotyklas (
 ALTER TABLE przedmiotyklas ADD CONSTRAINT przedmiotyklas_pk PRIMARY KEY ( idpk );
 
 CREATE TABLE uczniowie (
-    iducz        INTEGER NOT NULL,
+    idu          INTEGER NOT NULL,
     nrwdzienniku INTEGER,
     idk          INTEGER NOT NULL,
-    iduucznia    INTEGER NOT NULL,
+    idus         INTEGER NOT NULL,
     idurodzica   INTEGER NOT NULL
 );
 
-ALTER TABLE uczniowie ADD CONSTRAINT idu PRIMARY KEY ( iducz );
+ALTER TABLE uczniowie ADD CONSTRAINT idu PRIMARY KEY ( idu );
 
 CREATE TABLE uzytkownicy (
-    idu      INTEGER NOT NULL,
+    idus     INTEGER NOT NULL,
     login    VARCHAR(20),
     haslo    VARCHAR(20),
     imie     VARCHAR(20),
@@ -77,27 +89,41 @@ CREATE TABLE uzytkownicy (
     rola     VARCHAR(20)
 );
 
-ALTER TABLE uzytkownicy ADD CONSTRAINT uzytkownicy_pk PRIMARY KEY ( idu );
+ALTER TABLE uzytkownicy ADD CONSTRAINT uzytkownicy_pk PRIMARY KEY ( idus );
+
+ALTER TABLE uzytkownicy ADD CONSTRAINT uzytkownicy__un UNIQUE ( login );
 
 ALTER TABLE frekwencja
     ADD CONSTRAINT frekwencja_p_fk FOREIGN KEY ( idp )
         REFERENCES przedmioty ( idp );
 
 ALTER TABLE frekwencja
-    ADD CONSTRAINT frekwencja_u_fk FOREIGN KEY ( iducz )
-        REFERENCES uczniowie ( iducz );
+    ADD CONSTRAINT frekwencja_u_fk FOREIGN KEY ( idu )
+        REFERENCES uczniowie ( idu );
+
+ALTER TABLE lekcje
+    ADD CONSTRAINT idkv2 FOREIGN KEY ( klasa )
+        REFERENCES klasy ( idk );
+
+ALTER TABLE lekcje
+    ADD CONSTRAINT idn FOREIGN KEY ( nauczyciel )
+        REFERENCES nauczyciele ( idn );
+
+ALTER TABLE lekcje
+    ADD CONSTRAINT idp FOREIGN KEY ( przedmiot )
+        REFERENCES przedmioty ( idp );
 
 ALTER TABLE uczniowie
     ADD CONSTRAINT idurodzica FOREIGN KEY ( idurodzica )
-        REFERENCES uzytkownicy ( idu );
+        REFERENCES uzytkownicy ( idus );
 
 ALTER TABLE uczniowie
     ADD CONSTRAINT klasa FOREIGN KEY ( idk )
         REFERENCES klasy ( idk );
 
 ALTER TABLE nauczyciele
-    ADD CONSTRAINT nauczyciele_uzytkownicy_fk FOREIGN KEY ( idu )
-        REFERENCES uzytkownicy ( idu );
+    ADD CONSTRAINT nauczyciele_uzytkownicy_fk FOREIGN KEY ( idus )
+        REFERENCES uzytkownicy ( idus );
 
 ALTER TABLE nauczycieleprzedmiotow
     ADD CONSTRAINT nauczycieleprzedmiotow_n_fk FOREIGN KEY ( idn )
@@ -113,7 +139,7 @@ ALTER TABLE oceny
 
 ALTER TABLE oceny
     ADD CONSTRAINT oceny_uczen_fk FOREIGN KEY ( idu )
-        REFERENCES uczniowie ( iducz );
+        REFERENCES uczniowie ( idu );
 
 ALTER TABLE przedmiotyklas
     ADD CONSTRAINT przedmiotyklas_k_fk FOREIGN KEY ( idk )
@@ -124,9 +150,9 @@ ALTER TABLE przedmiotyklas
         REFERENCES przedmioty ( idp );
 
 ALTER TABLE uczniowie
-    ADD CONSTRAINT uczniowie_uzytkownicy_fk FOREIGN KEY ( iduucznia )
-        REFERENCES uzytkownicy ( idu );
+    ADD CONSTRAINT uczniowie_uzytkownicy_fk FOREIGN KEY ( idus )
+        REFERENCES uzytkownicy ( idus );
 
 ALTER TABLE klasy
-    ADD CONSTRAINT wychowawca FOREIGN KEY ( nauczyciel_idn )
+    ADD CONSTRAINT wychowawca FOREIGN KEY ( wychowawca )
         REFERENCES nauczyciele ( idn );
