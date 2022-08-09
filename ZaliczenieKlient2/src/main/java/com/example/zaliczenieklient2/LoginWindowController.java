@@ -1,7 +1,9 @@
 package com.example.zaliczenieklient2;
 
+import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.image.ImageView;
@@ -23,6 +25,7 @@ public class LoginWindowController implements Initializable{
     protected TextField aPassword; //haslo z aplikacji
     @FXML
     private Label labelError;
+
 
     @FXML
     private Label connect;
@@ -89,6 +92,13 @@ public class LoginWindowController implements Initializable{
             e.printStackTrace();
         }
     }
+
+    @FXML
+    public void closeApplication() {
+        if(client != null) client.closeEvrything(client.getSocket(), client.getBw(), client.getBr());
+        Platform.exit();
+    }
+
     public void connected() throws IOException{
         client = new Client(new Socket("localhost", 8081));
         System.out.println("connected to server.");

@@ -30,6 +30,30 @@ public class Client {
         }
     }
 
+    public Socket getSocket() {
+        return socket;
+    }
+
+    public void setSocket(Socket socket) {
+        this.socket = socket;
+    }
+
+    public BufferedReader getBr() {
+        return br;
+    }
+
+    public void setBr(BufferedReader br) {
+        this.br = br;
+    }
+
+    public BufferedWriter getBw() {
+        return bw;
+    }
+
+    public void setBw(BufferedWriter bw) {
+        this.bw = bw;
+    }
+
     public JSONObject getData(){
         JSONObject serwer = null;
         try {
