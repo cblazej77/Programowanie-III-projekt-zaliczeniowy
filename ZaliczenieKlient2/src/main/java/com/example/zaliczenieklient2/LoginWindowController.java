@@ -59,19 +59,28 @@ public class LoginWindowController implements Initializable{
                 System.out.println("Login: " + aLogin.getText() + ", Password: " + aPassword.getText());
 
                 if (aPassword.getText().length() >= 1 && aLogin.getText().length() >= 1) {
+                    System.out.println("worked length");
                     if (client.sendLogPassToSerwer(aLogin.getText(), aPassword.getText())){//wysyla login i haslo do serwera
+                        System.out.println("wyslano");
                         disconnected();
                         client = null;
                     } else {
+                        System.out.println("wszedl else");
                         if (client.authorizationLogin()) {//sprawdza czy wpisalismy poprawny login i haslo
+                            System.out.println("Zalogowal sie uzytkownik: " + aLogin.getText());
                             data.setUsername(aLogin.getText());//aby przeslac miedzy Contollerami dane korzytamy z klasy SendDataToContoller -> data
+                            System.out.println("krok1");
                             data.setClient(client);
+                            System.out.println("krok2");
                             Application.setRoot("appWindow");
+                            System.out.println("krok3");
                         } else labelError.setText("Podany login i/lub haslo sa nieprawidlowe");
                     }
                 }
             } else disconnected();
-        }catch(IOException e){}
+        }catch(IOException e){
+            e.printStackTrace();
+        }
     }
     @FXML
     protected void refreshButton(){
