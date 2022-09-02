@@ -13,7 +13,7 @@ public class Main {
 
         Querries querries = new Querries();
 
-        querries.AddUzytkownik("KD020","haslo","Kamil","Wujcik","NAUCZYCIEL");
+        querries.addUzytkownik("KD021","haslo","Krytian","Wujcik","NAUCZYCIEL");
 
     }
 }
