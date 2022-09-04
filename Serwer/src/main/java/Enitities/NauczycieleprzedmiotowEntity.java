@@ -2,6 +2,7 @@ package Enitities;
 
 import jakarta.persistence.*;
 
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
@@ -23,6 +24,8 @@ public class NauczycieleprzedmiotowEntity {
     @ManyToOne
     @JoinColumn(name = "idp", referencedColumnName = "idp", nullable = false, insertable = false, updatable = false)
     private PrzedmiotyEntity przedmiotyByIdp;
+    @OneToMany(mappedBy = "nauczycieleprzedmiotowByIdnp")
+    private Collection<LekcjeEntity> lekcjesByIdnp;
 
     public Long getIdnp() {
         return idnp;
@@ -84,5 +87,13 @@ public class NauczycieleprzedmiotowEntity {
 
     public void setPrzedmiotyByIdp(PrzedmiotyEntity przedmiotyByIdp) {
         this.przedmiotyByIdp = przedmiotyByIdp;
+    }
+
+    public Collection<LekcjeEntity> getLekcjesByIdnp() {
+        return lekcjesByIdnp;
+    }
+
+    public void setLekcjesByIdnp(Collection<LekcjeEntity> lekcjesByIdnp) {
+        this.lekcjesByIdnp = lekcjesByIdnp;
     }
 }

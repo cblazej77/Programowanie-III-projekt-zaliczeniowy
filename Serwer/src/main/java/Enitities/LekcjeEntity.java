@@ -24,11 +24,11 @@ public class LekcjeEntity {
     @Column(name = "klasa", nullable = false)
     private Long klasa;
     @Basic
-    @Column(name = "przedmiot", nullable = false)
-    private Long przedmiot;
-    @Basic
-    @Column(name = "nauczyciel", nullable = false)
-    private Long nauczyciel;
+    @Column(name = "idnp", nullable = false)
+    private Long idnp;
+    @ManyToOne
+    @JoinColumn(name = "idnp", referencedColumnName = "idnp", nullable = false)
+    private NauczycieleprzedmiotowEntity nauczycieleprzedmiotowByIdnp;
 
     public Long getIdl() {
         return idl;
@@ -70,33 +70,12 @@ public class LekcjeEntity {
         this.klasa = klasa;
     }
 
-    public Long getPrzedmiot() {
-        return przedmiot;
+    public Long getIdnp() {
+        return idnp;
     }
 
-    public void setPrzedmiot(Long przedmiot) {
-        this.przedmiot = przedmiot;
-    }
-
-    public Long getNauczyciel() {
-        return nauczyciel;
-    }
-
-    public void setNauczyciel(Long nauczyciel) {
-        this.nauczyciel = nauczyciel;
-    }
-
-    @Override
-    public String toString() {
-        return "LekcjeEntity{" +
-                "idl=" + idl +
-                ", semestr=" + semestr +
-                ", dzien='" + dzien + '\'' +
-                ", godzina=" + godzina +
-                ", klasa=" + klasa +
-                ", przedmiot=" + przedmiot +
-                ", nauczyciel=" + nauczyciel +
-                '}';
+    public void setIdnp(Long idnp) {
+        this.idnp = idnp;
     }
 
     @Override
@@ -104,11 +83,19 @@ public class LekcjeEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         LekcjeEntity that = (LekcjeEntity) o;
-        return Objects.equals(idl, that.idl) && Objects.equals(semestr, that.semestr) && Objects.equals(dzien, that.dzien) && Objects.equals(godzina, that.godzina) && Objects.equals(klasa, that.klasa) && Objects.equals(przedmiot, that.przedmiot) && Objects.equals(nauczyciel, that.nauczyciel);
+        return Objects.equals(idl, that.idl) && Objects.equals(semestr, that.semestr) && Objects.equals(dzien, that.dzien) && Objects.equals(godzina, that.godzina) && Objects.equals(klasa, that.klasa) && Objects.equals(idnp, that.idnp);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idl, semestr, dzien, godzina, klasa, przedmiot, nauczyciel);
+        return Objects.hash(idl, semestr, dzien, godzina, klasa, idnp);
+    }
+
+    public NauczycieleprzedmiotowEntity getNauczycieleprzedmiotowByIdnp() {
+        return nauczycieleprzedmiotowByIdnp;
+    }
+
+    public void setNauczycieleprzedmiotowByIdnp(NauczycieleprzedmiotowEntity nauczycieleprzedmiotowByIdnp) {
+        this.nauczycieleprzedmiotowByIdnp = nauczycieleprzedmiotowByIdnp;
     }
 }

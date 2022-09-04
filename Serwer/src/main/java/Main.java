@@ -1,9 +1,8 @@
-import Enitities.PrzedmiotyEntity;
-import Enitities.UzytkownicyEntity;
-import jakarta.persistence.EntityManager;
+import Enitities.FrekwencjaEntity;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
+
+import java.sql.Date;
 
 public class Main {
 
@@ -13,7 +12,15 @@ public class Main {
 
         Querries querries = new Querries();
 
-        querries.addUzytkownik("KD021","haslo","Krytian","Wujcik","NAUCZYCIEL");
+        for(FrekwencjaEntity f: querries.findFrekwencjaByNrWDzienniku(7, "A2021")) {
+            System.out.println(f);
+        }
+
+        System.out.println();
+
+        for(FrekwencjaEntity f: querries.findFrekwencjaByImieINazwisko("Karolina", "Sumosia")) {
+            System.out.println(f);
+        }
 
     }
 }

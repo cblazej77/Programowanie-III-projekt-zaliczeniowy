@@ -3,8 +3,10 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
+import org.hibernate.query.Query;
 
 import java.sql.Date;
+import java.util.List;
 
 
 // Klasa w której napisane są metody do obsługi bazy
@@ -72,7 +74,7 @@ public class Querries {
         transaction.commit();
     }
 
-    public void addLekcja(Integer semestr, String dzien, Integer godzina, Long klasa, Long przedmiot, Long nauczyciel) {
+    public void addLekcja(Integer semestr, String dzien, Integer godzina, Long klasa, Long idnp) {
         EntityManager entityManager = FACTORY.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
@@ -81,8 +83,7 @@ public class Querries {
         lekcjeEntity.setDzien(dzien);
         lekcjeEntity.setGodzina(godzina);
         lekcjeEntity.setKlasa(klasa);
-        lekcjeEntity.setPrzedmiot(przedmiot);
-        lekcjeEntity.setNauczyciel(nauczyciel);
+        lekcjeEntity.setIdnp(idnp);
         entityManager.persist(lekcjeEntity);
         transaction.commit();
     }
@@ -112,5 +113,74 @@ public class Querries {
         entityManager.persist(frekwencjaEntity);
         transaction.commit();
     }
+
+    public List<FrekwencjaEntity> findFrekwencjaByNameOfSubject(String nameOfSubcject) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT f FROM FrekwencjaEntity f JOIN f.przedmiotyByIdp p WHERE p.nazwa = :name");
+        query.setParameter("name", nameOfSubcject);
+        return query.getResultList();
+    }
+
+    public List<FrekwencjaEntity> findFrekwencjaByNrWDzienniku(Integer nrWDzienniku, String nazwaKlasy) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT f FROM FrekwencjaEntity f JOIN f.uczniowieByIdu u JOIN u.klasyByIdk k WHERE u.nrwdzienniku = :nr AND k.nazwa = :nazwa");
+        query.setParameter("nr", nrWDzienniku);
+        query.setParameter("nazwa", nazwaKlasy);
+        return query.getResultList();
+    }
+
+    public List<FrekwencjaEntity> findFrekwencjaByImieINazwisko(String Imie, String Nazwisko) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT f FROM FrekwencjaEntity f JOIN f.uczniowieByIdu u JOIN u.uzytkownicyByIdus us WHERE us.imie = :imie AND us.nazwisko = :nazwisko");
+        query.setParameter("imie", Imie);
+        query.setParameter("nazwisko", Nazwisko);
+        return query.getResultList();
+    }
+
+    public List<UczniowieEntity> findUczniowieByImie(String imie) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT u FROM UczniowieEntity u JOIN u.uzytkownicyByIdus us WHERE us.imie = :imie");
+        query.setParameter("imie", imie);
+        return query.getResultList();
+    }
+
+    public List<UczniowieEntity> findUczniowieByNazwisko(String nazwisko) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT u FROM UczniowieEntity u JOIN u.uzytkownicyByIdus us WHERE us.nazwisko = :naz");
+        query.setParameter("naz", nazwisko);
+        return query.getResultList();
+    }
+
+    public List<UczniowieEntity> findUczniowieByKlasa(String nazwa) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT u FROM UczniowieEntity u JOIN u.klasyByIdk k WHERE k.nazwa = :naz");
+        query.setParameter("naz", nazwa);
+        return query.getResultList();
+    }
+
+    public List<OcenyEntity> findOcenyByOcena(Float ocena) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT o FROM OcenyEntity o WHERE o.ocena = :oc");
+        query.setParameter("oc", ocena);
+        return query.getResultList();
+    }
+
+    public List<OcenyEntity> findOcenyByUczen(String imie, String nazwisko) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT o FROM OcenyEntity o JOIN o.uczniowieByIdu u JOIN u.uzytkownicyByIdus us WHERE us.imie = :im AND us.nazwisko = :naz");
+        query.setParameter("im", imie);
+        query.setParameter("naz", nazwisko);
+        return query.getResultList();
+    }
+
+    public List<OcenyEntity> findOcenyByPrzedmiot(String nazwa) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT o FROM OcenyEntity o JOIN o.przedmiotyByIdp p WHERE p.nazwa = :naz");
+        query.setParameter("naz", nazwa);
+        return query.getResultList();
+    }
+
+
+
 
 }
