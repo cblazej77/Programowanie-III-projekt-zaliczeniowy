@@ -67,6 +67,7 @@ public class LoginWindowController implements Initializable{
                     } else {
                         System.out.println("wszedl else");
                         if (client.authorizationLogin()) {//sprawdza czy wpisalismy poprawny login i haslo
+                        //if(true){
                             System.out.println("Zalogowal sie uzytkownik: " + aLogin.getText());
                             data.setUsername(aLogin.getText());//aby przeslac miedzy Contollerami dane korzytamy z klasy SendDataToContoller -> data
                             System.out.println("krok1");
