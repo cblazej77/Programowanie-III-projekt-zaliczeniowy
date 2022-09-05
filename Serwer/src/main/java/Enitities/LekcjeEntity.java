@@ -27,7 +27,7 @@ public class LekcjeEntity {
     @Column(name = "idnp", nullable = false)
     private Long idnp;
     @ManyToOne
-    @JoinColumn(name = "idnp", referencedColumnName = "idnp", nullable = false)
+    @JoinColumn(name = "idnp", referencedColumnName = "idnp", nullable = false, insertable = false, updatable = false)
     private NauczycieleprzedmiotowEntity nauczycieleprzedmiotowByIdnp;
 
     public Long getIdl() {

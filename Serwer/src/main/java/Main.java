@@ -1,4 +1,5 @@
 import Enitities.FrekwencjaEntity;
+import Enitities.OcenyEntity;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
@@ -21,6 +22,11 @@ public class Main {
         for(FrekwencjaEntity f: querries.findFrekwencjaByImieINazwisko("Karolina", "Sumosia")) {
             System.out.println(f);
         }
+
+        System.out.println();
+
+        System.out.println(querries.findAvgOfOcenyforUczenFromPrzedmiot("matematyka",0L));
+
 
     }
 }

@@ -1,9 +1,9 @@
+import Enitities.UzytkownicyEntity;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
 import java.net.Socket;
-import java.sql.SQLException;
 
 public class ThreadForClient extends Thread{
 
@@ -40,41 +40,37 @@ public class ThreadForClient extends Thread{
         } catch (JSONException e) {throw new RuntimeException(e);}
     }
 
-  /*  private void logowanieUzytkownika(BufferedWriter bw){
+    private void logowanieUzytkownika(BufferedWriter bw){
         //Tutaj wchodzimy w operacje z baza danych
+        Querries querries = new Querries();
+        String bHaslo = querries.findHasloOfUzytkownikByLogin(uLogin);
+
+        if (bHaslo.equals(uhaslo)) {
+            autoryzacjaKlienta("accept", bw);
+            // podstawoweDane(baza, bw, uLogin);//nie zaimplementowalem jeszcze tego w kliencie
+            System.out.println("Uzytkownik o loginie:" + uLogin + " poprawnie sie zalogowal");
+            check = 4;
+        }else autoryzacjaKlienta("declined", bw);
+
+    }
+
+    private void podstawoweDane(BufferedWriter bw, String uLogin){
         try {
-            Baza baza = new Baza();
-            String bHaslo = baza.zalogujUzytkownikaLogin(uLogin);
-
-            if (bHaslo.equals(uhaslo)) {
-                autoryzacjaKlienta("accept", bw);
-                // podstawoweDane(baza, bw, uLogin);//nie zaimplementowalem jeszcze tego w kliencie
-                System.out.println("Uzytkownik o loginie:" + uLogin + " poprawnie sie zalogowal");
-                check = 4;
-            }else autoryzacjaKlienta("declined", bw);
-
-        } catch (ClassNotFoundException e) {
-            e.printStackTrace();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
-    } */
-
-  /*  private void podstawoweDane(Baza baza, BufferedWriter bw, String uLogin){
-        try {
+            Querries querries = new Querries();
+            UzytkownicyEntity us = querries.findUzytkownikByLogin(uLogin);
             JSONObject pd = new JSONObject();
-            pd = baza.wyswietlUzytkownikaLogin(uLogin);
+            pd.put("imie", us.getImie());
+            pd.put("nazwisko", us.getNazwisko());
+            pd.put("rola", us.getRola());
             bw.write(pd.toString());
             bw.newLine();
             bw.flush();
         } catch (IOException e) {
             e.printStackTrace();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
-    } */
+    }
 
     private void autoryzacjaKlienta(String status, BufferedWriter bw) {
         try {

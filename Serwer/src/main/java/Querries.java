@@ -180,6 +180,37 @@ public class Querries {
         return query.getResultList();
     }
 
+    public List<OcenyEntity> findOcenyByPrzedmiotforUczen(String nazwa, Long idu) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT o FROM OcenyEntity o JOIN o.przedmiotyByIdp p WHERE p.nazwa = :naz AND o.idu = :id");
+        query.setParameter("naz", nazwa);
+        query.setParameter("id", idu);
+        return query.getResultList();
+    }
+
+    public Double findAvgOfOcenyforUczenFromPrzedmiot(String nazwa, Long idu) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT AVG(o.ocena) FROM OcenyEntity o JOIN o.przedmiotyByIdp p WHERE p.nazwa = :naz AND o.idu = :id");
+        query.setParameter("naz", nazwa);
+        query.setParameter("id", idu);
+        return (Double) query.getResultList().get(0);
+    }
+
+    public String findHasloOfUzytkownikByLogin(String login) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT u.haslo FROM UzytkownicyEntity u WHERE u.login = :login");
+        query.setParameter("login", login);
+        return (String) query.getResultList().get(0);
+    }
+
+    public UzytkownicyEntity findUzytkownikByLogin(String login) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT us FROM UzytkownicyEntity us WHERE us.login = :login");
+        query.setParameter("login", login);
+        return (UzytkownicyEntity) query.getResultList().get(0);
+    }
+
+
 
 
 
