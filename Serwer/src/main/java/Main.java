@@ -1,19 +1,32 @@
-import Enitities.PrzedmiotyEntity;
-import Enitities.UzytkownicyEntity;
-import jakarta.persistence.EntityManager;
+import Enitities.FrekwencjaEntity;
+import Enitities.OcenyEntity;
 import jakarta.persistence.EntityManagerFactory;
-import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
+
+import java.sql.Date;
 
 public class Main {
 
-    //private static final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory("MyUnit");
+    private static final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory("MyUnit");
 
     public static void main(String[] args) {
 
         Querries querries = new Querries();
 
-        querries.addUzytkownik("KD020","haslo","Krytian","Wujcik","NAUCZYCIEL");
+        for(FrekwencjaEntity f: querries.findFrekwencjaByNrWDzienniku(7, "A2021")) {
+            System.out.println(f);
+        }
+
+        System.out.println();
+
+        for(FrekwencjaEntity f: querries.findFrekwencjaByImieINazwisko("Karolina", "Sumosia")) {
+            System.out.println(f);
+        }
+
+        System.out.println();
+
+        System.out.println(querries.findAvgOfOcenyforUczenFromPrzedmiot("matematyka",0L));
+
 
     }
 }

@@ -15,17 +15,17 @@
    <children>
       <BorderPane layoutX="-2.0" prefHeight="453.0" prefWidth="673.0">
          <left>
-            <VBox prefHeight="327.0" prefWidth="155.0" style="-fx-background-color: #23aea3;" BorderPane.alignment="CENTER">
+            <VBox prefHeight="343.0" prefWidth="184.0" style="-fx-background-color: #23aea3;" BorderPane.alignment="CENTER">
                <children>
-                  <Button mnemonicParsing="false" onAction="#ocenyButton" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #23aea3;" text="Oceny" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#ocenyButton" prefHeight="40.0" prefWidth="184.0" style="-fx-background-color: #23aea3;" text="Oceny" textFill="WHITE">
                      <VBox.margin>
-                        <Insets bottom="5.0" top="15.0" />
+                        <Insets bottom="5.0" right="40.0" top="15.0" />
                      </VBox.margin>
                      <font>
-                        <Font size="17.0" />
+                        <Font size="15.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="32.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="34.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@icons8-exam-100.png" />
                            </image>
@@ -35,15 +35,15 @@
                         <Insets right="50.0" />
                      </padding>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#frekwencjaButton" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #23aea3;" text="Frekwencja" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#frekwencjaButton" prefHeight="40.0" prefWidth="288.0" style="-fx-background-color: #23aea3;" text="Frekwencja" textFill="WHITE">
                      <VBox.margin>
-                        <Insets bottom="5.0" top="5.0" />
+                        <Insets bottom="5.0" right="33.0" top="5.0" />
                      </VBox.margin>
                      <font>
                         <Font size="15.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="33.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="31.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@icons8-calendar-64.png" />
                            </image>
@@ -53,25 +53,25 @@
                         <Insets left="10.0" right="30.0" />
                      </padding>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#planlekcjiButton" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #23aea3;" text="Plan Lekcji" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#planlekcjiButton" prefHeight="40.0" prefWidth="190.0" style="-fx-background-color: #23aea3;" text="Edytuj dane" textFill="WHITE">
                      <VBox.margin>
-                        <Insets bottom="5.0" top="5.0" />
+                        <Insets bottom="5.0" right="25.0" top="5.0" />
                      </VBox.margin>
                      <font>
                         <Font size="15.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="36.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="35.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@icons8-calendar-100.png" />
+                              <Image url="@icons8-database-administrator-100.png" />
                            </image>
                         </ImageView>
                      </graphic>
                      <padding>
-                        <Insets right="25.0" />
+                        <Insets right="20.0" />
                      </padding>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#uczenButton" prefHeight="40.0" prefWidth="145.0" style="-fx-background-color: #23aea3;" text="Uczeń" textFill="WHITE">
+                  <Button mnemonicParsing="false" onAction="#uczenButton" prefHeight="40.0" prefWidth="216.0" style="-fx-background-color: #23aea3;" text="Nauczyciel" textFill="WHITE">
                      <VBox.margin>
                         <Insets bottom="5.0" right="10.0" top="5.0" />
                      </VBox.margin>
@@ -79,9 +79,9 @@
                         <Font size="15.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="38.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="35.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                            <image>
-                              <Image url="@icons8-student-99.png" />
+                              <Image url="@icons8-teacher-64.png" />
                            </image>
                         </ImageView>
                      </graphic>
@@ -114,7 +114,7 @@
          <bottom>
             <Pane prefHeight="35.0" prefWidth="642.0" style="-fx-background-color: #1c8b82;" BorderPane.alignment="CENTER">
                <children>
-                  <Text fill="WHITE" layoutX="506.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zalogowano na konto ucznia" />
+                  <Text fill="WHITE" layoutX="479.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zalogowano na konto nauczyciela" />
                </children></Pane>
          </bottom>
          <center>
