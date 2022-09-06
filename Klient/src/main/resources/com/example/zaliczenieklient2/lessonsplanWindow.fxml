@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zaliczenieklient2.LessonsplanWindow">
+   <children>
+      <BorderPane prefHeight="400.0" prefWidth="600.0">
+         <center>
+            <TableView prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
+              <columns>
+                <TableColumn prefWidth="75.0" text="Godz." />
+                <TableColumn prefWidth="75.0" text="Pon." />
+                  <TableColumn prefWidth="75.0" text="Wt." />
+                  <TableColumn prefWidth="75.0" text="Śr." />
+                  <TableColumn prefWidth="75.0" text="Czw." />
+                  <TableColumn prefWidth="75.0" text="Pt." />
+              </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+         </center>
+         <top>
+            <BorderPane prefHeight="56.0" prefWidth="600.0" BorderPane.alignment="CENTER">
+               <center>
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Plan Lekcji" BorderPane.alignment="CENTER">
+                     <font>
+                        <Font size="27.0" />
+                     </font>
+                  </Text>
+               </center>
+            </BorderPane>
+         </top>
+      </BorderPane>
+   </children>
+</AnchorPane>
