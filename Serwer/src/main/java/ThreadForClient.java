@@ -43,11 +43,17 @@ public class ThreadForClient extends Thread{
     private void logowanieUzytkownika(BufferedWriter bw){
         //Tutaj wchodzimy w operacje z baza danych
         Querries querries = new Querries();
-        String bHaslo = querries.findHasloOfUzytkownikByLogin(uLogin);
 
-        if (bHaslo.equals(uhaslo)) {
+        String bHaslo;
+        try {
+            bHaslo = querries.findHasloOfUzytkownikByLogin(uLogin);
+        }catch(IndexOutOfBoundsException  e){
+            System.out.println(e);
+            bHaslo = "";
+        }
+        if (bHaslo.equals(uhaslo) && bHaslo != "") {
             autoryzacjaKlienta("accept", bw);
-            // podstawoweDane(baza, bw, uLogin);//nie zaimplementowalem jeszcze tego w kliencie
+            podstawoweDane(bw, uLogin);//nie zaimplementowalem jeszcze tego w kliencie
             System.out.println("Uzytkownik o loginie:" + uLogin + " poprawnie sie zalogowal");
             check = 4;
         }else autoryzacjaKlienta("declined", bw);
