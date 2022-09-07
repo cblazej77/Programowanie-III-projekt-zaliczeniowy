@@ -30,9 +30,9 @@ public class ThreadForClient extends Thread{
             JSONObject klient;
             for(check = 0; check < 4; check++) {
                 klient = new JSONObject(br.readLine());
-                uLogin = klient.optString("login");
-                uhaslo = klient.optString("haslo");
-                //logowanieUzytkownika(bw);
+                uLogin = klient.optString("login"); if (uLogin == klient.optString("login")){ System.out.println("Login taken from JSON"); }
+                uhaslo = klient.optString("haslo"); if(uhaslo == klient.optString("haslo")) {System.out.println("Haslo taken from JASON"); }
+                logowanieUzytkownika(bw);
 
             }
 

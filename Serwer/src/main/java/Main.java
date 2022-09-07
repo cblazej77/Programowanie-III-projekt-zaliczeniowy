@@ -3,6 +3,9 @@ import Enitities.OcenyEntity;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.Persistence;
 
+import java.io.IOException;
+import java.net.ServerSocket;
+import java.net.Socket;
 import java.sql.Date;
 
 public class Main {
@@ -26,6 +29,18 @@ public class Main {
         System.out.println();
 
         System.out.println(querries.findAvgOfOcenyforUczenFromPrzedmiot("matematyka",0L));
+
+        try{
+            ServerSocket server = new ServerSocket(8081);
+            while(true) {
+                Socket socket = server.accept();
+                ThreadForClient thc = new ThreadForClient(socket);
+                thc.start();
+            }
+        }
+        catch (IOException e){
+            e.printStackTrace();
+        }
 
 
     }
