@@ -6,6 +6,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.Pane;
+import javafx.scene.text.Text;
 import org.json.JSONObject;
 
 import java.net.URL;
@@ -15,7 +16,7 @@ import java.util.ResourceBundle;
 public class AppWindowController implements Initializable {
 
     @FXML
-    private Label welcoming;
+    private Text welcome;
 
     @FXML
     private Label label;
@@ -39,7 +40,7 @@ public class AppWindowController implements Initializable {
 
         //data.getUsername();
 
-        welcoming.setText("Witam po zalogowaniu: " + name + " " + surname + "!");
+        welcome.setText("Witam po zalogowaniu: " + name + " " + surname + "!");
         //if(access.equals("UCZEN")) userData.setText("Dzien Dobry, " + name + " "+ surname +", zalogowales sie na konto ucznia.");
 
     }
