@@ -35,6 +35,17 @@ public class AppWindowController implements Initializable {
     }
 
     @FXML
+    private void logout(ActionEvent event){
+        client = null;
+        data.setClient(client);
+        try {
+            Application.setRoot("loginWindow");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+    @FXML
     private void ocenyButton(ActionEvent event) throws JSONException, IOException {
         client.sendCase(0);
         FxmlLoader object = new FxmlLoader();
