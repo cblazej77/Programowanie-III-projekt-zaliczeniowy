@@ -17,7 +17,7 @@ public class Main {
         //for(FrekwencjaEntity f: querries.findFrekwencjaByNrWDzienniku(7, "A2021")) {System.out.println(f);}
         //for(FrekwencjaEntity f: querries.findFrekwencjaByImieINazwisko("Karolina", "Sumosia")) { System.out.println(f);}
         //System.out.println(querries.findAvgOfOcenyforUczenFromPrzedmiot("matematyka",0L));
-
+        System.out.println("Start serwer!");
         try{
             ServerSocket server = new ServerSocket(8081);
             while(true) {

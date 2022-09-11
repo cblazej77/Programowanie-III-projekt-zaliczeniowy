@@ -65,6 +65,7 @@ public class ThreadForClient extends Thread {
                     if (!check) {
                         while (waitt) {
                             reciveCase(br);
+                            if(chooseCase == 2) deleteSomething(br);
                             if(chooseCase == 3) nauczycielDane(bw,uLogin);
                         }
                     }
@@ -75,6 +76,46 @@ public class ThreadForClient extends Thread {
             throw new RuntimeException(e);
         } catch (IOException e) {
             throw new RuntimeException(e);
+        }
+    }
+
+    private void deleteSomething(BufferedReader br) {
+        JSONObject rc = null;
+        try {
+            rc = new JSONObject(br.readLine());
+            int chooseDelete = rc.optInt("whitchDelete");
+            String data = rc.getString("data");
+            switch(chooseDelete){
+                case 0:
+
+                    break;
+                case 1:
+
+                    break;
+
+                case 2:
+
+                    break;
+
+                case 3:
+
+                    break;
+
+                case 4:
+
+                    break;
+
+                case 5:
+
+                    break;
+
+                case 6://usuniecie klasy
+
+
+                    break;
+            }
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
         }
     }
 
@@ -167,7 +208,7 @@ public class ThreadForClient extends Thread {
         try {
             JSONObject pd = new JSONObject();
             Querries querries = new Querries();
-            List<Float> oc = querries.findOcenyByPrzedmiotforUczenbyLogin(subject, uLogin);
+            List<Float> oc = querries.findOcenyByPrzedmiotforUczen(subject, uLogin);
             pd.put("size", oc.size());
             pd.put("subject", subject);
             bw.write(pd.toString());

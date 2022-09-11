@@ -30,6 +30,10 @@ public class LekcjeEntity {
     @JoinColumn(name = "idnp", referencedColumnName = "idnp", nullable = false, insertable = false, updatable = false)
     private NauczycieleprzedmiotowEntity nauczycieleprzedmiotowByIdnp;
 
+    @ManyToOne
+    @JoinColumn(name = "klasa", referencedColumnName = "idk", nullable = false, insertable = false, updatable = false)
+    private KlasyEntity klasyByKlasa;
+
     public Long getIdl() {
         return idl;
     }

@@ -1,13 +1,12 @@
 package com.example.zaliczenieklient2;
 
 
-import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
-import java.lang.reflect.Array;
 import java.net.Socket;
+import java.util.jar.JarException;
 
 public class Client {
 
@@ -60,7 +59,18 @@ public class Client {
         }catch (IOException | JSONException e){e.printStackTrace();}
         return serwer;
     }
-
+    public void SendRemoveSygnal(String data, int i){
+        try{
+            json = new JSONObject();
+            json.put("data", data);
+            json.put("whitchDelete", i);
+            bw.write(json.toString());
+            bw.newLine();
+            bw.flush();
+        }catch(IOException e){e.printStackTrace();} catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
 
     public boolean sendLogPassToSerwer(String login, String password){//Wysyla login i haslo w JONSONie do serwera, po wcisnieciu przycisku zaloguj
         try{
