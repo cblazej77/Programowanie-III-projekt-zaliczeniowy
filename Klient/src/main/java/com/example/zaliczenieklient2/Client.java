@@ -6,7 +6,6 @@ import org.json.JSONObject;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.jar.JarException;
 
 public class Client {
 
@@ -62,12 +61,12 @@ public class Client {
     public void SendRemoveSygnal(String data, int i){
         try{
             json = new JSONObject();
-            json.put("data", date);
+            json.put("data", data);
             json.put("whitchDelete", i);
             bw.write(json.toString());
             bw.newLine();
             bw.flush();
-        }catch(IOException | JarException e){e.printStackTrace();}
+        }catch(IOException | JSONException e){e.printStackTrace();}
     }
 
     public boolean sendLogPassToSerwer(String login, String password){//Wysyla login i haslo w JONSONie do serwera, po wcisnieciu przycisku zaloguj
