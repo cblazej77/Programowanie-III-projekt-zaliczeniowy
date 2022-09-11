@@ -89,7 +89,7 @@
                         <Insets right="50.0" />
                      </padding>
                   </Button>
-                  <Button mnemonicParsing="false" prefHeight="24.0" prefWidth="82.0" text="Wyloguj">
+                  <Button mnemonicParsing="false" onAction="#logout" prefHeight="24.0" prefWidth="82.0" text="Wyloguj">
                      <font>
                         <Font size="11.0" />
                      </font>
@@ -114,7 +114,7 @@
          <bottom>
             <Pane prefHeight="35.0" prefWidth="642.0" style="-fx-background-color: #1c8b82;" BorderPane.alignment="CENTER">
                <children>
-                  <Text fill="WHITE" layoutX="479.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zalogowano na konto nauczyciela" />
+                  <Text fill="WHITE" layoutX="806.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zalogowano na konto nauczyciela" />
                </children></Pane>
          </bottom>
          <center>
