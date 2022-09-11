@@ -1,14 +1,12 @@
 package com.example.zaliczenieklient2;
 
 
-import jdk.internal.jmod.JmodFile;
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.*;
 import java.net.Socket;
-import java.util.ArrayList;
-import java.util.List;
+import java.util.jar.JarException;
 
 public class Client {
 
@@ -58,34 +56,18 @@ public class Client {
         JSONObject serwer = null;
         try {
             serwer = new JSONObject(br.readLine());
-            String imie = serwer.optString("imie");
-            String nazwisko = serwer.optString("nazwisko");
-            String rola = serwer.optString("rola");
         }catch (IOException | JSONException e){e.printStackTrace();}
         return serwer;
     }
-
-    public List<Float> getList(){
-        List<Float> objects = null;
-        try {
-                Object object = br.read();
-                objects =  (List<Float>) object;
-                System.out.println(objects);
-            } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        return objects;
-    }
-
-    public String getString(){
-        String serwer = null;
-        try {
-            serwer = new String(br.readLine());
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return serwer;
+    public void SendRemoveSygnal(String data, int i){
+        try{
+            json = new JSONObject();
+            json.put("data", date);
+            json.put("whitchDelete", i);
+            bw.write(json.toString());
+            bw.newLine();
+            bw.flush();
+        }catch(IOException | JarException e){e.printStackTrace();}
     }
 
     public boolean sendLogPassToSerwer(String login, String password){//Wysyla login i haslo w JONSONie do serwera, po wcisnieciu przycisku zaloguj
