@@ -15,7 +15,7 @@
    <children>
       <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1000.0">
          <left>
-            <VBox prefHeight="343.0" prefWidth="184.0" style="-fx-background-color: #23aea3;" BorderPane.alignment="CENTER">
+            <VBox prefHeight="590.0" prefWidth="190.0" style="-fx-background-color: #23aea3;" BorderPane.alignment="CENTER">
                <children>
                   <Button mnemonicParsing="false" onAction="#ocenyTButton" prefHeight="40.0" prefWidth="184.0" style="-fx-background-color: #23aea3;" text="Oceny" textFill="WHITE">
                      <VBox.margin>
@@ -118,7 +118,7 @@
                </children></Pane>
          </bottom>
          <right>
-            <Pane prefHeight="590.0" prefWidth="11.0" style="-fx-background-color: #23aea3;" BorderPane.alignment="CENTER" />
+            <Pane prefHeight="590.0" prefWidth="10.0" style="-fx-background-color: #23aea3;" BorderPane.alignment="CENTER" />
          </right>
          <center>
             <Pane prefHeight="200.0" prefWidth="200.0" BorderPane.alignment="CENTER">
