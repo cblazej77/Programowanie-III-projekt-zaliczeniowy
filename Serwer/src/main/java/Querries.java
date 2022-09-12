@@ -114,6 +114,50 @@ public class Querries {
         transaction.commit();
     }
 
+    public void addNauczycielePrzedmiotow(Long idn, Long idp) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        NauczycieleprzedmiotowEntity nauczycieleprzedmiotowEntity = new NauczycieleprzedmiotowEntity();
+        nauczycieleprzedmiotowEntity.setIdn(idn);
+        nauczycieleprzedmiotowEntity.setIdp(idp);
+        entityManager.persist(nauczycieleprzedmiotowEntity);
+        transaction.commit();
+    }
+
+    public void addNauczycielPrzedmiotuByNameAndLogin(String loginN, String nameP) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT n.idn FROM NauczycieleEntity n WHERE n.uzytkownicyByIdus.login = :login");
+        Query query1 = (Query) entityManager.createQuery("SELECT p.idp FROM PrzedmiotyEntity  p WHERE p.nazwa = :nazwa");
+        query1.setParameter("nazwa", nameP);
+        query.setParameter("login", loginN);
+        Long idn = (Long) query.getResultList().get(0);
+        Long idp = (Long) query1.getResultList().get(0);
+        addNauczycielePrzedmiotow(idn, idp);
+    }
+
+    public void addPrzedmiotKlasy(Long idp, Long idk) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        EntityTransaction transaction = entityManager.getTransaction();
+        transaction.begin();
+        PrzedmiotyklasEntity przedmiotyklasEntity = new PrzedmiotyklasEntity();
+        przedmiotyklasEntity.setIdp(idp);
+        przedmiotyklasEntity.setIdk(idk);
+        entityManager.persist(przedmiotyklasEntity);
+        transaction.commit();
+    }
+
+    public void addPrzedmiotKlasyByNames(String nameP, String nameC) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT k.idk FROM KlasyEntity k WHERE k.nazwa = :nazwaK");
+        Query query1 = (Query) entityManager.createQuery("SELECT p.idp FROM PrzedmiotyEntity  p WHERE p.nazwa = :nazwa");
+        query1.setParameter("nazwa", nameP);
+        query.setParameter("nazwaK", nameC);
+        Long idk = (Long) query.getResultList().get(0);
+        Long idp = (Long) query1.getResultList().get(0);
+        addPrzedmiotKlasy(idp, idk);
+    }
+
     public List<FrekwencjaEntity> findFrekwencjaByNameOfSubject(String nameOfSubcject) {
         EntityManager entityManager = FACTORY.createEntityManager();
         Query query = (Query) entityManager.createQuery("SELECT f FROM FrekwencjaEntity f JOIN f.przedmiotyByIdp p WHERE p.nazwa = :name");
@@ -369,6 +413,7 @@ public class Querries {
         EntityTransaction transaction = entitymanager.getTransaction();
         UczniowieEntity uczniowieEntity = findUczenByLogin(login);
         transaction.begin();
+        uczniowieEntity = entitymanager.merge(uczniowieEntity);
         entitymanager.remove(uczniowieEntity);
         transaction.commit();
         entitymanager.close();
@@ -398,6 +443,7 @@ public class Querries {
         EntityTransaction transaction = entitymanager.getTransaction();
         PrzedmiotyEntity przedmiotyEntity = findPrzedmiotByNazwa(nazwa);
         transaction.begin();
+        przedmiotyEntity = entitymanager.merge(przedmiotyEntity);
         entitymanager.remove(przedmiotyEntity);
         transaction.commit();
         entitymanager.close();
@@ -422,6 +468,7 @@ public class Querries {
         EntityTransaction transaction = entitymanager.getTransaction();
         KlasyEntity klasyEntity = findKlasaByNazwa(nazwa);
         transaction.begin();
+        klasyEntity = entitymanager.merge(klasyEntity);
         entitymanager.remove(klasyEntity);
         transaction.commit();
         entitymanager.close();
@@ -449,32 +496,33 @@ public class Querries {
         EntityTransaction transaction = entitymanager.getTransaction();
         FrekwencjaEntity frekwencjaEntity = findFrekwencjaByEverything(nazwaPrzedmiotu,loginU, data, godzina, klasa);
         transaction.begin();
+        frekwencjaEntity = entitymanager.merge(frekwencjaEntity);
         entitymanager.remove(frekwencjaEntity);
         transaction.commit();
         entitymanager.close();
     }
 
-    public LekcjeEntity findLekcjaByEverything(Integer godzina, String klasa, String login, String nazwaP, Date data, String temat) {
+    public LekcjeEntity findLekcjaByEverything(Integer godzina, String klasa, String login, String nazwaP, Date data) {
         EntityManager entitymanager = FACTORY.createEntityManager();
         Query query = (Query) entitymanager.createQuery("SELECT l FROM LekcjeEntity l JOIN l.klasyByKlasa k " +
                 "JOIN l.nauczycieleprzedmiotowByIdnp np WHERE l.data = :data AND l.godzina = :god " +
                 "AND k.nazwa = :nazwaK AND np.nauczycieleByIdn.uzytkownicyByIdus.login = :loginN " +
-                "AND np.przedmiotyByIdp.nazwa = :nazwaP AND l.temat = :temat");
+                "AND np.przedmiotyByIdp.nazwa = :nazwaP");
 
         query.setParameter("god", godzina);
         query.setParameter("data", data);
         query.setParameter("loginN", login);
-        query.setParameter("temat", temat);
         query.setParameter("nazwaP", nazwaP);
         query.setParameter("nazwaK", klasa);
         return (LekcjeEntity) query.getResultList().get(0);
     }
 
-    public void removeLekcja(Integer godzina, String klasa, String login, String nazwaP, Date data, String temat) {
+    public void removeLekcja(Integer godzina, String klasa, String login, String nazwaP, Date data) {
         EntityManager entitymanager = FACTORY.createEntityManager();
         EntityTransaction transaction = entitymanager.getTransaction();
-        LekcjeEntity lekcjeEntity = findLekcjaByEverything(godzina, klasa, login, nazwaP, data, temat);
+        LekcjeEntity lekcjeEntity = findLekcjaByEverything(godzina, klasa, login, nazwaP, data);
         transaction.begin();
+        lekcjeEntity = entitymanager.merge(lekcjeEntity);
         entitymanager.remove(lekcjeEntity);
         transaction.commit();
         entitymanager.close();
@@ -497,6 +545,7 @@ public class Querries {
         EntityTransaction transaction = entitymanager.getTransaction();
         OcenyEntity ocenyEntity = findOcenaByEverything(nazwao, ocena, login, nazwap);
         transaction.begin();
+        ocenyEntity = entitymanager.merge(ocenyEntity);
         entitymanager.remove(ocenyEntity);
         transaction.commit();
         entitymanager.close();
@@ -509,5 +558,43 @@ public class Querries {
         query.setParameter("naz", subject);
         query.setParameter("login", uLogin);
         return query.getResultList();
+    }
+
+    public NauczycieleprzedmiotowEntity findNauczycielPrzedmituByNameAndLogin(String nameP, String loginN) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT np.idnp FROM NauczycieleprzedmiotowEntity np JOIN np.przedmiotyByIdp p JOIN np.nauczycieleByIdn n WHERE p.nazwa = :nameP AND n.uzytkownicyByIdus.login = :loginN ");
+        query.setParameter("nameP", nameP);
+        query.setParameter("loginN", loginN);
+        return (NauczycieleprzedmiotowEntity) query.getResultList();
+    }
+
+    public PrzedmiotyklasEntity findPrzedmiotKlasyByNames(String nameP, String nameC) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT pk.idpk FROM PrzedmiotyklasEntity pk JOIN pk.przedmiotyByIdp p JOIN pk.klasyByIdk k WHERE p.nazwa = :nameP AND k.nazwa = :nameC");
+        query.setParameter("nameP", nameP);
+        query.setParameter("nameC", nameC);
+        return (PrzedmiotyklasEntity) query.getResultList();
+    }
+
+    public void removeNauczycielPrzedmiotow(String nameP, String loginN) {
+        EntityManager entitymanager = FACTORY.createEntityManager();
+        EntityTransaction transaction = entitymanager.getTransaction();
+        NauczycieleprzedmiotowEntity nauczycieleprzedmiotowEntity = findNauczycielPrzedmituByNameAndLogin(nameP, loginN);
+        transaction.begin();
+        nauczycieleprzedmiotowEntity = entitymanager.merge(nauczycieleprzedmiotowEntity);
+        entitymanager.remove(nauczycieleprzedmiotowEntity);
+        transaction.commit();
+        entitymanager.close();
+    }
+
+    public void removePrzedmiotKlasy(String nameP, String nameC) {
+        EntityManager entitymanager = FACTORY.createEntityManager();
+        EntityTransaction transaction = entitymanager.getTransaction();
+        PrzedmiotyklasEntity przedmiotyklasEntity = findPrzedmiotKlasyByNames(nameP, nameC);
+        transaction.begin();
+        przedmiotyklasEntity = entitymanager.merge(przedmiotyklasEntity);
+        entitymanager.remove(przedmiotyklasEntity);
+        transaction.commit();
+        entitymanager.close();
     }
 }
