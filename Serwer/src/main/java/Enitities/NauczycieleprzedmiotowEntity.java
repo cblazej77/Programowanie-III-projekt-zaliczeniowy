@@ -21,10 +21,10 @@ public class NauczycieleprzedmiotowEntity {
     @OneToMany(mappedBy = "nauczycieleprzedmiotowByIdnp")
     private Collection<LekcjeEntity> lekcjesByIdnp;
     @ManyToOne
-    @JoinColumn(name = "idn", referencedColumnName = "idn", nullable = false)
+    @JoinColumn(name = "idn", referencedColumnName = "idn", nullable = false, insertable = false, updatable = false)
     private NauczycieleEntity nauczycieleByIdn;
     @ManyToOne
-    @JoinColumn(name = "idp", referencedColumnName = "idp", nullable = false)
+    @JoinColumn(name = "idp", referencedColumnName = "idp", nullable = false, insertable = false, updatable = false)
     private PrzedmiotyEntity przedmiotyByIdp;
 
     public long getIdnp() {

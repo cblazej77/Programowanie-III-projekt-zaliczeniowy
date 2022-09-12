@@ -31,13 +31,13 @@ public class OcenyEntity {
     @Column(name = "data", nullable = true)
     private Date data;
     @ManyToOne
-    @JoinColumn(name = "idu", referencedColumnName = "idu", nullable = false)
+    @JoinColumn(name = "idu", referencedColumnName = "idu", nullable = false, insertable = false, updatable = false)
     private UczniowieEntity uczniowieByIdu;
     @ManyToOne
-    @JoinColumn(name = "idp", referencedColumnName = "idp", nullable = false)
+    @JoinColumn(name = "idp", referencedColumnName = "idp", nullable = false, insertable = false, updatable = false)
     private PrzedmiotyEntity przedmiotyByIdp;
     @ManyToOne
-    @JoinColumn(name = "idn", referencedColumnName = "idn")
+    @JoinColumn(name = "idn", referencedColumnName = "idn", insertable = false, updatable = false)
     private NauczycieleEntity nauczycieleByIdn;
 
     public long getIdo() {

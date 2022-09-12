@@ -31,10 +31,10 @@ public class LekcjeEntity {
     @OneToMany(mappedBy = "lekcjeByIdl")
     private Collection<FrekwencjaEntity> frekwencjasByIdl;
     @ManyToOne
-    @JoinColumn(name = "klasa", referencedColumnName = "idk", nullable = false)
+    @JoinColumn(name = "klasa", referencedColumnName = "idk", nullable = false, insertable = false, updatable = false)
     private KlasyEntity klasyByKlasa;
     @ManyToOne
-    @JoinColumn(name = "idnp", referencedColumnName = "idnp", nullable = false)
+    @JoinColumn(name = "idnp", referencedColumnName = "idnp", nullable = false, insertable = false, updatable = false)
     private NauczycieleprzedmiotowEntity nauczycieleprzedmiotowByIdnp;
 
     public long getIdl() {

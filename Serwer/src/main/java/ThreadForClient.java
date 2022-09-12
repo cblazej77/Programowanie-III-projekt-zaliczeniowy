@@ -4,6 +4,7 @@ import org.json.JSONObject;
 
 import java.io.*;
 import java.net.Socket;
+import java.sql.Date;
 import java.util.Iterator;
 import java.util.List;
 
@@ -221,8 +222,8 @@ public class ThreadForClient extends Thread{
         try {
             JSONObject pd = new JSONObject();
             Querries querries = new Querries();
-            List<String> oc = querries.findLekcjePrzedmiotForPrzedmiotByUserLogin(uLogin,day);
-            List<Integer> oc1 = querries.findLekcjeGodzinaForPrzedmiotByUserLogin(uLogin,day);
+            List<String> oc = querries.findLekcjePrzedmiotForPrzedmiotByUserLogin(uLogin, Date.valueOf(day));
+            List<Integer> oc1 = querries.findLekcjeGodzinaForPrzedmiotByUserLogin(uLogin, Date.valueOf(day));
             pd.put("day",day);
             bw.write(pd.toString());
             bw.newLine();

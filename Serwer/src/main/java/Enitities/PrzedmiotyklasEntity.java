@@ -18,10 +18,10 @@ public class PrzedmiotyklasEntity {
     @Column(name = "idk", nullable = false)
     private long idk;
     @ManyToOne
-    @JoinColumn(name = "idp", referencedColumnName = "idp", nullable = false)
+    @JoinColumn(name = "idp", referencedColumnName = "idp", nullable = false, insertable = false, updatable = false)
     private PrzedmiotyEntity przedmiotyByIdp;
     @ManyToOne
-    @JoinColumn(name = "idk", referencedColumnName = "idk", nullable = false)
+    @JoinColumn(name = "idk", referencedColumnName = "idk", nullable = false, insertable = false, updatable = false)
     private KlasyEntity klasyByIdk;
 
     public long getIdpk() {

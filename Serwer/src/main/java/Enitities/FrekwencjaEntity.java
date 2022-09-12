@@ -27,16 +27,16 @@ public class FrekwencjaEntity {
     @Column(name = "idn", nullable = true)
     private Long idn;
     @ManyToOne
-    @JoinColumn(name = "idp", referencedColumnName = "idp", nullable = false)
+    @JoinColumn(name = "idp", referencedColumnName = "idp", nullable = false, insertable = false, updatable = false)
     private PrzedmiotyEntity przedmiotyByIdp;
     @ManyToOne
-    @JoinColumn(name = "idu", referencedColumnName = "idu", nullable = false)
+    @JoinColumn(name = "idu", referencedColumnName = "idu", nullable = false, insertable = false, updatable = false)
     private UczniowieEntity uczniowieByIdu;
     @ManyToOne
-    @JoinColumn(name = "idl", referencedColumnName = "idl")
+    @JoinColumn(name = "idl", referencedColumnName = "idl", insertable = false, updatable = false)
     private LekcjeEntity lekcjeByIdl;
     @ManyToOne
-    @JoinColumn(name = "idn", referencedColumnName = "idn")
+    @JoinColumn(name = "idn", referencedColumnName = "idn", insertable = false, updatable = false)
     private NauczycieleEntity nauczycieleByIdn;
 
     public long getIdf() {

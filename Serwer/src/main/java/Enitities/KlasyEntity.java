@@ -23,7 +23,7 @@ public class KlasyEntity {
     @Column(name = "wychowawca", nullable = true)
     private Long wychowawca;
     @ManyToOne
-    @JoinColumn(name = "wychowawca", referencedColumnName = "idn")
+    @JoinColumn(name = "wychowawca", referencedColumnName = "idn", insertable = false, updatable = false)
     private NauczycieleEntity nauczycieleByWychowawca;
     @OneToMany(mappedBy = "klasyByKlasa")
     private Collection<LekcjeEntity> lekcjesByIdk;

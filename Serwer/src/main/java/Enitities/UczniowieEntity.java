@@ -29,13 +29,13 @@ public class UczniowieEntity {
     @OneToMany(mappedBy = "uczniowieByIdu")
     private Collection<OcenyEntity> oceniesByIdu;
     @ManyToOne
-    @JoinColumn(name = "idk", referencedColumnName = "idk", nullable = false)
+    @JoinColumn(name = "idk", referencedColumnName = "idk", nullable = false, insertable = false, updatable = false)
     private KlasyEntity klasyByIdk;
     @ManyToOne
-    @JoinColumn(name = "idus", referencedColumnName = "idus", nullable = false)
+    @JoinColumn(name = "idus", referencedColumnName = "idus", nullable = false, insertable = false, updatable = false)
     private UzytkownicyEntity uzytkownicyByIdus;
     @ManyToOne
-    @JoinColumn(name = "idurodzica", referencedColumnName = "idus", nullable = false)
+    @JoinColumn(name = "idurodzica", referencedColumnName = "idus", nullable = false, insertable = false, updatable = false)
     private UzytkownicyEntity uzytkownicyByIdurodzica;
 
     public long getIdu() {
