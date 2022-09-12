@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import java.io.*;
 import java.net.Socket;
+import java.util.List;
 
 public class Client {
 
@@ -67,6 +68,17 @@ public class Client {
             bw.newLine();
             bw.flush();
         }catch(IOException | JSONException e){e.printStackTrace();}
+    }
+
+    public void SendAddSignal(List<String> Data, int i, int n) throws JSONException, IOException {
+        json = new JSONObject();
+        for(int j=0;j<n;j++){
+            json.put("data" + j, Data.get(j));
+        }
+        json.put("whichAdd",i);
+        bw.write(json.toString());
+        bw.newLine();
+        bw.flush();
     }
 
     public boolean sendLogPassToSerwer(String login, String password){//Wysyla login i haslo w JONSONie do serwera, po wcisnieciu przycisku zaloguj

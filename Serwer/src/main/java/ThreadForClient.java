@@ -73,6 +73,7 @@ public class ThreadForClient extends Thread{
                             if(chooseCase == 4) nauczycielDane(bw,uLogin);
                             if(chooseCase == 5) OcenyNauczycielaDane(bw,uLogin);
                             if(chooseCase == 6) removeDane(br);
+                            if(chooseCase == 7) addDane(br);
                         }
                     }
                 }
@@ -123,6 +124,48 @@ public class ThreadForClient extends Thread{
                 break;
             case 6:
                 querries.removeKlasaByNazwa(data);
+                break;
+            case 7:
+                //querries.removeFrekwencja(data);
+                break;
+            case 8:
+                //querries.removeNauczycielPrzedmiotu(data);
+                break;
+            case 9:
+                //querries.removePrzedmiotKlasy(data);
+                break;
+            default:
+                break;
+        }
+    }
+
+    private void addDane(BufferedReader br) throws IOException, JSONException {
+        Querries querries = new Querries();
+        JSONObject rc = null;
+        rc = new JSONObject(br.readLine());
+        int which = rc.optInt("whichAdd");
+        switch (which){
+            case 0:
+                querries.addUzytkownik(rc.optString("data0"),rc.optString("data1"),rc.optString("data2"),rc.optString("data3"),rc.optString("data4"));
+                break;
+            case 1:
+
+                break;
+            case 2:
+
+                break;
+            case 3:
+
+                break;
+            case 4:
+                //removeOcena(String nazwao, Float ocena, String login, String nazwap)
+                //querries.removeOcena(data);
+                break;
+            case 5:
+                //querries.removeLekcja(data);
+                break;
+            case 6:
+
                 break;
             case 7:
                 //querries.removeFrekwencja(data);

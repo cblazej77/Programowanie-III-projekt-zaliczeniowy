@@ -93,7 +93,7 @@ public class AppWindowController implements Initializable {
 
     @FXML
     private void daneTButton(ActionEvent event) throws JSONException, IOException {
-        client.sendCase(6);
+        //client.sendCase(6);
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPane("editDBWindow");
         mainPane.setCenter(view);
