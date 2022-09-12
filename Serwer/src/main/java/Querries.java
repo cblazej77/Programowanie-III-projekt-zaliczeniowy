@@ -74,13 +74,13 @@ public class Querries {
         transaction.commit();
     }
 
-    public void addLekcja(Integer semestr, String dzien, Integer godzina, Long klasa, Long idnp) {
+    public void addLekcja(Integer godzina, Long klasa, Long idnp, Date data, String temat) {
         EntityManager entityManager = FACTORY.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
         LekcjeEntity lekcjeEntity = new LekcjeEntity();
-        lekcjeEntity.setSemestr(semestr);
-        lekcjeEntity.setDzien(dzien);
+        lekcjeEntity.setData(data);
+        lekcjeEntity.setTemat(temat);
         lekcjeEntity.setGodzina(godzina);
         lekcjeEntity.setKlasa(klasa);
         lekcjeEntity.setIdnp(idnp);
@@ -100,15 +100,15 @@ public class Querries {
         transaction.commit();
     }
 
-    public void addFrekwencja(Long idp, Long idu, Date data, Integer godzina, String rodzaj) {
+    public void addFrekwencja(Long idp, Long idu, String rodzaj, Long idl, Long idn) {
         EntityManager entityManager = FACTORY.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
         FrekwencjaEntity frekwencjaEntity = new FrekwencjaEntity();
+        frekwencjaEntity.setIdl(idl);
+        frekwencjaEntity.setIdn(idn);
         frekwencjaEntity.setIdp(idp);
         frekwencjaEntity.setIdu(idu);
-        frekwencjaEntity.setData(data);
-        frekwencjaEntity.setGodzina(godzina);
         frekwencjaEntity.setRodzaj(rodzaj);
         entityManager.persist(frekwencjaEntity);
         transaction.commit();
@@ -240,18 +240,18 @@ public class Querries {
         return (KlasyEntity) query.getResultList().get(0);
     }
 
-    public List<Integer> findLekcjeGodzinaForPrzedmiotByUserLogin(String login, String dzien) {
+    public List<Integer> findLekcjeGodzinaForPrzedmiotByUserLogin(String login, Date data) {
         EntityManager entityManager = FACTORY.createEntityManager();
-        Query query = (Query) entityManager.createQuery("SELECT l.godzina FROM LekcjeEntity l JOIN l.klasyByKlasa k JOIN k.uczniowiesByIdk u JOIN u.uzytkownicyByIdus us WHERE us.login = :login AND l.dzien = :dzien ORDER BY l.godzina");
+        Query query = (Query) entityManager.createQuery("SELECT l.godzina FROM LekcjeEntity l JOIN l.klasyByKlasa k JOIN k.uczniowiesByIdk u JOIN u.uzytkownicyByIdus us WHERE us.login = :login AND l.data = :data ORDER BY l.godzina");
         query.setParameter("login", login);
-        query.setParameter("dzien", dzien);
+        query.setParameter("data", data);
         return query.getResultList();
     }
-    public List<String> findLekcjePrzedmiotForPrzedmiotByUserLogin(String login, String dzien) {
+    public List<String> findLekcjePrzedmiotForPrzedmiotByUserLogin(String login, Date data) {
         EntityManager entityManager = FACTORY.createEntityManager();
-        Query query = (Query) entityManager.createQuery("SELECT np.przedmiotyByIdp.nazwa FROM LekcjeEntity l JOIN l.nauczycieleprzedmiotowByIdnp np JOIN l.klasyByKlasa k JOIN k.uczniowiesByIdk u JOIN u.uzytkownicyByIdus us WHERE us.login = :login AND l.dzien = :dzien ORDER BY l.godzina");
+        Query query = (Query) entityManager.createQuery("SELECT np.przedmiotyByIdp.nazwa FROM LekcjeEntity l JOIN l.nauczycieleprzedmiotowByIdnp np JOIN l.klasyByKlasa k JOIN k.uczniowiesByIdk u JOIN u.uzytkownicyByIdus us WHERE us.login = :login AND l.data = :dzien ORDER BY l.godzina");
         query.setParameter("login", login);
-        query.setParameter("dzien", dzien);
+        query.setParameter("dzien", data);
         return query.getResultList();
     }
 
@@ -294,7 +294,7 @@ public class Querries {
         entityManager.close();
     }
 
-    public void addLekcjaByLoginAndNames(Integer semestr, String dzien, Integer godzina, String nazwaKlasy, String loginN, String nazwaPrzedmiotu) {
+    public void addLekcjaByLoginAndNames(Integer godzina, String nazwaKlasy, String loginN, String nazwaPrzedmiotu, Date data, String temat) {
         EntityManager entityManager = FACTORY.createEntityManager();
         Query query = (Query) entityManager.createQuery("Select k.idk FROM KlasyEntity k where k.nazwa = :nazwaKlasy");
         Query query1 = (Query) entityManager.createQuery("Select np.idnp FROM NauczycieleprzedmiotowEntity np join np.przedmiotyByIdp p join np.nauczycieleByIdn n WHERE p.nazwa = :nazwaP AND n.uzytkownicyByIdus.login = :loginN");
@@ -303,7 +303,7 @@ public class Querries {
         query1.setParameter("loginN", loginN);
         Long idk = (Long) query.getResultList().get(0);
         Long idnp = (Long) query1.getResultList().get(0);
-        addLekcja(semestr, dzien, godzina, idk, idnp);
+        addLekcja(godzina, idk, idnp, data, temat);
         entityManager.close();
     }
 
@@ -316,16 +316,24 @@ public class Querries {
         entityManager.close();
     }
 
-    public void addFrekwencjaOnNazwaPrzedmiotuAndUczenLogin(String nazwaP, String loginU, Date data, Integer godzina, String rodzaj) {
+    public void addFrekwencjaOnEverything(String nazwaP, String loginU, Date data, Integer godzina, String rodzaj, String klasa, String loginN) {
 
         EntityManager entityManager = FACTORY.createEntityManager();
         Query query1 = (Query) entityManager.createQuery("SELECT p.idp FROM PrzedmiotyEntity p WHERE p.nazwa = :nazwa");
         Query query = (Query) entityManager.createQuery("Select u.idu FROM UczniowieEntity u JOIN u.uzytkownicyByIdus us WHERE us.login = :loginU");
+        Query query2 = (Query) entityManager.createQuery("SELECT l.idl FROM LekcjeEntity l WHERE l.godzina = :godzina AND l.data = :data AND l.klasyByKlasa.nazwa = :klasa");
+        Query query3 = (Query) entityManager.createQuery("SELECT n.idn FROM NauczycieleEntity n WHERE n.uzytkownicyByIdus.login = :loginN");
         query1.setParameter("nazwa", nazwaP);
         query.setParameter("loginU", loginU);
+        query2.setParameter("godzina", godzina);
+        query2.setParameter("klasa", klasa);
+        query2.setParameter("data", data);
+        query3.setParameter("loginN", loginN);
         Long idu = (Long) query.getResultList().get(0);
         Long idp = (Long) query1.getResultList().get(0);
-        addFrekwencja(idp, idu, data, godzina, rodzaj);
+        Long idl = (Long) query2.getResultList().get(0);
+        Long idn = (Long) query3.getResultList().get(0);
+        addFrekwencja(idp, idu,rodzaj, idl, idn);
         entityManager.close();
     }
 
@@ -419,47 +427,53 @@ public class Querries {
         entitymanager.close();
     }
 
-    public FrekwencjaEntity findFrekwencjaByEverything(String nazwaPrzedmiotu, String loginU, Date data, Integer godzina) {
+    public FrekwencjaEntity findFrekwencjaByEverything(String nazwaPrzedmiotu, String loginU, Date data, Integer godzina, String klasa) {
         EntityManager entitymanager = FACTORY.createEntityManager();
+        Query query0 = (Query) entitymanager.createQuery("SELECT l.idl FROM LekcjeEntity l WHERE l.klasyByKlasa.nazwa = :nazwaK " +
+                "AND l.data = :data AND l.godzina = :godzina");
         Query query = (Query) entitymanager.createQuery("SELECT f FROM FrekwencjaEntity f JOIN f.przedmiotyByIdp p " +
                 "JOIN f.uczniowieByIdu u WHERE p.nazwa = :nazwa AND u.uzytkownicyByIdus.login = :login " +
-                "AND f.data = :data AND f.godzina = :godzina");
-        query.setParameter("godzina", godzina);
+                "AND f.idl = :idl");
+        query0.setParameter("nazwaK", klasa);
+        query0.setParameter("data", data);
+        query0.setParameter("godzina", godzina);
+        Long idl = (Long) query0.getResultList().get(0);
         query.setParameter("login", loginU);
-        query.setParameter("data", data);
         query.setParameter("nazwa", nazwaPrzedmiotu);
+        query.setParameter("idl", idl);
         return (FrekwencjaEntity) query.getResultList().get(0);
     }
 
-    public void removeFrekwencja(String nazwaPrzedmiotu, String loginU, Date data, Integer godzina) {
+    public void removeFrekwencja(String nazwaPrzedmiotu, String loginU, Date data, Integer godzina, String klasa) {
         EntityManager entitymanager = FACTORY.createEntityManager();
         EntityTransaction transaction = entitymanager.getTransaction();
-        FrekwencjaEntity frekwencjaEntity = findFrekwencjaByEverything(nazwaPrzedmiotu,loginU,data,godzina);
+        FrekwencjaEntity frekwencjaEntity = findFrekwencjaByEverything(nazwaPrzedmiotu,loginU, data, godzina, klasa);
         transaction.begin();
         entitymanager.remove(frekwencjaEntity);
         transaction.commit();
         entitymanager.close();
     }
 
-    public LekcjeEntity findLekcjaByEverything(Integer semestr, String dzien, Integer godzina, String klasa, String login, String nazwaP) {
+    public LekcjeEntity findLekcjaByEverything(Integer godzina, String klasa, String login, String nazwaP, Date data, String temat) {
         EntityManager entitymanager = FACTORY.createEntityManager();
         Query query = (Query) entitymanager.createQuery("SELECT l FROM LekcjeEntity l JOIN l.klasyByKlasa k " +
-                "JOIN l.nauczycieleprzedmiotowByIdnp np WHERE l.dzien = :dzien AND l.semestr = :sem AND l.godzina = :god " +
+                "JOIN l.nauczycieleprzedmiotowByIdnp np WHERE l.data = :data AND l.godzina = :god " +
                 "AND k.nazwa = :nazwaK AND np.nauczycieleByIdn.uzytkownicyByIdus.login = :loginN " +
-                "AND np.przedmiotyByIdp.nazwa = :nazwaP");
+                "AND np.przedmiotyByIdp.nazwa = :nazwaP AND l.temat = :temat");
+
         query.setParameter("god", godzina);
-        query.setParameter("dzien", dzien);
+        query.setParameter("data", data);
         query.setParameter("loginN", login);
-        query.setParameter("sem", semestr);
+        query.setParameter("temat", temat);
         query.setParameter("nazwaP", nazwaP);
         query.setParameter("nazwaK", klasa);
         return (LekcjeEntity) query.getResultList().get(0);
     }
 
-    public void removeLekcja(Integer semestr, String dzien, Integer godzina, String klasa, String login, String nazwaP) {
+    public void removeLekcja(Integer godzina, String klasa, String login, String nazwaP, Date data, String temat) {
         EntityManager entitymanager = FACTORY.createEntityManager();
         EntityTransaction transaction = entitymanager.getTransaction();
-        LekcjeEntity lekcjeEntity = findLekcjaByEverything(semestr, dzien, godzina, klasa, login, nazwaP);
+        LekcjeEntity lekcjeEntity = findLekcjaByEverything(godzina, klasa, login, nazwaP, data, temat);
         transaction.begin();
         entitymanager.remove(lekcjeEntity);
         transaction.commit();

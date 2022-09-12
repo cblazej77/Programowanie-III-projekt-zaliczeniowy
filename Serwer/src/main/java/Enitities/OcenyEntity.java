@@ -2,6 +2,7 @@ package Enitities;
 
 import jakarta.persistence.*;
 
+import java.sql.Date;
 import java.util.Objects;
 
 @Entity
@@ -10,42 +11,40 @@ public class OcenyEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "ido", nullable = false)
-    private Long ido;
+    private long ido;
     @Basic
     @Column(name = "nazwa", nullable = true, length = 20)
     private String nazwa;
     @Basic
     @Column(name = "ocena", nullable = false, precision = 0)
-    private Float ocena;
+    private float ocena;
     @Basic
     @Column(name = "idu", nullable = false)
-    private Long idu;
+    private long idu;
     @Basic
     @Column(name = "idp", nullable = false)
-    private Long idp;
+    private long idp;
+    @Basic
+    @Column(name = "idn", nullable = true)
+    private Long idn;
+    @Basic
+    @Column(name = "data", nullable = true)
+    private Date data;
     @ManyToOne
-    @JoinColumn(name = "idu", referencedColumnName = "idu", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "idu", referencedColumnName = "idu", nullable = false)
     private UczniowieEntity uczniowieByIdu;
     @ManyToOne
-    @JoinColumn(name = "idp", referencedColumnName = "idp", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "idp", referencedColumnName = "idp", nullable = false)
     private PrzedmiotyEntity przedmiotyByIdp;
+    @ManyToOne
+    @JoinColumn(name = "idn", referencedColumnName = "idn")
+    private NauczycieleEntity nauczycieleByIdn;
 
-    @Override
-    public String toString() {
-        return "OcenyEntity{" +
-                "ido=" + ido +
-                ", nazwa='" + nazwa + '\'' +
-                ", ocena=" + ocena +
-                ", idu=" + idu +
-                ", idp=" + idp +
-                '}';
-    }
-
-    public Long getIdo() {
+    public long getIdo() {
         return ido;
     }
 
-    public void setIdo(Long ido) {
+    public void setIdo(long ido) {
         this.ido = ido;
     }
 
@@ -57,28 +56,44 @@ public class OcenyEntity {
         this.nazwa = nazwa;
     }
 
-    public Float getOcena() {
+    public float getOcena() {
         return ocena;
     }
 
-    public void setOcena(Float ocena) {
+    public void setOcena(float ocena) {
         this.ocena = ocena;
     }
 
-    public Long getIdu() {
+    public long getIdu() {
         return idu;
     }
 
-    public void setIdu(Long idu) {
+    public void setIdu(long idu) {
         this.idu = idu;
     }
 
-    public Long getIdp() {
+    public long getIdp() {
         return idp;
     }
 
-    public void setIdp(Long idp) {
+    public void setIdp(long idp) {
         this.idp = idp;
+    }
+
+    public Long getIdn() {
+        return idn;
+    }
+
+    public void setIdn(Long idn) {
+        this.idn = idn;
+    }
+
+    public Date getData() {
+        return data;
+    }
+
+    public void setData(Date data) {
+        this.data = data;
     }
 
     @Override
@@ -86,12 +101,12 @@ public class OcenyEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         OcenyEntity that = (OcenyEntity) o;
-        return Objects.equals(ido, that.ido) && Objects.equals(nazwa, that.nazwa) && Objects.equals(ocena, that.ocena) && Objects.equals(idu, that.idu) && Objects.equals(idp, that.idp);
+        return ido == that.ido && Float.compare(that.ocena, ocena) == 0 && idu == that.idu && idp == that.idp && Objects.equals(nazwa, that.nazwa) && Objects.equals(idn, that.idn) && Objects.equals(data, that.data);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(ido, nazwa, ocena, idu, idp);
+        return Objects.hash(ido, nazwa, ocena, idu, idp, idn, data);
     }
 
     public UczniowieEntity getUczniowieByIdu() {
@@ -108,5 +123,13 @@ public class OcenyEntity {
 
     public void setPrzedmiotyByIdp(PrzedmiotyEntity przedmiotyByIdp) {
         this.przedmiotyByIdp = przedmiotyByIdp;
+    }
+
+    public NauczycieleEntity getNauczycieleByIdn() {
+        return nauczycieleByIdn;
+    }
+
+    public void setNauczycieleByIdn(NauczycieleEntity nauczycieleByIdn) {
+        this.nauczycieleByIdn = nauczycieleByIdn;
     }
 }

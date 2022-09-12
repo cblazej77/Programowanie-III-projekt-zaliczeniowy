@@ -12,7 +12,7 @@ public class KlasyEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "idk", nullable = false)
-    private Long idk;
+    private long idk;
     @Basic
     @Column(name = "nazwa", nullable = false, length = 20)
     private String nazwa;
@@ -23,18 +23,20 @@ public class KlasyEntity {
     @Column(name = "wychowawca", nullable = true)
     private Long wychowawca;
     @ManyToOne
-    @JoinColumn(name = "wychowawca", referencedColumnName = "idn", insertable = false, updatable = false)
+    @JoinColumn(name = "wychowawca", referencedColumnName = "idn")
     private NauczycieleEntity nauczycieleByWychowawca;
+    @OneToMany(mappedBy = "klasyByKlasa")
+    private Collection<LekcjeEntity> lekcjesByIdk;
     @OneToMany(mappedBy = "klasyByIdk")
     private Collection<PrzedmiotyklasEntity> przedmiotyklasByIdk;
     @OneToMany(mappedBy = "klasyByIdk")
     private Collection<UczniowieEntity> uczniowiesByIdk;
 
-    public Long getIdk() {
+    public long getIdk() {
         return idk;
     }
 
-    public void setIdk(Long idk) {
+    public void setIdk(long idk) {
         this.idk = idk;
     }
 
@@ -63,21 +65,11 @@ public class KlasyEntity {
     }
 
     @Override
-    public String toString() {
-        return "KlasyEntity{" +
-                "idk=" + idk +
-                ", nazwa='" + nazwa + '\'' +
-                ", datarozpoczecia=" + datarozpoczecia +
-                ", wychowawca=" + wychowawca +
-                '}';
-    }
-
-    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         KlasyEntity that = (KlasyEntity) o;
-        return Objects.equals(idk, that.idk) && Objects.equals(nazwa, that.nazwa) && Objects.equals(datarozpoczecia, that.datarozpoczecia) && Objects.equals(wychowawca, that.wychowawca);
+        return idk == that.idk && Objects.equals(nazwa, that.nazwa) && Objects.equals(datarozpoczecia, that.datarozpoczecia) && Objects.equals(wychowawca, that.wychowawca);
     }
 
     @Override
@@ -91,6 +83,14 @@ public class KlasyEntity {
 
     public void setNauczycieleByWychowawca(NauczycieleEntity nauczycieleByWychowawca) {
         this.nauczycieleByWychowawca = nauczycieleByWychowawca;
+    }
+
+    public Collection<LekcjeEntity> getLekcjesByIdk() {
+        return lekcjesByIdk;
+    }
+
+    public void setLekcjesByIdk(Collection<LekcjeEntity> lekcjesByIdk) {
+        this.lekcjesByIdk = lekcjesByIdk;
     }
 
     public Collection<PrzedmiotyklasEntity> getPrzedmiotyklasByIdk() {

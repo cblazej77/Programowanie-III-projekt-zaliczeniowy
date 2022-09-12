@@ -11,7 +11,7 @@ public class UzytkownicyEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "idus", nullable = false)
-    private Long idus;
+    private long idus;
     @Basic
     @Column(name = "login", nullable = true, length = 20)
     private String login;
@@ -34,11 +34,11 @@ public class UzytkownicyEntity {
     @OneToMany(mappedBy = "uzytkownicyByIdurodzica")
     private Collection<UczniowieEntity> uczniowiesByIdus_0;
 
-    public Long getIdus() {
+    public long getIdus() {
         return idus;
     }
 
-    public void setIdus(Long idus) {
+    public void setIdus(long idus) {
         this.idus = idus;
     }
 
@@ -87,7 +87,7 @@ public class UzytkownicyEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UzytkownicyEntity that = (UzytkownicyEntity) o;
-        return Objects.equals(idus, that.idus) && Objects.equals(login, that.login) && Objects.equals(haslo, that.haslo) && Objects.equals(imie, that.imie) && Objects.equals(nazwisko, that.nazwisko) && Objects.equals(rola, that.rola);
+        return idus == that.idus && Objects.equals(login, that.login) && Objects.equals(haslo, that.haslo) && Objects.equals(imie, that.imie) && Objects.equals(nazwisko, that.nazwisko) && Objects.equals(rola, that.rola);
     }
 
     @Override
@@ -117,17 +117,5 @@ public class UzytkownicyEntity {
 
     public void setUczniowiesByIdus_0(Collection<UczniowieEntity> uczniowiesByIdus_0) {
         this.uczniowiesByIdus_0 = uczniowiesByIdus_0;
-    }
-
-    @Override
-    public String toString() {
-        return "UzytkownicyEntity{" +
-                "idus=" + idus +
-                ", login='" + login + '\'' +
-                ", haslo='" + haslo + '\'' +
-                ", imie='" + imie + '\'' +
-                ", nazwisko='" + nazwisko + '\'' +
-                ", rola='" + rola + '\'' +
-                '}';
     }
 }

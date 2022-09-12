@@ -11,38 +11,38 @@ public class UczniowieEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "idu", nullable = false)
-    private Long idu;
+    private long idu;
     @Basic
     @Column(name = "nrwdzienniku", nullable = true)
     private Integer nrwdzienniku;
     @Basic
     @Column(name = "idk", nullable = false)
-    private Long idk;
+    private long idk;
     @Basic
     @Column(name = "idus", nullable = false)
-    private Long idus;
+    private long idus;
     @Basic
     @Column(name = "idurodzica", nullable = false)
-    private Long idurodzica;
+    private long idurodzica;
     @OneToMany(mappedBy = "uczniowieByIdu")
     private Collection<FrekwencjaEntity> frekwencjasByIdu;
     @OneToMany(mappedBy = "uczniowieByIdu")
     private Collection<OcenyEntity> oceniesByIdu;
     @ManyToOne
-    @JoinColumn(name = "idk", referencedColumnName = "idk", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "idk", referencedColumnName = "idk", nullable = false)
     private KlasyEntity klasyByIdk;
     @ManyToOne
-    @JoinColumn(name = "idus", referencedColumnName = "idus", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "idus", referencedColumnName = "idus", nullable = false)
     private UzytkownicyEntity uzytkownicyByIdus;
     @ManyToOne
-    @JoinColumn(name = "idurodzica", referencedColumnName = "idus", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "idurodzica", referencedColumnName = "idus", nullable = false)
     private UzytkownicyEntity uzytkownicyByIdurodzica;
 
-    public Long getIdu() {
+    public long getIdu() {
         return idu;
     }
 
-    public void setIdu(Long idu) {
+    public void setIdu(long idu) {
         this.idu = idu;
     }
 
@@ -54,27 +54,27 @@ public class UczniowieEntity {
         this.nrwdzienniku = nrwdzienniku;
     }
 
-    public Long getIdk() {
+    public long getIdk() {
         return idk;
     }
 
-    public void setIdk(Long idk) {
+    public void setIdk(long idk) {
         this.idk = idk;
     }
 
-    public Long getIdus() {
+    public long getIdus() {
         return idus;
     }
 
-    public void setIdus(Long idus) {
+    public void setIdus(long idus) {
         this.idus = idus;
     }
 
-    public Long getIdurodzica() {
+    public long getIdurodzica() {
         return idurodzica;
     }
 
-    public void setIdurodzica(Long idurodzica) {
+    public void setIdurodzica(long idurodzica) {
         this.idurodzica = idurodzica;
     }
 
@@ -83,7 +83,7 @@ public class UczniowieEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         UczniowieEntity that = (UczniowieEntity) o;
-        return Objects.equals(idu, that.idu) && Objects.equals(nrwdzienniku, that.nrwdzienniku) && Objects.equals(idk, that.idk) && Objects.equals(idus, that.idus) && Objects.equals(idurodzica, that.idurodzica);
+        return idu == that.idu && idk == that.idk && idus == that.idus && idurodzica == that.idurodzica && Objects.equals(nrwdzienniku, that.nrwdzienniku);
     }
 
     @Override
@@ -129,16 +129,5 @@ public class UczniowieEntity {
 
     public void setUzytkownicyByIdurodzica(UzytkownicyEntity uzytkownicyByIdurodzica) {
         this.uzytkownicyByIdurodzica = uzytkownicyByIdurodzica;
-    }
-
-    @Override
-    public String toString() {
-        return "UczniowieEntity{" +
-                "idu=" + idu +
-                ", nrwdzienniku=" + nrwdzienniku +
-                ", idk=" + idk +
-                ", idus=" + idus +
-                ", idurodzica=" + idurodzica +
-                '}';
     }
 }

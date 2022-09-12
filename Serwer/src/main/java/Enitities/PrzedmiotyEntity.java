@@ -11,7 +11,7 @@ public class PrzedmiotyEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "idp", nullable = false)
-    private Long idp;
+    private long idp;
     @Basic
     @Column(name = "nazwa", nullable = true, length = 20)
     private String nazwa;
@@ -24,26 +24,19 @@ public class PrzedmiotyEntity {
     @OneToMany(mappedBy = "przedmiotyByIdp")
     private Collection<PrzedmiotyklasEntity> przedmiotyklasByIdp;
 
-    public PrzedmiotyEntity() {
-    }
-
     public PrzedmiotyEntity(String nazwa) {
-        this.nazwa = nazwa;
+        this.nazwa  = nazwa;
     }
 
-    @Override
-    public String toString() {
-        return "PrzedmiotyEntity{" +
-                "idp=" + idp +
-                ", nazwa='" + nazwa + '\'' +
-                '}';
+    public PrzedmiotyEntity() {
+
     }
 
-    public Long getIdp() {
+    public long getIdp() {
         return idp;
     }
 
-    public void setIdp(Long idp) {
+    public void setIdp(long idp) {
         this.idp = idp;
     }
 
@@ -60,7 +53,7 @@ public class PrzedmiotyEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PrzedmiotyEntity that = (PrzedmiotyEntity) o;
-        return Objects.equals(idp, that.idp) && Objects.equals(nazwa, that.nazwa);
+        return idp == that.idp && Objects.equals(nazwa, that.nazwa);
     }
 
     @Override

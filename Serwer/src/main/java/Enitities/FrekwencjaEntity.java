@@ -2,7 +2,6 @@ package Enitities;
 
 import jakarta.persistence.*;
 
-import java.sql.Date;
 import java.util.Objects;
 
 @Entity
@@ -11,67 +10,57 @@ public class FrekwencjaEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "idf", nullable = false)
-    private Long idf;
+    private long idf;
     @Basic
     @Column(name = "idp", nullable = false)
-    private Long idp;
+    private long idp;
     @Basic
     @Column(name = "idu", nullable = false)
-    private Long idu;
-    @Basic
-    @Column(name = "data", nullable = true)
-    private Date data;
-    @Basic
-    @Column(name = "godzina", nullable = true)
-    private Integer godzina;
+    private long idu;
     @Basic
     @Column(name = "rodzaj", nullable = true, length = 20)
     private String rodzaj;
+    @Basic
+    @Column(name = "idl", nullable = true)
+    private Long idl;
+    @Basic
+    @Column(name = "idn", nullable = true)
+    private Long idn;
     @ManyToOne
-    @JoinColumn(name = "idp", referencedColumnName = "idp", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "idp", referencedColumnName = "idp", nullable = false)
     private PrzedmiotyEntity przedmiotyByIdp;
     @ManyToOne
-    @JoinColumn(name = "idu", referencedColumnName = "idu", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "idu", referencedColumnName = "idu", nullable = false)
     private UczniowieEntity uczniowieByIdu;
+    @ManyToOne
+    @JoinColumn(name = "idl", referencedColumnName = "idl")
+    private LekcjeEntity lekcjeByIdl;
+    @ManyToOne
+    @JoinColumn(name = "idn", referencedColumnName = "idn")
+    private NauczycieleEntity nauczycieleByIdn;
 
-    public Long getIdf() {
+    public long getIdf() {
         return idf;
     }
 
-    public void setIdf(Long idf) {
+    public void setIdf(long idf) {
         this.idf = idf;
     }
 
-    public Long getIdp() {
+    public long getIdp() {
         return idp;
     }
 
-    public void setIdp(Long idp) {
+    public void setIdp(long idp) {
         this.idp = idp;
     }
 
-    public Long getIdu() {
+    public long getIdu() {
         return idu;
     }
 
-    public void setIdu(Long idu) {
+    public void setIdu(long idu) {
         this.idu = idu;
-    }
-
-    public Date getData() {
-        return data;
-    }
-
-    public void setData(Date data) {
-        this.data = data;
-    }
-
-    public Integer getGodzina() {
-        return godzina;
-    }
-
-    public void setGodzina(Integer godzina) {
-        this.godzina = godzina;
     }
 
     public String getRodzaj() {
@@ -82,16 +71,20 @@ public class FrekwencjaEntity {
         this.rodzaj = rodzaj;
     }
 
-    @Override
-    public String toString() {
-        return "FrekwencjaEntity{" +
-                "idf=" + idf +
-                ", idp=" + idp +
-                ", idu=" + idu +
-                ", data=" + data +
-                ", godzina=" + godzina +
-                ", rodzaj='" + rodzaj + '\'' +
-                '}';
+    public Long getIdl() {
+        return idl;
+    }
+
+    public void setIdl(Long idl) {
+        this.idl = idl;
+    }
+
+    public Long getIdn() {
+        return idn;
+    }
+
+    public void setIdn(Long idn) {
+        this.idn = idn;
     }
 
     @Override
@@ -99,12 +92,12 @@ public class FrekwencjaEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         FrekwencjaEntity that = (FrekwencjaEntity) o;
-        return Objects.equals(idf, that.idf) && Objects.equals(idp, that.idp) && Objects.equals(idu, that.idu) && Objects.equals(data, that.data) && Objects.equals(godzina, that.godzina) && Objects.equals(rodzaj, that.rodzaj);
+        return idf == that.idf && idp == that.idp && idu == that.idu && Objects.equals(rodzaj, that.rodzaj) && Objects.equals(idl, that.idl) && Objects.equals(idn, that.idn);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(idf, idp, idu, data, godzina, rodzaj);
+        return Objects.hash(idf, idp, idu, rodzaj, idl, idn);
     }
 
     public PrzedmiotyEntity getPrzedmiotyByIdp() {
@@ -121,5 +114,21 @@ public class FrekwencjaEntity {
 
     public void setUczniowieByIdu(UczniowieEntity uczniowieByIdu) {
         this.uczniowieByIdu = uczniowieByIdu;
+    }
+
+    public LekcjeEntity getLekcjeByIdl() {
+        return lekcjeByIdl;
+    }
+
+    public void setLekcjeByIdl(LekcjeEntity lekcjeByIdl) {
+        this.lekcjeByIdl = lekcjeByIdl;
+    }
+
+    public NauczycieleEntity getNauczycieleByIdn() {
+        return nauczycieleByIdn;
+    }
+
+    public void setNauczycieleByIdn(NauczycieleEntity nauczycieleByIdn) {
+        this.nauczycieleByIdn = nauczycieleByIdn;
     }
 }

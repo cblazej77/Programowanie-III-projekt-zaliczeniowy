@@ -11,53 +11,44 @@ public class NauczycieleprzedmiotowEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "idnp", nullable = false)
-    private Long idnp;
+    private long idnp;
     @Basic
     @Column(name = "idn", nullable = false)
-    private Long idn;
+    private long idn;
     @Basic
     @Column(name = "idp", nullable = false)
-    private Long idp;
-    @ManyToOne
-    @JoinColumn(name = "idn", referencedColumnName = "idn", nullable = false, insertable = false, updatable = false)
-    private NauczycieleEntity nauczycieleByIdn;
-    @ManyToOne
-    @JoinColumn(name = "idp", referencedColumnName = "idp", nullable = false, insertable = false, updatable = false)
-    private PrzedmiotyEntity przedmiotyByIdp;
+    private long idp;
     @OneToMany(mappedBy = "nauczycieleprzedmiotowByIdnp")
     private Collection<LekcjeEntity> lekcjesByIdnp;
+    @ManyToOne
+    @JoinColumn(name = "idn", referencedColumnName = "idn", nullable = false)
+    private NauczycieleEntity nauczycieleByIdn;
+    @ManyToOne
+    @JoinColumn(name = "idp", referencedColumnName = "idp", nullable = false)
+    private PrzedmiotyEntity przedmiotyByIdp;
 
-    public Long getIdnp() {
+    public long getIdnp() {
         return idnp;
     }
 
-    public void setIdnp(Long idnp) {
+    public void setIdnp(long idnp) {
         this.idnp = idnp;
     }
 
-    public Long getIdn() {
+    public long getIdn() {
         return idn;
     }
 
-    public void setIdn(Long idn) {
+    public void setIdn(long idn) {
         this.idn = idn;
     }
 
-    public Long getIdp() {
+    public long getIdp() {
         return idp;
     }
 
-    public void setIdp(Long idp) {
+    public void setIdp(long idp) {
         this.idp = idp;
-    }
-
-    @Override
-    public String toString() {
-        return "NauczycieleprzedmiotowEntity{" +
-                "idnp=" + idnp +
-                ", idn=" + idn +
-                ", idp=" + idp +
-                '}';
     }
 
     @Override
@@ -65,12 +56,20 @@ public class NauczycieleprzedmiotowEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         NauczycieleprzedmiotowEntity that = (NauczycieleprzedmiotowEntity) o;
-        return Objects.equals(idnp, that.idnp) && Objects.equals(idn, that.idn) && Objects.equals(idp, that.idp);
+        return idnp == that.idnp && idn == that.idn && idp == that.idp;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(idnp, idn, idp);
+    }
+
+    public Collection<LekcjeEntity> getLekcjesByIdnp() {
+        return lekcjesByIdnp;
+    }
+
+    public void setLekcjesByIdnp(Collection<LekcjeEntity> lekcjesByIdnp) {
+        this.lekcjesByIdnp = lekcjesByIdnp;
     }
 
     public NauczycieleEntity getNauczycieleByIdn() {
@@ -87,13 +86,5 @@ public class NauczycieleprzedmiotowEntity {
 
     public void setPrzedmiotyByIdp(PrzedmiotyEntity przedmiotyByIdp) {
         this.przedmiotyByIdp = przedmiotyByIdp;
-    }
-
-    public Collection<LekcjeEntity> getLekcjesByIdnp() {
-        return lekcjesByIdnp;
-    }
-
-    public void setLekcjesByIdnp(Collection<LekcjeEntity> lekcjesByIdnp) {
-        this.lekcjesByIdnp = lekcjesByIdnp;
     }
 }

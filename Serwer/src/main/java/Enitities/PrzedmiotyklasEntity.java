@@ -10,50 +10,41 @@ public class PrzedmiotyklasEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "idpk", nullable = false)
-    private Long idpk;
+    private long idpk;
     @Basic
     @Column(name = "idp", nullable = false)
-    private Long idp;
+    private long idp;
     @Basic
     @Column(name = "idk", nullable = false)
-    private Long idk;
+    private long idk;
     @ManyToOne
-    @JoinColumn(name = "idp", referencedColumnName = "idp", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "idp", referencedColumnName = "idp", nullable = false)
     private PrzedmiotyEntity przedmiotyByIdp;
     @ManyToOne
-    @JoinColumn(name = "idk", referencedColumnName = "idk", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "idk", referencedColumnName = "idk", nullable = false)
     private KlasyEntity klasyByIdk;
 
-    @Override
-    public String toString() {
-        return "PrzedmiotyklasEntity{" +
-                "idpk=" + idpk +
-                ", idp=" + idp +
-                ", idk=" + idk +
-                '}';
-    }
-
-    public Long getIdpk() {
+    public long getIdpk() {
         return idpk;
     }
 
-    public void setIdpk(Long idpk) {
+    public void setIdpk(long idpk) {
         this.idpk = idpk;
     }
 
-    public Long getIdp() {
+    public long getIdp() {
         return idp;
     }
 
-    public void setIdp(Long idp) {
+    public void setIdp(long idp) {
         this.idp = idp;
     }
 
-    public Long getIdk() {
+    public long getIdk() {
         return idk;
     }
 
-    public void setIdk(Long idk) {
+    public void setIdk(long idk) {
         this.idk = idk;
     }
 
@@ -62,7 +53,7 @@ public class PrzedmiotyklasEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         PrzedmiotyklasEntity that = (PrzedmiotyklasEntity) o;
-        return Objects.equals(idpk, that.idpk) && Objects.equals(idp, that.idp) && Objects.equals(idk, that.idk);
+        return idpk == that.idpk && idp == that.idp && idk == that.idk;
     }
 
     @Override

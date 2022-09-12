@@ -11,39 +11,35 @@ public class NauczycieleEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Id
     @Column(name = "idn", nullable = false)
-    private Long idn;
+    private long idn;
     @Basic
     @Column(name = "idus", nullable = false)
-    private Long idus;
+    private long idus;
+    @OneToMany(mappedBy = "nauczycieleByIdn")
+    private Collection<FrekwencjaEntity> frekwencjasByIdn;
     @OneToMany(mappedBy = "nauczycieleByWychowawca")
     private Collection<KlasyEntity> klasiesByIdn;
     @ManyToOne
-    @JoinColumn(name = "idus", referencedColumnName = "idus", nullable = false, insertable = false, updatable = false)
+    @JoinColumn(name = "idus", referencedColumnName = "idus", nullable = false)
     private UzytkownicyEntity uzytkownicyByIdus;
     @OneToMany(mappedBy = "nauczycieleByIdn")
     private Collection<NauczycieleprzedmiotowEntity> nauczycieleprzedmiotowsByIdn;
+    @OneToMany(mappedBy = "nauczycieleByIdn")
+    private Collection<OcenyEntity> oceniesByIdn;
 
-    @Override
-    public String toString() {
-        return "NauczycieleEntity{" +
-                "idn=" + idn +
-                ", idus=" + idus +
-                '}';
-    }
-
-    public Long getIdn() {
+    public long getIdn() {
         return idn;
     }
 
-    public void setIdn(Long idn) {
+    public void setIdn(long idn) {
         this.idn = idn;
     }
 
-    public Long getIdus() {
+    public long getIdus() {
         return idus;
     }
 
-    public void setIdus(Long idus) {
+    public void setIdus(long idus) {
         this.idus = idus;
     }
 
@@ -52,12 +48,20 @@ public class NauczycieleEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         NauczycieleEntity that = (NauczycieleEntity) o;
-        return Objects.equals(idn, that.idn) && Objects.equals(idus, that.idus);
+        return idn == that.idn && idus == that.idus;
     }
 
     @Override
     public int hashCode() {
         return Objects.hash(idn, idus);
+    }
+
+    public Collection<FrekwencjaEntity> getFrekwencjasByIdn() {
+        return frekwencjasByIdn;
+    }
+
+    public void setFrekwencjasByIdn(Collection<FrekwencjaEntity> frekwencjasByIdn) {
+        this.frekwencjasByIdn = frekwencjasByIdn;
     }
 
     public Collection<KlasyEntity> getKlasiesByIdn() {
@@ -82,5 +86,13 @@ public class NauczycieleEntity {
 
     public void setNauczycieleprzedmiotowsByIdn(Collection<NauczycieleprzedmiotowEntity> nauczycieleprzedmiotowsByIdn) {
         this.nauczycieleprzedmiotowsByIdn = nauczycieleprzedmiotowsByIdn;
+    }
+
+    public Collection<OcenyEntity> getOceniesByIdn() {
+        return oceniesByIdn;
+    }
+
+    public void setOceniesByIdn(Collection<OcenyEntity> oceniesByIdn) {
+        this.oceniesByIdn = oceniesByIdn;
     }
 }
