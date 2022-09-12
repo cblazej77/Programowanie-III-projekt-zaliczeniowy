@@ -10,8 +10,6 @@ import java.net.URL;
 import java.util.ResourceBundle;
 
 public class teacherEditWindowController implements Initializable {
-    @FXML
-    private TextField RemoveUserText;
 
     @FXML
     private TextField addStudentNumberText;
@@ -21,6 +19,21 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     private TextField addStudentUserLoginText;
+
+    @FXML
+    private TextField addUserLoginText;
+
+    @FXML
+    private TextField addUserPasswordText;
+
+    @FXML
+    private TextField addUserFirstNameText;
+
+    @FXML
+    private TextField addUserSurnameText;
+
+    @FXML
+    private TextField addUserAccessText;
 
     @FXML
     private TextField addTeacherUsLoginText;
@@ -38,8 +51,6 @@ public class teacherEditWindowController implements Initializable {
     @FXML
     private TextField removeClassLoginText;
 
-    @FXML
-    private TextField removeLessonIDText;
     @FXML
     private TextField addMarkNameText;
 
@@ -74,11 +85,74 @@ public class teacherEditWindowController implements Initializable {
     private TextField removeTeacherLoginText;
 
     @FXML
-    private TextField removeTurnoutIDText;
+    private TextField addLessonThemeText;
 
     @FXML
-    private TextField removeUserLoginText;
+    private TextField addLessonDateText;
 
+    @FXML
+    private TextField addLessonHourText;
+
+    @FXML
+    private TextField addLessonClassText;
+
+    @FXML
+    private TextField addLessonTeacherText;
+
+    @FXML
+    private TextField addLessonSubjectText;
+    
+    @FXML
+    private TextField removeLessonDateText;
+
+    @FXML
+    private TextField removeLessonHourText;
+    
+    @FXML
+    private TextField removeLessonClassText;
+    
+    @FXML
+    private TextField removeLessonTeacherLoginText;
+    
+    @FXML
+    private TextField removeLessonSubjectText;
+    
+    @FXML
+    private TextField removeUserLoginText;
+    
+    @FXML
+    private TextField removeFrequencyDateText;
+
+    @FXML
+    private TextField removeFrequencySubNameText;
+
+    @FXML
+    private TextField removeFrequencyULoginText;
+
+    @FXML
+    private TextField removeFrequencyHourText;
+
+    @FXML
+    private TextField removeFrequencyClassText;
+
+    @FXML
+    private TextField addFrequencyDateText;
+
+    @FXML
+    private TextField addFrequencySubNameText;
+
+    @FXML
+    private TextField addFrequencyStudentLoginText;
+
+    @FXML
+    private TextField addFrequencyHourText;
+
+    @FXML
+    private TextField addFrequencyTypeText;
+
+    @FXML
+    private TextField addFrequencyClassText;
+    
     @FXML
     private TextField transerNewClassName;
 
@@ -96,8 +170,8 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     void RemoveUserButton(ActionEvent event) {
-        if(RemoveUserText.getText().length()>0){
-            client.SendRemoveSygnal(RemoveUserText.getText(), 1);
+        if(removeUserLoginText.getText().length()>0){
+            client.SendRemoveSygnal(removeUserLoginText.getText(), 1);
         }
     }
 
@@ -158,4 +232,6 @@ public class teacherEditWindowController implements Initializable {
 
     }
 
+    public void AddStudentButton(ActionEvent actionEvent) {
+    }
 }
