@@ -37,33 +37,32 @@ public class ThreadForClient extends Thread{
             JSONObject klient;
             check = true;
             wait = true;
+            access="";
             while(check){//for(check = 0; check < 4; check++) {//ta petla chyba jest nie potrzebna i psuje program
                 klient = new JSONObject(br.readLine());
                 uLogin = klient.optString("login"); if (uLogin == klient.optString("login")){ System.out.println("Login taken from JSON"); }
                 uhaslo = klient.optString("haslo"); if(uhaslo == klient.optString("haslo")) {System.out.println("Haslo taken from JASON"); }
                 logowanieUzytkownika(bw);
-                /*if(!check){
-                    //podstawoweDane(bw, uLogin);
-                    while(wait){
-                        reciveCase(br);
-                        if(chooseCase == 3) uczenDane(bw, uLogin);
-                        if(chooseCase == 2) planlekcjiDane(bw);
-                        //if(user sie wyloguje/zamknie) wait = false;
-                    }
-                }*/
-                if(access.equals("UCZEN")) {
+                if(access.equals("UCZEN")){
                     if (!check) {
                         while (wait) {
                             reciveCase(br);
-                            //if (chooseCase == 0) sendMark(bw);
-                            if(chooseCase == 3) uczenDane(bw, uLogin);
-                            if(chooseCase == 2) {
+                            if (chooseCase == 0){//za kazdym dodanym tutaj przedmiotem trzeba zwiekszyc w kliencie, forze zmienna z o jeden wiecej
+                                sendMark(bw, "informatyka");
+                                sendMark(bw, "matematyka");
+                                sendMark(bw, "JezykAngielski");
+                                sendMark(bw, "JezykPolski");
+                                //sendMark(bw, "Muzyka");
+                            }
+                            else if(chooseCase == 2) {
                                 planlekcjiDane(bw,"Poniedzialek");
                                 planlekcjiDane(bw,"Wtorek");
                                 planlekcjiDane(bw,"Sroda");
                                 planlekcjiDane(bw,"Czwartek");
                                 planlekcjiDane(bw,"Piatek");
                             }
+                            else if(chooseCase == 3) uczenDane(bw, uLogin);
+
                         }
                     }
                 }else{
@@ -71,7 +70,7 @@ public class ThreadForClient extends Thread{
                         while (wait) {
                             reciveCase(br);
                             if(chooseCase == 4) nauczycielDane(bw,uLogin);
-                            if(chooseCase == 5) OcenyNauczycielaDane(bw,uLogin);
+                            if(chooseCase == 5) //OcenyNauczycielaDane(bw,uLogin);ta funckja jest pusta
                             if(chooseCase == 6) removeDane(br);
                             if(chooseCase == 7) addDane(br);
                         }
@@ -84,6 +83,28 @@ public class ThreadForClient extends Thread{
         }
     }
 
+    private void sendMark(BufferedWriter bw, String subject) {
+        try {
+            JSONObject pd = new JSONObject();
+            Querries querries = new Querries();
+            List<Float> oc = querries.findOcenyByPrzedmiotforUczen(subject, uLogin);
+            pd.put("size", oc.size());
+            pd.put("subject", subject);
+            bw.write(pd.toString());
+            bw.newLine();
+            bw.flush();
+            for (int i = 0; i < oc.size(); i++) {
+                pd.put("id", oc.get(i));
+                bw.write(pd.toString());
+                bw.newLine();
+                bw.flush();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
 
     private void reciveCase(BufferedReader br) {
@@ -116,8 +137,12 @@ public class ThreadForClient extends Thread{
                 querries.removePrzedmiotByNazwa(data);
                 break;
             case 4:
-                //removeOcena(String nazwao, Float ocena, String login, String nazwap)
-                //querries.removeOcena(data);
+                rc = new JSONObject(br.readLine());
+                float rMark = rc.optLong("rMark");
+                String rLogin = rc.optString("rLogin");
+                String rLession = rc.optString("rLession");
+
+                querries.removeOcena(data, rMark, rLogin, rLession);
                 break;
             case 5:
                 //querries.removeLekcja(data);
@@ -184,7 +209,6 @@ public class ThreadForClient extends Thread{
     private void logowanieUzytkownika(BufferedWriter bw){
         //Tutaj wchodzimy w operacje z baza danych
         Querries querries = new Querries();
-
         String bHaslo;
         try {
             bHaslo = querries.findHasloOfUzytkownikByLogin(uLogin);
@@ -192,7 +216,7 @@ public class ThreadForClient extends Thread{
             System.out.println(e);
             bHaslo = "";
         }
-        if (bHaslo.equals(uhaslo) && !bHaslo.equals("")) {
+        if (bHaslo.equals(uhaslo) && (!bHaslo.equals(""))) {
             autoryzacjaKlienta("accept", bw);
             podstawoweDane(bw, uLogin);
             podstawoweDane(bw, uLogin);

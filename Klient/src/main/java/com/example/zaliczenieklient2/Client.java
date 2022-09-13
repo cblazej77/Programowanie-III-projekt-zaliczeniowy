@@ -69,6 +69,17 @@ public class Client {
             bw.flush();
         }catch(IOException | JSONException e){e.printStackTrace();}
     }
+    public void SendRemoveMark(Float mark, String mark, String Lession){
+        try{
+            json = new JSONObject();
+            json.put("rMark", mark);
+            json.put("rLogin", mark);
+            json.put("rLession", Lession);
+            bw.write(json.toString());
+            bw.newLine();
+            bw.flush();
+        }catch(IOException | JSONException e){e.printStackTrace();}
+    }
 
     public void SendAddSignal(List<String> Data, int i, int n) throws JSONException, IOException {
         json = new JSONObject();

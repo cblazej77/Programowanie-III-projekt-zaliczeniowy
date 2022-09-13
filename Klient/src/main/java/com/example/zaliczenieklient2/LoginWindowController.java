@@ -59,7 +59,6 @@ public class LoginWindowController implements Initializable{
                 System.out.println("Login: " + aLogin.getText() + ", Password: " + aPassword.getText());
 
                 if (aPassword.getText().length() >= 1 && aLogin.getText().length() >= 1) {
-                    System.out.println("worked length");
                     if (client.sendLogPassToSerwer(aLogin.getText(), aPassword.getText())){//wysyla login i haslo do serwera
                         System.out.println("wyslano");
                         disconnected();
@@ -68,7 +67,6 @@ public class LoginWindowController implements Initializable{
                         if (client.authorizationLogin()) {//sprawdza czy wpisalismy poprawny login i haslo
                             System.out.println("Zalogowal sie uzytkownik: " + aLogin.getText());
                             String acces = client.getData().optString("rola");
-                            data.setUsername(aLogin.getText());
                             data.setClient(client);
                             if(client != null && acces.equals("UCZEN")){
                                 Application.setRoot("appWindow");
@@ -127,9 +125,3 @@ public class LoginWindowController implements Initializable{
         redRefresh.setOpacity(1);
     }
 }
- /*//bylo potrzebne gdy w klasa Application byla inaczej napisana
-                    Stage stage = (Stage)aLogin.getScene().getWindow();//tworzymy nowa scene
-                    Parent root = FXMLLoader.load((getClass().getResource("appWindow.fxml")));
-                    stage.setTitle("Scene 2");
-                    stage.setScene(new Scene(root));
-                     */

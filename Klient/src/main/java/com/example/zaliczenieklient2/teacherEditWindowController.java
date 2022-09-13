@@ -21,6 +21,8 @@ public class teacherEditWindowController implements Initializable {
     private TextField addStudentClassNameText;
 
     @FXML
+    private TextField removeMarkTeacherLoginText1;
+    @FXML
     private TextField addStudentUserLoginText;
 
     @FXML
@@ -164,10 +166,18 @@ public class teacherEditWindowController implements Initializable {
     private Client client;
     private JSONObject serwer;
 
+    int idClass;
+    String loginTeacher;
     SendDataToContoller data = SendDataToContoller.getInstance();
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         client = data.getClient();
+        serwer = client.getData();
+        //odbior danych
+        //idClass //czy nauczyciel opiekuje się tylko jedną klasą?
+        loginTeacher="";
+        //jeszcze jakas lista/vektor czego uczy dany nauczyciel
+        //druga lista/vektor jakie klasy uczy nauczyciel
     }
 
     @FXML
@@ -217,11 +227,17 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     void removeLessonByID(ActionEvent event) {
-
+        client.sendCase(6);
+        if(removeMarkNameText.getText().length()>0 && removeMarkValueText.getText()>0 && removeMarkUloginText.getText()>0 && removeMarkSubNameText.getText() >0 && removeMarkTeacherLoginText1.getText()> 0) {
+            if(loginTeacher.equals(removeMarkTeacherLoginText1.getText())) {//sprawdzic czy nauczyciel jest tym od tego przedmiotu
+                client.SendRemoveSygnal(removeMarkNameText.getText(), 6);
+                client.SendRemoveMark(Float.valueOf(removeMarkValueText.getText()), removeMarkUloginText.getText(), removeMarkSubNameText.getText());
+            }
+        }
     }
 
     @FXML
-    void removeMarkByID(ActionEvent event) {
+    void removeMarkByID(ActionEvent event) throws JSONException, IOException{
 
     }
 

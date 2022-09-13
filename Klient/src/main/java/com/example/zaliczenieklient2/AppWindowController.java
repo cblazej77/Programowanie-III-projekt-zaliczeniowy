@@ -32,17 +32,20 @@ public class AppWindowController implements Initializable {
         serwer = client.getData();
 
         String name = serwer.optString("imie");
-        //String surname = serwer.optString("nazwisko");
-        String access = serwer.optString("rola");
-        System.out.println(access);
-
-        //data.getUsername();
-
         welcome.setText("Witaj " + name + "!");
-        //if(access.equals("UCZEN")) userData.setText("Dzien Dobry, " + name + " "+ surname +", zalogowales sie na konto ucznia.");
-
     }
 
+    @FXML
+    private void logout(ActionEvent event){
+        client = null;
+        data.setClient(client);
+        try {
+            Application.setRoot("loginWindow");
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
     @FXML
     private void ocenyButton(ActionEvent event) throws JSONException, IOException {
         client.sendCase(0);
@@ -93,7 +96,7 @@ public class AppWindowController implements Initializable {
 
     @FXML
     private void daneTButton(ActionEvent event) throws JSONException, IOException {
-        //client.sendCase(6);
+        //client.sendCase(6);tutaj jest to nie potrzebne bo wysyylanie jest w klasie teacherEditWindowController
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPane("editDBWindow");
         mainPane.setCenter(view);
