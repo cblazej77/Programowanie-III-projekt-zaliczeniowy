@@ -121,43 +121,49 @@ public class ThreadForClient extends Thread{
         Querries querries = new Querries();
         JSONObject rc = null;
         rc = new JSONObject(br.readLine());
-        String data = rc.optString("data");
+        //String data = rc.optString("data");
         int which = rc.optInt("whichDelete");
         switch (which){
             case 0:
-                querries.removeUzytkownikByLogin(data);
+                querries.removeUzytkownikByLogin(rc.optString("data0"));
                 break;
             case 1:
-                querries.removeUczenByLogin(data);
+                querries.removeUczenByLogin(rc.optString("data0"));
                 break;
             case 2:
-                querries.removeNauczycielByLogin(data);
+                querries.removeNauczycielByLogin(rc.optString("data0"));
                 break;
             case 3:
-                querries.removePrzedmiotByNazwa(data);
+                querries.removePrzedmiotByNazwa(rc.optString("data0"));
                 break;
             case 4:
-                rc = new JSONObject(br.readLine());
+                /*rc = new JSONObject(br.readLine());
                 float rMark = rc.optLong("rMark");
                 String rLogin = rc.optString("rLogin");
-                String rLession = rc.optString("rLession");
-
-                querries.removeOcena(data, rMark, rLogin, rLession);
+                String rLesson = rc.optString("rLesson");
+                */
+                querries.removeOcena(rc.optString("data0"), (float) rc.optDouble("data1"), rc.optString("data2"), rc.optString("data3"));
                 break;
             case 5:
-                //querries.removeLekcja(data);
+                Integer godzina = rc.optInt("data0");
+                String klasa = rc.optString("data1");
+                String login = rc.optString("data2");
+                String nazwaP = rc.optString("data3");
+                Date data = Date.valueOf(rc.optString("data4"));
+                querries.removeLekcja(godzina,klasa,login,nazwaP,data);
+                //querries.removeLekcja(rc.optInt("data0"),rc.optString("data1"),rc.optString("data2"),rc.optString("data3"), Date.valueOf(rc.optString("data4")));
                 break;
             case 6:
-                querries.removeKlasaByNazwa(data);
+                querries.removeKlasaByNazwa(rc.optString("data0"));
                 break;
             case 7:
-                //querries.removeFrekwencja(data);
+                querries.removeFrekwencja(rc.optString("data0"),rc.optString("data1"),Date.valueOf(rc.optString("data2")),rc.optInt("data3"), rc.optString("data4"));
                 break;
             case 8:
-                //querries.removeNauczycielPrzedmiotu(data);
+                querries.removeNauczycielPrzedmiotow(rc.optString("data0"),rc.optString("data1"));
                 break;
             case 9:
-                //querries.removePrzedmiotKlasy(data);
+                querries.removePrzedmiotKlasy(rc.optString("data0"),rc.optString("data1"));
                 break;
             default:
                 break;
@@ -174,17 +180,15 @@ public class ThreadForClient extends Thread{
                 querries.addUzytkownik(rc.optString("data0"),rc.optString("data1"),rc.optString("data2"),rc.optString("data3"),rc.optString("data4"));
                 break;
             case 1:
-
+                querries.addUczen(rc.optInt("data0"),rc.optLong("data1"),rc.optLong("data2"),rc.optLong("data3"));
                 break;
             case 2:
-
+                querries.addNauczyciel(rc.optLong("data0"));
                 break;
             case 3:
-
+                querries.addPrzedmiot(rc.optString("data0"));
                 break;
             case 4:
-                //removeOcena(String nazwao, Float ocena, String login, String nazwap)
-                //querries.removeOcena(data);
                 break;
             case 5:
                 //querries.removeLekcja(data);

@@ -4,7 +4,18 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c7a4f9ec-d963-4ca3-a98b-2238aa99b40e" name="Changes" comment="2nd scene edit" />
+    <list default="true" id="c7a4f9ec-d963-4ca3-a98b-2238aa99b40e" name="Changes" comment="2nd scene edit">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Klient/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Klient/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Klient/src/main/java/com/example/zaliczenieklient2/AppWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Klient/src/main/java/com/example/zaliczenieklient2/AppWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Klient/src/main/java/com/example/zaliczenieklient2/Client.java" beforeDir="false" afterPath="$PROJECT_DIR$/Klient/src/main/java/com/example/zaliczenieklient2/Client.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Klient/src/main/java/com/example/zaliczenieklient2/teacherEditWindowController.java" beforeDir="false" afterPath="$PROJECT_DIR$/Klient/src/main/java/com/example/zaliczenieklient2/teacherEditWindowController.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Klient/target/classes/com/example/zaliczenieklient2/AppWindowController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Klient/target/classes/com/example/zaliczenieklient2/AppWindowController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Klient/target/classes/com/example/zaliczenieklient2/Client.class" beforeDir="false" afterPath="$PROJECT_DIR$/Klient/target/classes/com/example/zaliczenieklient2/Client.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Klient/target/classes/com/example/zaliczenieklient2/teacherEditWindowController.class" beforeDir="false" afterPath="$PROJECT_DIR$/Klient/target/classes/com/example/zaliczenieklient2/teacherEditWindowController.class" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serwer/.idea/misc.xml" beforeDir="false" afterPath="$PROJECT_DIR$/Serwer/.idea/misc.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Serwer/target/classes/ThreadForClient.class" beforeDir="false" afterPath="$PROJECT_DIR$/Serwer/target/classes/ThreadForClient.class" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />

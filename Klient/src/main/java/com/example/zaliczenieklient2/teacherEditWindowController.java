@@ -22,6 +22,10 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     private TextField removeMarkTeacherLoginText1;
+
+    @FXML
+    private TextField addStudentParentLoginText;
+
     @FXML
     private TextField addStudentUserLoginText;
 
@@ -172,7 +176,7 @@ public class teacherEditWindowController implements Initializable {
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         client = data.getClient();
-        serwer = client.getData();
+        //serwer = client.getData();
         //odbior danych
         //idClass //czy nauczyciel opiekuje się tylko jedną klasą?
         loginTeacher="";
@@ -181,69 +185,13 @@ public class teacherEditWindowController implements Initializable {
     }
 
     @FXML
-    void transferStudentButton(ActionEvent event) {
-
-    }
-
-    @FXML
     void removeUserByLoginButton(ActionEvent event) throws JSONException, IOException {
         client.sendCase(6);
+        List<String> Data=null;
         if(removeUserLoginText.getText().length()>0){
-            client.SendRemoveSygnal(removeUserLoginText.getText(), 0);
+            Data.add(removeUserLoginText.getText());
+            client.SendRemoveSignal(Data, 0, 1);
         }
-    }
-
-    @FXML
-    void removeStudentByLoginButton(ActionEvent event) throws JSONException, IOException {
-        client.sendCase(6);
-        if(removeStudentLoginText.getText().length()>0){
-            client.SendRemoveSygnal(removeStudentLoginText.getText(),1);
-        }
-    }
-
-    @FXML
-    void removeTeacherByLoginButton(ActionEvent event) throws JSONException, IOException {
-        client.sendCase(6);
-        if(removeTeacherLoginText.getText().length()>0){
-            client.SendRemoveSygnal(removeTeacherLoginText.getText(),2);
-        }
-    }
-
-    @FXML
-    void removeSubjectByNameButton(ActionEvent event) throws JSONException, IOException {
-        client.sendCase(6);
-        if(removeSubjectNameText.getText().length()>0){
-            client.SendRemoveSygnal(removeSubjectNameText.getText(),3);
-        }
-    }
-
-    @FXML
-    void removeClassByName(ActionEvent event) throws JSONException, IOException {
-        client.sendCase(6);
-            if(removeClassLoginText.getText().length()>0){
-                client.SendRemoveSygnal(removeClassLoginText.getText(), 6);
-            }
-    }
-
-    @FXML
-    void removeLessonByID(ActionEvent event) {
-        client.sendCase(6);
-        if(removeMarkNameText.getText().length()>0 && removeMarkValueText.getText()>0 && removeMarkUloginText.getText()>0 && removeMarkSubNameText.getText() >0 && removeMarkTeacherLoginText1.getText()> 0) {
-            if(loginTeacher.equals(removeMarkTeacherLoginText1.getText())) {//sprawdzic czy nauczyciel jest tym od tego przedmiotu
-                client.SendRemoveSygnal(removeMarkNameText.getText(), 6);
-                client.SendRemoveMark(Float.valueOf(removeMarkValueText.getText()), removeMarkUloginText.getText(), removeMarkSubNameText.getText());
-            }
-        }
-    }
-
-    @FXML
-    void removeMarkByID(ActionEvent event) throws JSONException, IOException{
-
-    }
-
-    @FXML
-    void removeTurnoutByID(ActionEvent event) {
-
     }
 
     @FXML
@@ -266,11 +214,104 @@ public class teacherEditWindowController implements Initializable {
     }
 
     @FXML
-    public void addStudentButton(ActionEvent event) {
+    void removeStudentByLoginButton(ActionEvent event) throws JSONException, IOException {
+        client.sendCase(6);
+        List<String> Data=null;
+        if(removeStudentLoginText.getText().length()>0){
+            Data.add(removeStudentLoginText.getText());
+            client.SendRemoveSignal(Data,1,1);
+        }
     }
 
     @FXML
-    void AddTeacherButton(ActionEvent event) {
+    public void addStudentButton(ActionEvent event) throws JSONException, IOException {
+        client.sendCase(7);
+        List<String> Data=null;
+        if(addStudentNumberText.getText().length()>0&&addStudentClassNameText.getText().length()>0&&addStudentUserLoginText.getText().length()>0&&addStudentParentLoginText.getText().length()>0){
+            Data.add(addStudentNumberText.getText());
+            Data.add(addStudentClassNameText.getText());
+            Data.add(addStudentUserLoginText.getText());
+            Data.add(addStudentParentLoginText.getText());
+            client.SendAddSignal(Data,1,4);
+        }
+    }
+
+    @FXML
+    void removeTeacherByLoginButton(ActionEvent event) throws JSONException, IOException {
+        client.sendCase(6);
+        List<String> Data=null;
+        if(removeTeacherLoginText.getText().length()>0){
+            Data.add(removeTeacherLoginText.getText());
+            client.SendRemoveSignal(Data,2,1);
+        }
+    }
+
+    @FXML
+    void AddTeacherButton(ActionEvent event) throws JSONException, IOException {
+        client.sendCase(7);
+        List<String> Data=null;
+        if(addTeacherUsLoginText.getText().length()>0){
+            client.SendAddSignal(Data,2,1);
+        }
+    }
+
+    @FXML
+    void removeSubjectByNameButton(ActionEvent event) throws JSONException, IOException {
+        client.sendCase(6);
+        List<String> Data=null;
+        if(removeSubjectNameText.getText().length()>0){
+            Data.add(removeSubjectNameText.getText());
+            client.SendRemoveSignal(Data,3,1);
+        }
+    }
+
+    @FXML
+    void addSubjectButton(ActionEvent event) throws JSONException, IOException {
+        client.sendCase(7);
+        List<String> Data=null;
+        if(addSubjectNameText.getText().length()>0){
+            Data.add(addSubjectNameText.getText());
+            client.SendAddSignal(Data,3,1);
+        }
+    }
+
+    @FXML
+    void removeMarkByID(ActionEvent event) throws JSONException, IOException {
+        client.sendCase(6);
+        List<String> Data=null;
+        if(removeMarkNameText.getText().length()>0 && removeMarkValueText.getText().length()>0 && removeMarkUloginText.getText().length()>0 && removeMarkSubNameText.getText().length() >0 && removeMarkTeacherLoginText1.getText().length()> 0) {
+            if(loginTeacher.equals(removeMarkTeacherLoginText1.getText())) {//sprawdzic czy nauczyciel jest tym od tego przedmiotu
+                Data.add(removeMarkNameText.getText());
+                Data.add(removeMarkValueText.getText());
+                Data.add(removeMarkUloginText.getText());
+                Data.add(removeMarkSubNameText.getText());
+                client.SendRemoveSignal(Data, 6,4);
+            }
+        }
+    }
+
+    @FXML
+    void removeClassByName(ActionEvent event) throws JSONException, IOException {
+        client.sendCase(6);
+        List<String> Data=null;
+            if(removeClassLoginText.getText().length()>0){
+                Data.add(removeClassLoginText.getText());
+                client.SendRemoveSignal(Data, 6,1);
+            }
+    }
+
+    @FXML
+    void removeLessonByID(ActionEvent event) throws JSONException, IOException{
+
+    }
+
+    @FXML
+    void removeTurnoutByID(ActionEvent event) {
+
+    }
+
+    @FXML
+    void transferStudentButton(ActionEvent event) {
 
     }
 }

@@ -59,22 +59,26 @@ public class Client {
         }catch (IOException | JSONException e){e.printStackTrace();}
         return serwer;
     }
-    public void SendRemoveSygnal(String data, int i){
+
+    /*public void SendRemoveMark(Float mark, String login, String lesson){
         try{
             json = new JSONObject();
-            json.put("data", data);
-            json.put("whichDelete", i);
+            json.put("rMark", mark);
+            json.put("rLogin", login);
+            json.put("rLesson", lesson);
             bw.write(json.toString());
             bw.newLine();
             bw.flush();
         }catch(IOException | JSONException e){e.printStackTrace();}
-    }
-    public void SendRemoveMark(Float mark, String mark, String Lession){
+    }*/
+
+    public void SendRemoveSignal(List<String> Data, int i, int n){
         try{
             json = new JSONObject();
-            json.put("rMark", mark);
-            json.put("rLogin", mark);
-            json.put("rLession", Lession);
+            for(int j=0;j<n;j++){
+                json.put("data" + j, Data.get(j));
+            }
+            json.put("whichDelete", i);
             bw.write(json.toString());
             bw.newLine();
             bw.flush();
@@ -86,7 +90,7 @@ public class Client {
         for(int j=0;j<n;j++){
             json.put("data" + j, Data.get(j));
         }
-        json.put("whichAdd",i);
+        json.put("whichAdd", i);
         bw.write(json.toString());
         bw.newLine();
         bw.flush();
