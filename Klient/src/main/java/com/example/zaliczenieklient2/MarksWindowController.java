@@ -40,7 +40,7 @@ public class MarksWindowController implements Initializable {
 
         String subName;//Name of subject
         Integer n;//size for
-        for(int z = 0; z < 3; z ++) {
+        for(int z = 0; z < 5; z ++) {
             serwer = client.getData();
             n = serwer.optInt("size");
             subName = serwer.optString("subject");

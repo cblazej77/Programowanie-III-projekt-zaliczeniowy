@@ -18,11 +18,11 @@
                      <Image url="@loginIcon.png" />
                  </image>
              </ImageView>
-            <Label fx:id="errorUsername" layoutX="377.0" layoutY="479.0" prefHeight="18.0" prefWidth="216.0" textFill="RED" />
+            <Label fx:id="errorUsername" layoutX="399.0" layoutY="510.0" prefHeight="18.0" prefWidth="204.0" textFill="RED" />
             <TextField fx:id="aLogin" layoutX="398.0" layoutY="484.0" prefHeight="26.0" prefWidth="204.0" promptText="Username" />
             <PasswordField fx:id="aPassword" layoutX="399.0" layoutY="537.0" prefHeight="25.0" prefWidth="204.0" promptText="Password" />
             <Button fx:id="button" layoutX="456.0" layoutY="589.0" onAction="#logInButton" prefHeight="30.0" prefWidth="88.0" text="Login" />
-            <Label fx:id="errorPassword" layoutX="392.0" layoutY="541.0" prefHeight="18.0" prefWidth="216.0" textFill="RED" />
+            <Label fx:id="errorPassword" layoutX="399.0" layoutY="562.0" prefHeight="18.0" prefWidth="204.0" textFill="RED" />
             <Label fx:id="labelError" layoutX="384.0" layoutY="647.0" prefHeight="17.0" prefWidth="237.0" textFill="RED" />
             <Label fx:id="connect" layoutX="51.0" layoutY="668.0" prefHeight="17.0" prefWidth="88.0" text="Disconnect" />
             <ImageView fx:id="limeRefresh" fitHeight="25.0" fitWidth="25.0" layoutX="14.0" layoutY="664.0" pickOnBounds="true" preserveRatio="true" AnchorPane.bottomAnchor="11.248756408691406" AnchorPane.leftAnchor="14.0">
@@ -35,7 +35,7 @@
                   <Image url="@redRefresh.png" />
                </image>
             </ImageView>
-            <Button fx:id="Button2" layoutX="126.0" layoutY="592.0" mnemonicParsing="false" onAction="#refreshButton" opacity="0.0" prefHeight="25.0" prefWidth="25.0" AnchorPane.bottomAnchor="122.0" AnchorPane.leftAnchor="126.0" />
+            <Button fx:id="Button2" layoutX="14.0" layoutY="664.0" mnemonicParsing="false" onAction="#refreshButton" opacity="0.0" prefHeight="25.0" prefWidth="25.0" AnchorPane.bottomAnchor="11.0" AnchorPane.leftAnchor="14.0" />
             <Button layoutX="928.0" layoutY="664.0" mnemonicParsing="false" onAction="#closeApplication" text="Zamknij" />
          </children></AnchorPane>
   </children>
