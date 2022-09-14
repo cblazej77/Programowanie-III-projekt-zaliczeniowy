@@ -36,11 +36,13 @@ public class MarksWindowController implements Initializable {
     public void initialize(URL url, ResourceBundle resourceBundle) {
 
         client = data.getClient();
+        serwer = client.getData();
         ObservableList<MarkTable> list = FXCollections.observableArrayList();
 
         String subName;//Name of subject
         Integer n;//size for
-        for(int z = 0; z < 5; z ++) {
+        Integer countSubject = serwer.optInt("count");
+        for(int z = 0; z < countSubject; z++) {
             serwer = client.getData();
             n = serwer.optInt("size");
             subName = serwer.optString("subject");

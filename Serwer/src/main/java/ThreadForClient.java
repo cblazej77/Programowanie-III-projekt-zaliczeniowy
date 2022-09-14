@@ -18,6 +18,7 @@ public class ThreadForClient extends Thread{
     private String access;
 
     private int chooseCase;
+
     public ThreadForClient(Socket socket) {
         this.socket = socket;
     }
@@ -48,6 +49,7 @@ public class ThreadForClient extends Thread{
                         while (wait) {
                             reciveCase(br);
                             if (chooseCase == 0){//za kazdym dodanym tutaj przedmiotem trzeba zwiekszyc w kliencie, forze zmienna z o jeden wiecej
+                                countSubject(bw);
                                 sendMark(bw, "informatyka");
                                 sendMark(bw, "matematyka");
                                 sendMark(bw, "JezykAngielski");
@@ -82,7 +84,22 @@ public class ThreadForClient extends Thread{
         } catch (IOException | JSONException e){throw new RuntimeException(e);
         }
     }
-
+    private void countSubject(BufferedWriter bw){
+        try {
+            JSONObject pd = new JSONObject();
+            Querries querries = new Querries();
+            List<Float> oc = querries.countPrzedmioty();
+            System.out.println(oc.size());
+            pd.put("count", oc.size());
+            bw.write(pd.toString());
+            bw.newLine();
+            bw.flush();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
     private void sendMark(BufferedWriter bw, String subject) {
         try {
             JSONObject pd = new JSONObject();

@@ -456,6 +456,12 @@ public class Querries {
         return (PrzedmiotyEntity) query.getResultList().get(0);
     }
 
+    public List<Float> countPrzedmioty(){
+         EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT p FROM PrzedmiotyEntity p");
+        return query.getResultList();
+        }
+
     public KlasyEntity findKlasaByNazwa(String nazwa) {
         EntityManager entitymanager = FACTORY.createEntityManager();
         Query query = (Query) entitymanager.createQuery("SELECT k FROM KlasyEntity k WHERE k.nazwa = :nazwa");

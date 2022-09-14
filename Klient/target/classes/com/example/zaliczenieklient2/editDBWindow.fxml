@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="805.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zaliczenieklient2.teacherEditWindowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="805.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zaliczenieklient2.teacherEditWindowController">
    <children>
       <BorderPane prefHeight="590.0" prefWidth="805.0">
          <top>
@@ -424,7 +424,7 @@
                                                       </TextField>
                                                    </children>
                                                 </GridPane>
-                                                <Button mnemonicParsing="false" text="Dodaj przedmiot" />
+                                                <Button mnemonicParsing="false" onAction="#addSubjectButton" text="Dodaj przedmiot" />
                                              </children>
                                              <padding>
                                                 <Insets left="20.0" right="20.0" />
@@ -446,18 +446,20 @@
                                  <items>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                        <children>
-                                          <Text layoutX="50.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuwanie">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                          <Button layoutX="33.0" layoutY="275.0" mnemonicParsing="false" onAction="#removeMarkByID" text="Usuń ocenę" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="66.0" />
-                                          <VBox layoutX="3.0" layoutY="42.0" prefHeight="263.0" prefWidth="176.0">
+                                          <VBox alignment="CENTER" layoutX="-2.0" layoutY="-2.0" prefHeight="501.0" prefWidth="248.0" spacing="5.0">
                                              <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Usuwanie">
+                                                   <font>
+                                                      <Font size="24.0" />
+                                                   </font>
+                                                </Text>
                                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Podaj nazwę oceny:">
                                                    <VBox.margin>
                                                       <Insets top="20.0" />
                                                    </VBox.margin>
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
                                                 </Text>
                                                 <TextField fx:id="removeMarkNameText">
                                                    <VBox.margin>
@@ -468,6 +470,9 @@
                                                    <VBox.margin>
                                                       <Insets top="10.0" />
                                                    </VBox.margin>
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
                                                 </Text>
                                                 <TextField fx:id="removeMarkValueText">
                                                    <VBox.margin>
@@ -478,6 +483,9 @@
                                                    <VBox.margin>
                                                       <Insets top="10.0" />
                                                    </VBox.margin>
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
                                                 </Text>
                                                 <TextField fx:id="removeMarkUloginText">
                                                    <VBox.margin>
@@ -488,6 +496,9 @@
                                                    <VBox.margin>
                                                       <Insets top="10.0" />
                                                    </VBox.margin>
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
                                                 </Text>
                                                 <TextField fx:id="removeMarkSubNameText">
                                                    <VBox.margin>
@@ -498,12 +509,19 @@
                                                    <VBox.margin>
                                                       <Insets top="10.0" />
                                                    </VBox.margin>
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
                                                 </Text>
                                                 <TextField fx:id="removeMarkTeacherLoginText1" layoutX="20.0" layoutY="244.0">
                                                    <VBox.margin>
                                                       <Insets top="10.0" />
                                                    </VBox.margin>
                                                 </TextField>
+                                                <Button mnemonicParsing="false" onAction="#removeMarkByID" text="Usuń ocenę">
+                                                   <VBox.margin>
+                                                      <Insets top="20.0" />
+                                                   </VBox.margin></Button>
                                              </children>
                                              <padding>
                                                 <Insets left="10.0" right="10.0" />
@@ -513,54 +531,64 @@
                                     </AnchorPane>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="314.0" prefWidth="460.0">
                                        <children>
-                                          <GridPane layoutX="11.0" layoutY="43.0" prefHeight="200.0" prefWidth="400.0">
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
+                                          <VBox alignment="CENTER" prefHeight="501.0" prefWidth="554.0" spacing="100.0">
                                              <children>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Uczeń (Login):" GridPane.rowIndex="2">
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dodawanie">
                                                    <font>
-                                                      <Font size="16.0" />
+                                                      <Font size="24.0" />
                                                    </font>
                                                 </Text>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Przedmiot (Nazwa):" GridPane.rowIndex="3">
-                                                   <font>
-                                                      <Font size="16.0" />
-                                                   </font>
-                                                </Text>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwa:">
-                                                   <font>
-                                                      <Font size="16.0" />
-                                                   </font>
-                                                </Text>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ocena:" GridPane.rowIndex="1">
-                                                   <font>
-                                                      <Font size="16.0" />
-                                                   </font>
-                                                </Text>
-                                                <TextField fx:id="addMarkULoginText" prefHeight="6.0" prefWidth="303.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                                                   <opaqueInsets>
-                                                      <Insets />
-                                                   </opaqueInsets>
-                                                </TextField>
-                                                <TextField fx:id="addMarkSubNameText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <TextField fx:id="addMarkNameText" GridPane.columnIndex="1" />
-                                                <TextField fx:id="addMarkValueText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                <GridPane prefHeight="200.0" prefWidth="400.0">
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="100.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                   <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Uczeń (Login):" GridPane.rowIndex="2">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Text>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Przedmiot (Nazwa):" GridPane.rowIndex="3">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Text>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwa:">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Text>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Ocena:" GridPane.rowIndex="1">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Text>
+                                                      <TextField fx:id="addMarkULoginText" prefHeight="6.0" prefWidth="303.0" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                                                         <opaqueInsets>
+                                                            <Insets />
+                                                         </opaqueInsets>
+                                                      </TextField>
+                                                      <TextField fx:id="addMarkSubNameText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                      <TextField fx:id="addMarkNameText" GridPane.columnIndex="1" />
+                                                      <TextField fx:id="addMarkValueText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                   </children>
+                                                </GridPane>
+                                                <Button mnemonicParsing="false" text="Dodaj ocenę" />
                                              </children>
-                                          </GridPane>
-                                          <Text layoutX="166.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dodawanie">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                          <Button layoutX="170.0" layoutY="275.0" mnemonicParsing="false" text="Dodaj ocenę" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="233.0" />
+                                             <opaqueInsets>
+                                                <Insets />
+                                             </opaqueInsets>
+                                             <padding>
+                                                <Insets left="20.0" right="20.0" />
+                                             </padding>
+                                          </VBox>
                                        </children>
                                     </AnchorPane>
                                  </items>
@@ -577,18 +605,20 @@
                                  <items>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="160.0" prefWidth="100.0">
                                        <children>
-                                          <Text layoutX="50.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuwanie">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                          <Button layoutX="66.0" layoutY="433.0" mnemonicParsing="false" onAction="#removeLessonByID" text="Usuń lekcję" AnchorPane.bottomAnchor="41.39999999999998" AnchorPane.leftAnchor="66.0" />
-                                          <VBox layoutX="4.0" layoutY="42.0" prefHeight="352.0" prefWidth="174.0">
+                                          <VBox alignment="CENTER" layoutX="-1.0" prefHeight="499.0" prefWidth="247.0" spacing="8.0">
                                              <children>
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Usuwanie">
+                                                   <font>
+                                                      <Font size="24.0" />
+                                                   </font>
+                                                </Text>
                                                 <Text layoutX="20.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Podaj datę lekcji:">
                                                    <VBox.margin>
                                                       <Insets top="10.0" />
                                                    </VBox.margin>
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
                                                 </Text>
                                                 <TextField fx:id="removeLessonDateText" layoutX="20.0" layoutY="56.0">
                                                    <VBox.margin>
@@ -599,6 +629,9 @@
                                                    <VBox.margin>
                                                       <Insets top="10.0" />
                                                    </VBox.margin>
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
                                                 </Text>
                                                 <TextField fx:id="removeLessonHourText" layoutX="20.0" layoutY="98.0">
                                                    <VBox.margin>
@@ -609,6 +642,9 @@
                                                    <VBox.margin>
                                                       <Insets top="10.0" />
                                                    </VBox.margin>
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
                                                 </Text>
                                                 <TextField fx:id="removeLessonClassText" layoutX="20.0" layoutY="140.0">
                                                    <VBox.margin>
@@ -619,6 +655,9 @@
                                                    <VBox.margin>
                                                       <Insets top="10.0" />
                                                    </VBox.margin>
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
                                                 </Text>
                                                 <TextField fx:id="removeLessonTeacherLoginText" layoutX="20.0" layoutY="188.0">
                                                    <VBox.margin>
@@ -629,12 +668,19 @@
                                                    <VBox.margin>
                                                       <Insets top="10.0" />
                                                    </VBox.margin>
+                                                   <font>
+                                                      <Font size="14.0" />
+                                                   </font>
                                                 </Text>
                                                 <TextField fx:id="removeLessonSubjectText" layoutX="20.0" layoutY="223.0">
                                                    <VBox.margin>
                                                       <Insets top="10.0" />
                                                    </VBox.margin>
                                                 </TextField>
+                                                <Button mnemonicParsing="false" onAction="#removeLessonByID" text="Usuń lekcję">
+                                                   <VBox.margin>
+                                                      <Insets />
+                                                   </VBox.margin></Button>
                                              </children>
                                              <padding>
                                                 <Insets left="10.0" right="10.0" />
@@ -644,68 +690,75 @@
                                     </AnchorPane>
                                     <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="314.0" prefWidth="460.0">
                                        <children>
-                                          <GridPane layoutX="11.0" layoutY="43.0" prefHeight="256.0" prefWidth="400.0">
-                                             <columnConstraints>
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.0" minWidth="10.0" prefWidth="218.0" />
-                                                <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="182.0" />
-                                             </columnConstraints>
-                                             <rowConstraints>
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                                <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
-                                             </rowConstraints>
+                                          <VBox alignment="CENTER" prefHeight="500.0" prefWidth="553.0" spacing="70.0">
                                              <children>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Temat:">
+                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Dodawanie">
                                                    <font>
-                                                      <Font size="16.0" />
+                                                      <Font size="24.0" />
                                                    </font>
                                                 </Text>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Data:" GridPane.rowIndex="1">
-                                                   <font>
-                                                      <Font size="16.0" />
-                                                   </font>
-                                                </Text>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Godzina:" GridPane.rowIndex="2">
-                                                   <font>
-                                                      <Font size="16.0" />
-                                                   </font>
-                                                </Text>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Klasa:" GridPane.rowIndex="3">
-                                                   <font>
-                                                      <Font size="16.0" />
-                                                   </font>
-                                                </Text>
-                                                <TextField fx:id="addLessonThemeText" prefHeight="6.0" prefWidth="303.0" GridPane.columnIndex="1">
-                                                   <opaqueInsets>
-                                                      <Insets />
-                                                   </opaqueInsets>
-                                                </TextField>
-                                                <TextField fx:id="addLessonDateText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                                                <TextField fx:id="addLessonHourText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <TextField fx:id="addLessonClassText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                                                <TextField fx:id="addLessonTeacherText" prefHeight="25.0" prefWidth="173.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Prowadzący (Login):" GridPane.rowIndex="4">
-                                                   <font>
-                                                      <Font size="17.0" />
-                                                   </font>
-                                                </Text>
-                                                <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwa Przedmiotu" GridPane.rowIndex="5">
-                                                   <font>
-                                                      <Font size="17.0" />
-                                                   </font>
-                                                </Text>
-                                                <TextField fx:id="addLessonSubjectText" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                <GridPane prefHeight="256.0" prefWidth="400.0">
+                                                   <columnConstraints>
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="220.0" minWidth="10.0" prefWidth="218.0" />
+                                                      <ColumnConstraints hgrow="SOMETIMES" maxWidth="195.0" minWidth="10.0" prefWidth="182.0" />
+                                                   </columnConstraints>
+                                                   <rowConstraints>
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                      <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                                                   </rowConstraints>
+                                                   <children>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Temat:">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Text>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Data:" GridPane.rowIndex="1">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Text>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Godzina:" GridPane.rowIndex="2">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Text>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Klasa:" GridPane.rowIndex="3">
+                                                         <font>
+                                                            <Font size="16.0" />
+                                                         </font>
+                                                      </Text>
+                                                      <TextField fx:id="addLessonThemeText" prefHeight="6.0" prefWidth="303.0" GridPane.columnIndex="1">
+                                                         <opaqueInsets>
+                                                            <Insets />
+                                                         </opaqueInsets>
+                                                      </TextField>
+                                                      <TextField fx:id="addLessonDateText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                                      <TextField fx:id="addLessonHourText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                                                      <TextField fx:id="addLessonClassText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                      <TextField fx:id="addLessonTeacherText" prefHeight="25.0" prefWidth="173.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Prowadzący (Login):" GridPane.rowIndex="4">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </Text>
+                                                      <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nazwa Przedmiotu" GridPane.rowIndex="5">
+                                                         <font>
+                                                            <Font size="17.0" />
+                                                         </font>
+                                                      </Text>
+                                                      <TextField fx:id="addLessonSubjectText" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                                                   </children>
+                                                </GridPane>
+                                                <Button mnemonicParsing="false" text="Dodaj lekcję" />
                                              </children>
-                                          </GridPane>
-                                          <Text layoutX="166.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Dodawanie">
-                                             <font>
-                                                <Font size="18.0" />
-                                             </font>
-                                          </Text>
-                                          <Button layoutX="235.0" layoutY="433.0" mnemonicParsing="false" text="Dodaj lekcję" AnchorPane.bottomAnchor="41.39999999999998" AnchorPane.leftAnchor="235.0" />
+                                             <padding>
+                                                <Insets left="20.0" right="20.0" />
+                                             </padding>
+                                          </VBox>
                                        </children>
                                     </AnchorPane>
                                  </items>
