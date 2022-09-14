@@ -47,51 +47,51 @@
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Godzina" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Poniedziałek" GridPane.columnIndex="1" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Wtorek" GridPane.columnIndex="2" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Śrpda" GridPane.columnIndex="3" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Sroda" GridPane.columnIndex="3" />
                   <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Czwartek" GridPane.columnIndex="4" />
-                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Piątek" GridPane.columnIndex="5" />
-                  <Text fx:id="0x1" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.rowIndex="1" />
-                   <Text fx:id="0x2" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.rowIndex="2" />
-                   <Text fx:id="1x1" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="1" />
-                   <Text fx:id="1x2" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                   <Text fx:id="2x1" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="2" GridPane.rowIndex="1" />
-                   <Text fx:id="2x2" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="2" GridPane.rowIndex="2" />
-                   <Text fx:id="0x3" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.rowIndex="3" />
-                   <Text fx:id="1x3" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="3" />
-                   <Text fx:id="3x2" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="3" GridPane.rowIndex="2" />
-                   <Text fx:id="3x1" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="3" GridPane.rowIndex="1" />
-                   <Text fx:id="4x2" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="4" GridPane.rowIndex="2" />
-                   <Text fx:id="4x1" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="4" GridPane.rowIndex="1" />
-                   <Text fx:id="5x1" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="5" GridPane.rowIndex="1" />
-                   <Text fx:id="5x2" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="5" GridPane.rowIndex="2" />
-                   <Text fx:id="2x3" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="2" GridPane.rowIndex="3" />
-                   <Text fx:id="3x3" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="3" GridPane.rowIndex="3" />
-                   <Text fx:id="4x3" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="4" GridPane.rowIndex="3" />
-                   <Text fx:id="5x3" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="5" GridPane.rowIndex="3" />
-                   <Text fx:id="0x4" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.rowIndex="4" />
-                   <Text fx:id="1x4" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                   <Text fx:id="2x4" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="2" GridPane.rowIndex="4" />
-                   <Text fx:id="3x4" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="3" GridPane.rowIndex="4" />
-                   <Text fx:id="4x4" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="4" GridPane.rowIndex="4" />
-                   <Text fx:id="5x4" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="5" GridPane.rowIndex="4" />
-                   <Text fx:id="0x5" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.rowIndex="5" />
-                   <Text fx:id="1x5" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="5" />
-                   <Text fx:id="2x5" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="2" GridPane.rowIndex="5" />
-                   <Text fx:id="3x5" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="3" GridPane.rowIndex="5" />
-                   <Text fx:id="4x5" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="4" GridPane.rowIndex="5" />
-                   <Text fx:id="5x5" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="5" GridPane.rowIndex="5" />
-                   <Text fx:id="0x6" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.rowIndex="6" />
-                   <Text fx:id="0x7" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.rowIndex="7" />
-                   <Text fx:id="1x6" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="6" />
-                   <Text fx:id="1x7" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="1" GridPane.rowIndex="7" />
-                   <Text fx:id="2x6" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="2" GridPane.rowIndex="6" />
-                   <Text fx:id="2x7" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="2" GridPane.rowIndex="7" />
-                   <Text fx:id="3x6" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="3" GridPane.rowIndex="6" />
-                   <Text fx:id="3x7" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="3" GridPane.rowIndex="7" />
-                   <Text fx:id="4x6" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="4" GridPane.rowIndex="6" />
-                   <Text fx:id="4x7" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="4" GridPane.rowIndex="7" />
-                   <Text fx:id="5x6" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="5" GridPane.rowIndex="6" />
-                   <Text fx:id="5x7" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" GridPane.columnIndex="5" GridPane.rowIndex="7" />
+                  <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Piatek" GridPane.columnIndex="5" />
+                  <Text fx:id="0x1" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="1" />
+                   <Text fx:id="0x2" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="2" />
+                   <Text fx:id="0x3" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="3" />
+                   <Text fx:id="0x4" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="4" />
+                   <Text fx:id="0x5" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="5" />
+                   <Text fx:id="0x6" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="6" />
+                   <Text fx:id="0x7" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.rowIndex="7" />
+                   <Text fx:id="1x1" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                   <Text fx:id="1x2" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                   <Text fx:id="1x3" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                   <Text fx:id="1x4" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+                   <Text fx:id="1x5" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="5" />
+                   <Text fx:id="1x6" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="6" />
+                   <Text fx:id="1x7" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="1" GridPane.rowIndex="7" />
+                   <Text fx:id="2x1" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                   <Text fx:id="2x2" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.rowIndex="2" />
+                   <Text fx:id="2x3" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.rowIndex="3" />
+                   <Text fx:id="2x4" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.rowIndex="4" />
+                   <Text fx:id="2x5" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.rowIndex="5" />
+                   <Text fx:id="2x6" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.rowIndex="6" />
+                   <Text fx:id="2x7" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="2" GridPane.rowIndex="7" />
+                   <Text fx:id="3x1" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                   <Text fx:id="3x2" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="3" GridPane.rowIndex="2" />
+                   <Text fx:id="3x3" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="3" GridPane.rowIndex="3" />
+                   <Text fx:id="3x4" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="3" GridPane.rowIndex="4" />
+                   <Text fx:id="3x5" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="3" GridPane.rowIndex="5" />
+                   <Text fx:id="3x6" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="3" GridPane.rowIndex="6" />
+                   <Text fx:id="3x7" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="3" GridPane.rowIndex="7" />
+                   <Text fx:id="4x1" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="4" GridPane.rowIndex="1" />
+                   <Text fx:id="4x2" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="4" GridPane.rowIndex="2" />
+                   <Text fx:id="4x3" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="4" GridPane.rowIndex="3" />
+                   <Text fx:id="4x4" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="4" GridPane.rowIndex="4" />
+                   <Text fx:id="4x6" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="4" GridPane.rowIndex="6" />
+                   <Text fx:id="4x7" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="4" GridPane.rowIndex="7" />
+                   <Text fx:id="5x1" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="5" GridPane.rowIndex="1" />
+                   <Text fx:id="5x2" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="5" GridPane.rowIndex="2" />
+                   <Text fx:id="5x3" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="5" GridPane.rowIndex="3" />
+                   <Text fx:id="5x4" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="5" GridPane.rowIndex="4" />
+                   <Text fx:id="4x5" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="4" GridPane.rowIndex="5" />
+                   <Text fx:id="5x5" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="5" GridPane.rowIndex="5" />
+                   <Text fx:id="5x6" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="5" GridPane.rowIndex="6" />
+                   <Text fx:id="5x7" strokeType="OUTSIDE" strokeWidth="0.0" GridPane.columnIndex="5" GridPane.rowIndex="7" />
                </children>
             </GridPane>
          </center>

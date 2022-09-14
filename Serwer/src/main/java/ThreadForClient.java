@@ -57,11 +57,12 @@ public class ThreadForClient extends Thread{
                                 //sendMark(bw, "Muzyka");
                             }
                             else if(chooseCase == 2) {
+                                System.out.println("Wyswietlamy planLekcji");
                                 planlekcjiDane(bw,"Poniedzialek");
-                                planlekcjiDane(bw,"Wtorek");
-                                planlekcjiDane(bw,"Sroda");
-                                planlekcjiDane(bw,"Czwartek");
-                                planlekcjiDane(bw,"Piatek");
+                                //planlekcjiDane(bw,"Wtorek");
+                                //planlekcjiDane(bw,"Sroda");
+                                //planlekcjiDane(bw,"Czwartek");
+                                //planlekcjiDane(bw,"Piatek");
                             }
                             else if(chooseCase == 3) uczenDane(bw, uLogin);
 
@@ -315,13 +316,16 @@ public class ThreadForClient extends Thread{
             pd.put("day",day);
             bw.write(pd.toString());
             bw.newLine();
-            bw.flush();
+            //bw.write(pd.toString());
+            //bw.newLine();
+            //bw.flush();
 
             System.out.println(oc);
             pd.put("size",oc.size());
             bw.write(pd.toString());
             bw.newLine();
             bw.flush();
+            /*
             for(int i=0;i<oc.size();i++){
                 pd.put("hour",oc1.get(i));
                 pd.put("lesson",oc.get(i));
@@ -329,6 +333,7 @@ public class ThreadForClient extends Thread{
                 bw.newLine();
                 bw.flush();
             }
+             */
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
