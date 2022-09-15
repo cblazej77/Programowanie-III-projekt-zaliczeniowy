@@ -166,7 +166,7 @@ public class teacherEditWindowController implements Initializable {
     private TextField addFrequencyClassText;
     
     @FXML
-    private TextField transerNewClassName;
+    private TextField transferNewClassName;
 
     @FXML
     private TextField transferStudentLogin;

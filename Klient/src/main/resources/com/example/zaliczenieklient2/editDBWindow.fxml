@@ -967,7 +967,7 @@
                                                 </TextField>
                                                 <TextField fx:id="addFrequencyStudentLoginText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                                 <TextField fx:id="addFrequencyDateText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <TextField fx:id="addFrequancyHourText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <TextField fx:id="addFrequencyHourText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                                 <TextField fx:id="addFrequencyTypeText" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rodzaj(O/NB/S/USP/ZW):" GridPane.rowIndex="4">
                                                    <font>
