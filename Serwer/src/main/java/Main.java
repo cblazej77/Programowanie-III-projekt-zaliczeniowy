@@ -11,6 +11,10 @@ public class Main {
 
     public static void main(String[] args) {
 
+        Querries querries = new Querries();
+
+        System.out.println(querries.findLoginyUczniowZKlasy("1B2022"));
+
         System.out.println("Czekam...");
         try{
             ServerSocket server = new ServerSocket(8081);
