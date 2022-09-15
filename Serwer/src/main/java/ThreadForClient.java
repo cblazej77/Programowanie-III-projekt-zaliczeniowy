@@ -29,11 +29,7 @@ public class ThreadForClient extends Thread{
         try {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            //bw.write("Connection accepted");
-            //bw.newLine();
-            //bw.flush();
 
-            //zczytanie z jasona hasla i loginu wpisanego przez uzytkownika
 
             JSONObject klient;
             check = true;
@@ -75,7 +71,9 @@ public class ThreadForClient extends Thread{
                             if(chooseCase == 4) nauczycielDane(bw,uLogin);
                             if(chooseCase == 5) //OcenyNauczycielaDane(bw,uLogin);ta funckja jest pusta
                             if(chooseCase == 6) editDane(br);
-                            if(chooseCase == 8) {}//frekwencja
+                            if(chooseCase == 8) {subjectSend(bw); findKlasy(bw);};//wysyla liste przedmiotow,
+                            if(chooseCase == 9) {checkTeacher(br, bw);}//sprawdza czy dany nauczyciel uczy wybranego przez siebie przedmiotu
+                            if(chooseCase == 10) {sendAllClass(bw, br);}
                         }
                     }
                 }
@@ -84,6 +82,54 @@ public class ThreadForClient extends Thread{
 
         } catch (IOException | JSONException e){throw new RuntimeException(e);
         }
+    }
+    private void sendAllClass(BufferedWriter bw, BufferedReader br){
+        JSONObject rc = null;
+        JSONObject pd = new JSONObject();
+        String classView;
+        try {
+            rc = new JSONObject(br.readLine());
+            classView = rc.optString("data");
+            System.out.println(classView);
+            Querries querries = new Querries();
+            List<Integer> id = querries.findNumeryUczniowZKlasy(classView);
+            List<String> name = querries.findImionaUczniowZKlasy(classView);
+            List<String> surname = querries.findNazwiskaUczniowZKlasy(classView);
+            pd.put("size", name.size());
+            bw.write(pd.toString());
+            bw.newLine();
+            bw.flush();
+            for(int i=0; i<name.size(); i++){
+                System.out.println(id.get(i) + name.get(i) + surname.get(i));
+                pd.put("id", id.get(i));
+                pd.put("name", name.get(i));
+                pd.put("surname", surname.get(i));
+                bw.write(pd.toString());
+                bw.newLine();
+                bw.flush();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    private void checkTeacher(BufferedReader br, BufferedWriter bw){
+        JSONObject rc = null;
+        JSONObject pd = new JSONObject();
+        String subjectCheck;
+        try{
+            rc = new JSONObject(br.readLine());
+            subjectCheck = rc.optString("data");
+            Querries querries = new Querries();
+            Boolean aBoolean = querries.czyNauczycielUczyPrzedmiotu(uLogin, subjectCheck);
+            if(aBoolean) pd.put("boolean", "Yes");
+            else pd.put("boolean", "No");
+            bw.write(pd.toString());
+            bw.newLine();
+            bw.flush();
+        }catch (IOException | JSONException e){
+            e.printStackTrace();}
     }
     private void countSubject(BufferedWriter bw){
         try {
@@ -100,6 +146,49 @@ public class ThreadForClient extends Thread{
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+    private void findKlasy(BufferedWriter bw){
+        try{
+            JSONObject pd = new JSONObject();
+            Querries querries = new Querries();
+            List<String> Class = querries.findKlasy();
+            pd.put("size", Class.size());
+            bw.write(pd.toString());
+            bw.newLine();
+            bw.flush();
+            for(int i = 0; i<Class.size(); i++){
+                pd.put("Class", Class.get(i));
+                bw.write(pd.toString());
+                bw.newLine();
+                bw.flush();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    private void subjectSend(BufferedWriter bw) {
+        try{
+            JSONObject pd = new JSONObject();
+            Querries querries = new Querries();
+            List<String> subject = querries.findPrzedmmioty();
+            pd.put("size", subject.size());
+            bw.write(pd.toString());
+            bw.newLine();
+            bw.flush();
+            for(int i = 0; i<subject.size(); i++){
+                pd.put("subject", subject.get(i));
+                bw.write(pd.toString());
+                bw.newLine();
+                bw.flush();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
     private void sendMark(BufferedWriter bw, String subject) {
         try {

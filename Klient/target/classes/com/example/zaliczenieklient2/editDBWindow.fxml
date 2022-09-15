@@ -16,7 +16,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="805.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zaliczenieklient2.teacherEditWindowController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="590.0" prefWidth="805.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zaliczenieklient2.teacherEditWindowController">
    <children>
       <BorderPane prefHeight="590.0" prefWidth="805.0">
          <top>
@@ -580,7 +580,7 @@
                                                       <TextField fx:id="addMarkValueText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                                    </children>
                                                 </GridPane>
-                                                <Button mnemonicParsing="false" text="Dodaj ocenę" />
+                                                <Button mnemonicParsing="false" onAction="#addMark" text="Dodaj ocenę" />
                                              </children>
                                              <opaqueInsets>
                                                 <Insets />
@@ -753,7 +753,7 @@
                                                       <TextField fx:id="addLessonSubjectText" GridPane.columnIndex="1" GridPane.rowIndex="5" />
                                                    </children>
                                                 </GridPane>
-                                                <Button mnemonicParsing="false" text="Dodaj lekcję" />
+                                                <Button mnemonicParsing="false" onAction="#addLesson" text="Dodaj lekcję" />
                                              </children>
                                              <padding>
                                                 <Insets left="20.0" right="20.0" />
@@ -842,7 +842,7 @@
                                                 <Font size="18.0" />
                                              </font>
                                           </Text>
-                                          <Button layoutX="172.0" layoutY="275.0" mnemonicParsing="false" text="Dodaj klasę" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="233.0" />
+                                          <Button layoutX="172.0" layoutY="275.0" mnemonicParsing="false" onAction="#addClass" text="Dodaj klasę" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="233.0" />
                                        </children>
                                     </AnchorPane>
                                  </items>
@@ -967,7 +967,7 @@
                                                 </TextField>
                                                 <TextField fx:id="addFrequencyStudentLoginText" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                                 <TextField fx:id="addFrequencyDateText" GridPane.columnIndex="1" GridPane.rowIndex="2" />
-                                                <TextField fx:id="addFrequancyHourText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                                                <TextField fx:id="addFrequencyHourText" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                                                 <TextField fx:id="addFrequencyTypeText" GridPane.columnIndex="1" GridPane.rowIndex="4" />
                                                 <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Rodzaj(O/NB/S/USP/ZW):" GridPane.rowIndex="4">
                                                    <font>
@@ -987,7 +987,7 @@
                                                 <Font size="18.0" />
                                              </font>
                                           </Text>
-                                          <Button layoutX="157.0" layoutY="275.0" mnemonicParsing="false" text="Dodaj frekwencję" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="233.0" />
+                                          <Button layoutX="157.0" layoutY="275.0" mnemonicParsing="false" onAction="#addTurnout" text="Dodaj frekwencję" AnchorPane.bottomAnchor="45.0" AnchorPane.leftAnchor="233.0" />
                                        </children>
                                     </AnchorPane>
                                  </items>

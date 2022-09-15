@@ -59,6 +59,15 @@ public class Client {
         }catch (IOException | JSONException e){e.printStackTrace();}
         return serwer;
     }
+    public void SendString(String data){
+        try{
+            json = new JSONObject();
+            json.put("data", data);
+            bw.write(json.toString());
+            bw.newLine();
+            bw.flush();
+        }catch(IOException | JSONException e){e.printStackTrace();}
+    }
 
     /*public void SendRemoveSignal(List<String> Data, int i, int n){
         try{
