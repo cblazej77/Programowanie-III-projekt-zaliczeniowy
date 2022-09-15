@@ -14,13 +14,9 @@ public class teacherWindowController implements Initializable {
     @FXML
     private Text Tsurname;
     @FXML
-    private Text parentname;
+    private Text Tclass;
     @FXML
-    private Text parentsurname;
-    @FXML
-    private Text studentclass;
-    @FXML
-    private Text diarynumber;
+    private Text Tsubjects;
 
     private Client client;
     private JSONObject serwer;
@@ -32,10 +28,8 @@ public class teacherWindowController implements Initializable {
         client = data.getClient();
         serwer = client.getData();
 
-        String Sname = serwer.optString("imie");
-        String Ssurname = serwer.optString("nazwisko");
-
-        Tname.setText(Sname);
-        Tsurname.setText(Ssurname);
+        Tname.setText(serwer.optString("imie"));
+        Tsurname.setText(serwer.optString("nazwisko"));
+        //Tclass.setText(serwer.optString("klasa"));
     }
 }

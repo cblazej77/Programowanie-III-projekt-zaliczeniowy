@@ -29,11 +29,7 @@ public class ThreadForClient extends Thread{
         try {
             BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(socket.getOutputStream()));
             BufferedReader br = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-            //bw.write("Connection accepted");
-            //bw.newLine();
-            //bw.flush();
 
-            //zczytanie z jasona hasla i loginu wpisanego przez uzytkownika
 
             JSONObject klient;
             check = true;
@@ -74,9 +70,10 @@ public class ThreadForClient extends Thread{
                             reciveCase(br);
                             if(chooseCase == 4) nauczycielDane(bw,uLogin);
                             if(chooseCase == 5) //OcenyNauczycielaDane(bw,uLogin);ta funckja jest pusta
-                            if(chooseCase == 6) removeDane(br);
-                            if(chooseCase == 7) addDane(br);
-                            if(chooseCase == 8) {}//frekfencja
+                            if(chooseCase == 6) editDane(br);
+                            if(chooseCase == 8) {subjectSend(bw); findKlasy(bw);};//wysyla liste przedmiotow,
+                            if(chooseCase == 9) {checkTeacher(br, bw);}//sprawdza czy dany nauczyciel uczy wybranego przez siebie przedmiotu
+                            if(chooseCase == 10) {sendAllClass(bw, br);}
                         }
                     }
                 }
@@ -85,6 +82,54 @@ public class ThreadForClient extends Thread{
 
         } catch (IOException | JSONException e){throw new RuntimeException(e);
         }
+    }
+    private void sendAllClass(BufferedWriter bw, BufferedReader br){
+        JSONObject rc = null;
+        JSONObject pd = new JSONObject();
+        String classView;
+        try {
+            rc = new JSONObject(br.readLine());
+            classView = rc.optString("data");
+            System.out.println(classView);
+            Querries querries = new Querries();
+            List<Integer> id = querries.findNumeryUczniowZKlasy(classView);
+            List<String> name = querries.findImionaUczniowZKlasy(classView);
+            List<String> surname = querries.findNazwiskaUczniowZKlasy(classView);
+            pd.put("size", name.size());
+            bw.write(pd.toString());
+            bw.newLine();
+            bw.flush();
+            for(int i=0; i<name.size(); i++){
+                System.out.println(id.get(i) + name.get(i) + surname.get(i));
+                pd.put("id", id.get(i));
+                pd.put("name", name.get(i));
+                pd.put("surname", surname.get(i));
+                bw.write(pd.toString());
+                bw.newLine();
+                bw.flush();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    private void checkTeacher(BufferedReader br, BufferedWriter bw){
+        JSONObject rc = null;
+        JSONObject pd = new JSONObject();
+        String subjectCheck;
+        try{
+            rc = new JSONObject(br.readLine());
+            subjectCheck = rc.optString("data");
+            Querries querries = new Querries();
+            Boolean aBoolean = querries.czyNauczycielUczyPrzedmiotu(uLogin, subjectCheck);
+            if(aBoolean) pd.put("boolean", "Yes");
+            else pd.put("boolean", "No");
+            bw.write(pd.toString());
+            bw.newLine();
+            bw.flush();
+        }catch (IOException | JSONException e){
+            e.printStackTrace();}
     }
     private void countSubject(BufferedWriter bw){
         try {
@@ -101,6 +146,49 @@ public class ThreadForClient extends Thread{
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+    private void findKlasy(BufferedWriter bw){
+        try{
+            JSONObject pd = new JSONObject();
+            Querries querries = new Querries();
+            List<String> Class = querries.findKlasy();
+            pd.put("size", Class.size());
+            bw.write(pd.toString());
+            bw.newLine();
+            bw.flush();
+            for(int i = 0; i<Class.size(); i++){
+                pd.put("Class", Class.get(i));
+                bw.write(pd.toString());
+                bw.newLine();
+                bw.flush();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    private void subjectSend(BufferedWriter bw) {
+        try{
+            JSONObject pd = new JSONObject();
+            Querries querries = new Querries();
+            List<String> subject = querries.findPrzedmmioty();
+            pd.put("size", subject.size());
+            bw.write(pd.toString());
+            bw.newLine();
+            bw.flush();
+            for(int i = 0; i<subject.size(); i++){
+                pd.put("subject", subject.get(i));
+                bw.write(pd.toString());
+                bw.newLine();
+                bw.flush();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
     private void sendMark(BufferedWriter bw, String subject) {
         try {
@@ -136,7 +224,7 @@ public class ThreadForClient extends Thread{
             e.printStackTrace();}
     }
 
-    private void removeDane(BufferedReader br) throws IOException, JSONException {
+    /*private void removeDane(BufferedReader br) throws IOException, JSONException {
         Querries querries = new Querries();
         JSONObject rc = null;
         rc = new JSONObject(br.readLine());
@@ -156,11 +244,6 @@ public class ThreadForClient extends Thread{
                 querries.removePrzedmiotByNazwa(rc.optString("data0"));
                 break;
             case 4:
-                /*rc = new JSONObject(br.readLine());
-                float rMark = rc.optLong("rMark");
-                String rLogin = rc.optString("rLogin");
-                String rLesson = rc.optString("rLesson");
-                */
                 querries.removeOcena(rc.optString("data0"), (float) rc.optDouble("data1"), rc.optString("data2"), rc.optString("data3"));
                 break;
             case 5:
@@ -223,6 +306,90 @@ public class ThreadForClient extends Thread{
                 break;
             case 9:
                 //querries.removePrzedmiotKlasy(data);
+                break;
+            default:
+                break;
+        }
+    }*/
+
+    private void editDane(BufferedReader br) throws IOException, JSONException {
+        Querries querries = new Querries();
+        JSONObject rc = null;
+        rc = new JSONObject(br.readLine());
+        int which = rc.optInt("whichEdit");
+        switch (which){
+            case 0:
+                //przenies ucznia
+                break;
+            case 1:
+                querries.removeUzytkownikByLogin(rc.optString("data0"));
+                break;
+            case 2:
+                querries.addUzytkownik(rc.optString("data0"), rc.optString("data1"), rc.optString("data2"),
+                        rc.optString("data3"), rc.optString("data4"));
+                break;
+            case 3:
+                querries.removeUczenByLogin(rc.optString("data0"));
+                break;
+            case 4:
+                querries.addUczen(rc.optInt("data0"), rc.optLong("data1"), rc.optLong("data2"),
+                        rc.optLong("data3"));
+                break;
+            case 5:
+                querries.removeNauczycielByLogin(rc.optString("data0"));
+                break;
+            case 6:
+                querries.addNauczyciel(rc.optLong("data0"));
+                break;
+            case 7:
+                querries.removePrzedmiotByNazwa(rc.optString("data0"));
+                break;
+            case 8:
+                querries.addPrzedmiot(rc.optString("data0"));
+                break;
+            case 9:
+                querries.removeOcena(rc.optString("data0"), (float) rc.optDouble("data1"),
+                        rc.optString("data2"), rc.optString("data3"));
+                break;
+            case 10:
+                querries.addOcena(rc.optString("data0"), (float) rc.optDouble("data1"), rc.optLong("data2"),
+                        rc.optLong("data3"));
+                break;
+            case 11:
+                querries.removeLekcja(rc.optInt("data0"), rc.optString("data1"), rc.optString("data2"),
+                        rc.optString("data3"), Date.valueOf(rc.optString("data4")));
+                break;
+            case 12:
+                querries.addLekcja(rc.optInt("data0"), rc.optLong("data1"), rc.optLong("data2"),
+                        Date.valueOf(rc.optString("data3")), rc.optString("data4"));
+                break;
+            case 13:
+                querries.removeKlasaByNazwa("data0");
+                break;
+            case 14:
+                querries.addKlasa(rc.optString("data0"), Date.valueOf(rc.optString("data1")),
+                        rc.optLong("data2"));
+                break;
+            case 15:
+                querries.removeFrekwencja(rc.optString("data0"), rc.optString("data1"),
+                        Date.valueOf(rc.optString("data2")), rc.optInt("data3"), rc.optString("data4"));
+                break;
+            case 16:
+                querries.addFrekwencjaOnEverything(rc.optString("data0"), rc.optString("data1"),
+                        Date.valueOf(rc.optString("data2")), rc.optInt("data3"), rc.optString("data4"),
+                        rc.optString("data5"), rc.optString("data6"));
+                break;
+            case 17:
+                querries.removeNauczycielPrzedmiotow(rc.optString("data0"), rc.optString("data1"));
+                break;
+            case 18:
+                querries.addNauczycielePrzedmiotow(rc.optLong("data0"), rc.optLong("data1"));
+                break;
+            case 19:
+                querries.removePrzedmiotKlasy(rc.optString("data0"), rc.optString("data1"));
+                break;
+            case 20:
+                querries.addPrzedmiotKlasy(rc.optLong("data0"), rc.optLong("data1"));
                 break;
             default:
                 break;
@@ -295,9 +462,12 @@ public class ThreadForClient extends Thread{
         try {
             Querries querries = new Querries();
             UzytkownicyEntity us = querries.findUzytkownikByLogin(uLogin);
+            //NauczycieleEntity tch = querries.findNauczycielByLogin(uLogin);
+            //KlasyEntity cls = querries.findKlasaByNauczyciel(String.valueOf(tch));
             JSONObject pd = new JSONObject();
             pd.put("imie", us.getImie());
             pd.put("nazwisko", us.getNazwisko());
+            //pd.put("klasa", cls.getNazwa());
             bw.write(pd.toString());
             bw.newLine();
             bw.flush();
@@ -312,17 +482,15 @@ public class ThreadForClient extends Thread{
         try {
             JSONObject pd = new JSONObject();
             Querries querries = new Querries();
-            List<String> oc = querries.findLekcjePrzedmiotForPrzedmiotByUserLogin(uLogin, Date.valueOf(day));
-            List<Integer> oc1 = querries.findLekcjeGodzinaForPrzedmiotByUserLogin(uLogin, Date.valueOf(day));
+            List<String> przedmioty = querries.findLekcjePrzedmiotForPrzedmiotByUserLogin(uLogin, Date.valueOf(day));
+            List<Integer> godziny = querries.findLekcjeGodzinaForPrzedmiotByUserLogin(uLogin, Date.valueOf(day));
             pd.put("day",day);
-            bw.write(pd.toString());
-            bw.newLine();
             //bw.write(pd.toString());
             //bw.newLine();
             //bw.flush();
 
-            System.out.println(oc);
-            pd.put("size",oc.size());
+            System.out.println(przedmioty);
+            pd.put("size",przedmioty.size());
             bw.write(pd.toString());
             bw.newLine();
             bw.flush();

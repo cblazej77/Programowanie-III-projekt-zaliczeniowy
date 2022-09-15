@@ -21,26 +21,6 @@ import java.util.ResourceBundle;
 public class LessonsPlanWindowController implements Initializable {
     @FXML
     private GridPane gridPane;
-    @FXML
-    private TableView<LessonsPlanTable> table;
-
-    @FXML
-    private TableColumn<LessonsPlanTable, Integer> hour;
-
-    @FXML
-    private TableColumn<LessonsPlanTable, String> monday;
-
-    @FXML
-    private TableColumn<LessonsPlanTable, String> tuesday;
-
-    @FXML
-    private TableColumn<LessonsPlanTable, String> thursday;
-
-    @FXML
-    private TableColumn<LessonsPlanTable, String> wendesday;
-
-    @FXML
-    private TableColumn<LessonsPlanTable, String> friday;
 
     private Client client;
     private JSONObject serwer;
@@ -48,6 +28,7 @@ public class LessonsPlanWindowController implements Initializable {
 
     SendDataToContoller data = SendDataToContoller.getInstance();
     ObservableList<LessonsPlanTable> list = FXCollections.observableArrayList();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         String[] days = new String[] {"MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"};
@@ -82,10 +63,6 @@ public class LessonsPlanWindowController implements Initializable {
 
           //  }
         //}
-
-
-        //monday.setCellValueFactory(new PropertyValueFactory<LessonsPlanTable,String>("monday"));
-
     }
 
 }

@@ -284,6 +284,13 @@ public class Querries {
         return (KlasyEntity) query.getResultList().get(0);
     }
 
+    /*public KlasyEntity findKlasaByNauczyciel(String idn){
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT k FROM KlasyEntity k JOIN u.nauczycieleByIdn n WHERE n.idn = :idn");
+        query.setParameter("idn", idn);
+        return (KlasyEntity) query.getResultList().get(0);
+    }*/
+
     public List<Integer> findLekcjeGodzinaForPrzedmiotByUserLogin(String login, Date data) {
         EntityManager entityManager = FACTORY.createEntityManager();
         Query query = (Query) entityManager.createQuery("SELECT l.godzina FROM LekcjeEntity l JOIN l.klasyByKlasa k JOIN k.uczniowiesByIdk u JOIN u.uzytkownicyByIdus us WHERE us.login = :login AND l.data = :data ORDER BY l.godzina");
