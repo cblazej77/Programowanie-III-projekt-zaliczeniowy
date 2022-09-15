@@ -60,18 +60,6 @@ public class Client {
         return serwer;
     }
 
-    /*public void SendRemoveMark(Float mark, String login, String lesson){
-        try{
-            json = new JSONObject();
-            json.put("rMark", mark);
-            json.put("rLogin", login);
-            json.put("rLesson", lesson);
-            bw.write(json.toString());
-            bw.newLine();
-            bw.flush();
-        }catch(IOException | JSONException e){e.printStackTrace();}
-    }*/
-
     public void SendRemoveSignal(List<String> Data, int i, int n){
         try{
             json = new JSONObject();

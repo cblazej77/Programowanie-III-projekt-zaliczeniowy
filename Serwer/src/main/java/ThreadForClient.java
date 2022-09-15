@@ -156,11 +156,6 @@ public class ThreadForClient extends Thread{
                 querries.removePrzedmiotByNazwa(rc.optString("data0"));
                 break;
             case 4:
-                /*rc = new JSONObject(br.readLine());
-                float rMark = rc.optLong("rMark");
-                String rLogin = rc.optString("rLogin");
-                String rLesson = rc.optString("rLesson");
-                */
                 querries.removeOcena(rc.optString("data0"), (float) rc.optDouble("data1"), rc.optString("data2"), rc.optString("data3"));
                 break;
             case 5:
@@ -295,9 +290,12 @@ public class ThreadForClient extends Thread{
         try {
             Querries querries = new Querries();
             UzytkownicyEntity us = querries.findUzytkownikByLogin(uLogin);
+            //NauczycieleEntity tch = querries.findNauczycielByLogin(uLogin);
+            //KlasyEntity cls = querries.findKlasaByNauczyciel(String.valueOf(tch));
             JSONObject pd = new JSONObject();
             pd.put("imie", us.getImie());
             pd.put("nazwisko", us.getNazwisko());
+            //pd.put("klasa", cls.getNazwa());
             bw.write(pd.toString());
             bw.newLine();
             bw.flush();
@@ -312,17 +310,15 @@ public class ThreadForClient extends Thread{
         try {
             JSONObject pd = new JSONObject();
             Querries querries = new Querries();
-            List<String> oc = querries.findLekcjePrzedmiotForPrzedmiotByUserLogin(uLogin, Date.valueOf(day));
-            List<Integer> oc1 = querries.findLekcjeGodzinaForPrzedmiotByUserLogin(uLogin, Date.valueOf(day));
+            List<String> przedmioty = querries.findLekcjePrzedmiotForPrzedmiotByUserLogin(uLogin, Date.valueOf(day));
+            List<Integer> godziny = querries.findLekcjeGodzinaForPrzedmiotByUserLogin(uLogin, Date.valueOf(day));
             pd.put("day",day);
-            bw.write(pd.toString());
-            bw.newLine();
             //bw.write(pd.toString());
             //bw.newLine();
             //bw.flush();
 
-            System.out.println(oc);
-            pd.put("size",oc.size());
+            System.out.println(przedmioty);
+            pd.put("size",przedmioty.size());
             bw.write(pd.toString());
             bw.newLine();
             bw.flush();

@@ -21,26 +21,6 @@ import java.util.ResourceBundle;
 public class LessonsPlanWindowController implements Initializable {
     @FXML
     private GridPane gridPane;
-    @FXML
-    private TableView<LessonsPlanTable> table;
-
-    @FXML
-    private TableColumn<LessonsPlanTable, Integer> hour;
-
-    @FXML
-    private TableColumn<LessonsPlanTable, String> monday;
-
-    @FXML
-    private TableColumn<LessonsPlanTable, String> tuesday;
-
-    @FXML
-    private TableColumn<LessonsPlanTable, String> thursday;
-
-    @FXML
-    private TableColumn<LessonsPlanTable, String> wendesday;
-
-    @FXML
-    private TableColumn<LessonsPlanTable, String> friday;
 
     private Client client;
     private JSONObject serwer;
@@ -48,9 +28,10 @@ public class LessonsPlanWindowController implements Initializable {
 
     SendDataToContoller data = SendDataToContoller.getInstance();
     ObservableList<LessonsPlanTable> list = FXCollections.observableArrayList();
+
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-        String[] days = new String[] {"MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"};
+        /*String[] days = new String[] {"MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"};
         LocalDate localDate = LocalDate.now();
                 //System.out.println("LocalDate - System zone: " + localDate);
                 //System.out.println("Day of week: " + localDate.getDayOfWeek());
@@ -62,7 +43,7 @@ public class LessonsPlanWindowController implements Initializable {
         setMonday = String.valueOf(localDate).substring(0,8) + dayInt;
 
         System.out.println(localDate +" Poniedzialek wypada: " + setMonday);
-
+        */
         //SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
         //Date date = new Date(System.currentTimeMillis());
         //System.out.println(formatter.format(date));
@@ -82,9 +63,8 @@ public class LessonsPlanWindowController implements Initializable {
 
           //  }
         //}
+        client = data.getClient();
 
-
-        //monday.setCellValueFactory(new PropertyValueFactory<LessonsPlanTable,String>("monday"));
 
     }
 

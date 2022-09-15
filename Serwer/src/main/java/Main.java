@@ -11,21 +11,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        /*Querries querries = new Querries();
-
-        for(FrekwencjaEntity f: querries.findFrekwencjaByNrWDzienniku(7, "A2021")) {
-            System.out.println(f);
-        }
-
-        System.out.println();
-
-        for(FrekwencjaEntity f: querries.findFrekwencjaByImieINazwisko("Karolina", "Sumosia")) {
-            System.out.println(f);
-        }
-
-        System.out.println();
-
-        System.out.println(querries.findAvgOfOcenyforUczenFromPrzedmiot("matematyka",0L));*/
         System.out.println("Czekam...");
         try{
             ServerSocket server = new ServerSocket(8081);
@@ -38,7 +23,5 @@ public class Main {
         catch (IOException e){
             e.printStackTrace();
         }
-
-
     }
 }
