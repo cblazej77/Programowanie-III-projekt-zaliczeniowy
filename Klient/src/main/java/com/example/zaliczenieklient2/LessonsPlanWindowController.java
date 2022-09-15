@@ -9,8 +9,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.layout.GridPane;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.net.URL;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
@@ -21,6 +23,26 @@ import java.util.ResourceBundle;
 public class LessonsPlanWindowController implements Initializable {
     @FXML
     private GridPane gridPane;
+    @FXML
+    private TableView<LessonsPlanTable> table;
+
+    @FXML
+    private TableColumn<LessonsPlanTable, Integer> hour;
+
+    @FXML
+    private TableColumn<LessonsPlanTable, String> monday;
+
+    @FXML
+    private TableColumn<LessonsPlanTable, String> tuesday;
+
+    @FXML
+    private TableColumn<LessonsPlanTable, String> thursday;
+
+    @FXML
+    private TableColumn<LessonsPlanTable, String> wendesday;
+
+    @FXML
+    private TableColumn<LessonsPlanTable, String> friday;
 
     private Client client;
     private JSONObject serwer;
@@ -48,18 +70,28 @@ public class LessonsPlanWindowController implements Initializable {
         //Date date = new Date(System.currentTimeMillis());
         //System.out.println(formatter.format(date));
 
-        //Integer n;
-        //client = data.getClient();
-        //for(int i=0;i<5;i++){
-          //  serwer = client.getData();
-            //String day = serwer.optString("day");
-            //System.out.println(day);
-            //n = serwer.optInt("size");
-            //for(int j=0;j<n;j++){
-                //serwer = client.getData();
-                //String s = serwer.optString("lesson");
-                //Integer h = serwer.optInt("hour");
-                //System.out.println(s);
+        Integer n;
+        client = data.getClient();
+        try {
+            client.sendMonday(setMonday);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        for(int i=0;i<5;i++){
+            serwer = client.getData();
+            String day = serwer.optString("day");
+            System.out.println(day);
+            n = serwer.optInt("size");
+            for(int j=0;j<n+2;j++){
+                serwer = client.getData();
+                String s = serwer.optString("lesson");
+                Integer h = serwer.optInt("hour");
+                System.out.println(s);
+            }
+        }
+
 
           //  }
         //}

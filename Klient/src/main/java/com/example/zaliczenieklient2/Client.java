@@ -1,6 +1,14 @@
 package com.example.zaliczenieklient2;
 
-
+import javafx.beans.Observable;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
+import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.layout.GridPane;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -141,6 +149,14 @@ public class Client {
     public void sendCase(int i) throws JSONException, IOException {
         json = new JSONObject();
         json.put("cases", i);
+        bw.write(json.toString());
+        bw.newLine();
+        bw.flush();
+    }
+
+    public void sendMonday(String monday) throws JSONException, IOException {
+        json = new JSONObject();
+        json.put("monday", monday);
         bw.write(json.toString());
         bw.newLine();
         bw.flush();
