@@ -5,6 +5,8 @@ import org.json.JSONObject;
 import java.io.*;
 import java.net.Socket;
 import java.sql.Date;
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.Iterator;
 import java.util.List;
 
@@ -16,6 +18,8 @@ public class ThreadForClient extends Thread{
     private boolean check;
     private boolean wait;
     private String access;
+
+    private String date;
 
     private int chooseCase;
 
@@ -53,12 +57,13 @@ public class ThreadForClient extends Thread{
                                 //sendMark(bw, "Muzyka");
                             }
                             else if(chooseCase == 2) {
+                                reciveMonday(br);
                                 System.out.println("Wyswietlamy planLekcji");
-                                planlekcjiDane(bw,"Poniedzialek");
-                                //planlekcjiDane(bw,"Wtorek");
-                                //planlekcjiDane(bw,"Sroda");
-                                //planlekcjiDane(bw,"Czwartek");
-                                //planlekcjiDane(bw,"Piatek");
+                                planlekcjiDane(bw, date);
+                                planlekcjiDane(bw, String.valueOf(LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd")).plusDays(1)));
+                                planlekcjiDane(bw, String.valueOf(LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd")).plusDays(2)));
+                                planlekcjiDane(bw, String.valueOf(LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd")).plusDays(3)));
+                                planlekcjiDane(bw, String.valueOf(LocalDate.parse(date, DateTimeFormatter.ofPattern("yyyy-MM-dd")).plusDays(4)));
                             }
                             else if(chooseCase == 3) uczenDane(bw, uLogin);
 
@@ -213,6 +218,15 @@ public class ThreadForClient extends Thread{
         }
     }
 
+
+    private void reciveMonday(BufferedReader br) {
+        JSONObject rc = null;
+        try{
+            rc = new JSONObject(br.readLine());
+            date =  rc.optString("monday");
+        }catch (IOException | JSONException e){
+            e.printStackTrace();}
+    }
 
     private void reciveCase(BufferedReader br) {
         JSONObject rc = null;
@@ -485,6 +499,9 @@ public class ThreadForClient extends Thread{
             List<String> przedmioty = querries.findLekcjePrzedmiotForPrzedmiotByUserLogin(uLogin, Date.valueOf(day));
             List<Integer> godziny = querries.findLekcjeGodzinaForPrzedmiotByUserLogin(uLogin, Date.valueOf(day));
             pd.put("day",day);
+            bw.write(pd.toString());
+            bw.newLine();
+            bw.flush();
             //bw.write(pd.toString());
             //bw.newLine();
             //bw.flush();
@@ -494,15 +511,15 @@ public class ThreadForClient extends Thread{
             bw.write(pd.toString());
             bw.newLine();
             bw.flush();
-            /*
-            for(int i=0;i<oc.size();i++){
-                pd.put("hour",oc1.get(i));
-                pd.put("lesson",oc.get(i));
+
+            for(int i=0;i<przedmioty.size();i++){
+                pd.put("hour",godziny.get(i));
+                pd.put("lesson",przedmioty.get(i));
                 bw.write(pd.toString());
                 bw.newLine();
                 bw.flush();
             }
-             */
+
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
