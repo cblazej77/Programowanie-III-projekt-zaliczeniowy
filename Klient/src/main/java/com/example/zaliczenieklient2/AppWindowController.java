@@ -55,7 +55,7 @@ public class AppWindowController implements Initializable {
     }
 
     @FXML
-    private void frekwencjaButton(ActionEvent event){
+    private void frekwencjaButton(ActionEvent event) throws JSONException, IOException{
         //client.sendCase(1);
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPane("frequencyWindow");
@@ -84,6 +84,13 @@ public class AppWindowController implements Initializable {
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPane("teacher");
         mainPane.setCenter(view);
+    }
+    @FXML
+    private void frekfencjaTButton(ActionEvent event) throws JSONException, IOException{
+        client.sendCase(8);
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPane("frequencyTWindow");
+        mainPane.setCenter(view);//frequencyTWindo
     }
 
     @FXML

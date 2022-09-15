@@ -1,5 +1,6 @@
 package com.example.zaliczenieklient2;
 
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -11,13 +12,19 @@ import java.util.ResourceBundle;
 
 public class marksTWindowController implements Initializable {
     @FXML
-    TextField Tclass;
+    private TextField Tclass;
+
     @FXML
-    TextField Tdiarynr;
+    private TextField Tdiarynr;
+
     @FXML
-    TextField Tname;
+    private TextField Tmark;
+
     @FXML
-    TextField Tmark;
+    private TextField Tname;
+
+    @FXML
+    private TextField Tsubject;
 
 
     private Client client;
@@ -28,8 +35,13 @@ public class marksTWindowController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         client = data.getClient();
-        serwer = client.getData();
+        //serwer = client.getData();
 
+
+    }
+
+    @FXML
+    void addmarkButton(ActionEvent event) {
 
     }
 }
