@@ -76,6 +76,7 @@ public class ThreadForClient extends Thread{
                             if(chooseCase == 5) //OcenyNauczycielaDane(bw,uLogin);ta funckja jest pusta
                             if(chooseCase == 6) removeDane(br);
                             if(chooseCase == 7) addDane(br);
+                            if(chooseCase == 8) {}//frekfencja
                         }
                     }
                 }

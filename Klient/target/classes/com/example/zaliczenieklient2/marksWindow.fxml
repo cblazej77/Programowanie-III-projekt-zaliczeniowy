@@ -30,8 +30,8 @@
             <TableView fx:id="table" prefHeight="533.0" prefWidth="788.0" BorderPane.alignment="CENTER">
               <columns>
                 <TableColumn fx:id="subject" prefWidth="122.0" text="Przedmiot" />
-                <TableColumn fx:id="marks" prefWidth="624.0" text="Oceny" />
-                  <TableColumn fx:id="avgMarks" minWidth="0.0" prefWidth="88.0" text="Średnia" />
+                <TableColumn fx:id="marks" prefWidth="540.0" text="Oceny" />
+                  <TableColumn fx:id="avgMarks" minWidth="0.0" prefWidth="172.0" text="Średnia" />
               </columns>
             </TableView>
          </center>
