@@ -3,7 +3,6 @@ import jakarta.persistence.EntityManager;
 import jakarta.persistence.EntityManagerFactory;
 import jakarta.persistence.EntityTransaction;
 import jakarta.persistence.Persistence;
-import org.hibernate.dialect.LobMergeStrategy;
 import org.hibernate.query.Query;
 
 import java.sql.Date;
@@ -622,7 +621,7 @@ public class Querries {
     public List<String> findImionaUczniowZKlasy(String klasa) {
         EntityManager entitymanager = FACTORY.createEntityManager();
         Query query = (Query) entitymanager.createQuery("SELECT u.uzytkownicyByIdus.imie FROM KlasyEntity k " +
-                "JOIN K.uczniowiesByIdk u WHERE k.nazwa = :klasa ORDER BY u.nrwdzienniku");
+                "JOIN UczniowieEntity u ON k.idk = u.idk WHERE k.nazwa = :klasa ORDER BY u.nrwdzienniku");
         query.setParameter("klasa", klasa);
         return query.getResultList();
     }
@@ -630,7 +629,7 @@ public class Querries {
     public List<String> findNazwiskaUczniowZKlasy(String klasa) {
         EntityManager entitymanager = FACTORY.createEntityManager();
         Query query = (Query) entitymanager.createQuery("SELECT u.uzytkownicyByIdus.nazwisko FROM KlasyEntity k " +
-                "JOIN K.uczniowiesByIdk u WHERE k.nazwa = :klasa ORDER BY u.nrwdzienniku");
+                "JOIN UczniowieEntity u ON k.idk = u.idk WHERE k.nazwa = :klasa ORDER BY u.nrwdzienniku");
         query.setParameter("klasa", klasa);
         return query.getResultList();
     }
@@ -638,14 +637,32 @@ public class Querries {
     public List<Integer> findNumeryUczniowZKlasy(String klasa) {
         EntityManager entitymanager = FACTORY.createEntityManager();
         Query query = (Query) entitymanager.createQuery("SELECT u.nrwdzienniku FROM KlasyEntity k " +
-                "JOIN K.uczniowiesByIdk u WHERE k.nazwa = :klasa ORDER BY u.nrwdzienniku");
+                "JOIN UczniowieEntity u ON k.idk = u.idk WHERE k.nazwa = :klasa ORDER BY u.nrwdzienniku");
         query.setParameter("klasa", klasa);
         return query.getResultList();
     }
 
     public Boolean czyNauczycielUczyKlase(String loginN, String nazwaK) {
+        EntityManager entitymanager = FACTORY.createEntityManager();
+        Query query1 = (Query) entitymanager.createQuery("SELECT n.idn FROM NauczycieleEntity n JOIN n.uzytkownicyByIdus us WHERE us.login = :login");
+        query1.setParameter("login", loginN);
+        Long idn = (Long) query1.getResultList().get(0);
+        Query query2 = (Query) entitymanager.createQuery("SELECT np.idp FROM NauczycieleprzedmiotowEntity np WHERE np.idn = :idn");
+        query2.setParameter("idn", idn);
+        List<Long> list1 = query2.getResultList();
+        Query query3 = (Query) entitymanager.createQuery("SELECT k.idk FROM KlasyEntity k WHERE k.nazwa = :nazwaK");
+        query3.setParameter("nazwaK", nazwaK);
+        Long idk = (Long) query3.getResultList().get(0);
+        Query query4 = (Query) entitymanager.createQuery("SELECT pk.idp FROM PrzedmiotyklasEntity pk WHERE pk.idk = :idk");
+        query4.setParameter("idk", idk);
+        List<Long> list2 = query4.getResultList();
 
-        return null;
+        for(Long l : list1) {
+            for(Long l2 : list2) {
+                if(l == l2) return true;
+            }
+        }
+        return false;
     }
 
     public Boolean czyNauczycielUczyPrzedmiotu(String loginN, String nazwaP) {
@@ -660,6 +677,42 @@ public class Querries {
         query2.setParameter("idn", idn);
         query2.setParameter("idp", idp);
         return !query2.getResultList().isEmpty();
+    }
+
+    public List<String> findPrzedmiotyNauczanePrzezNauczyciela(String loginN) {
+        EntityManager entitymanager = FACTORY.createEntityManager();
+        Query query1 = (Query) entitymanager.createQuery("SELECT n.idn FROM NauczycieleEntity n JOIN n.uzytkownicyByIdus us WHERE us.login = :login");
+        query1.setParameter("login", loginN);
+        Long idn = (Long) query1.getResultList().get(0);
+        Query query2 = (Query) entitymanager.createQuery("SELECT np.przedmiotyByIdp.nazwa FROM NauczycieleprzedmiotowEntity np WHERE np.idn = :idn");
+        query2.setParameter("idn", idn);
+        return query2.getResultList();
+    }
+
+    public Boolean czyNauczycielUczyKlasePrzedmiotu(String loginN, String nazwaP, String nazwaK) {
+        EntityManager entitymanager = FACTORY.createEntityManager();
+        Query query = (Query) entitymanager.createQuery("SELECT p.idp FROM PrzedmiotyEntity p WHERE p.nazwa = :nazwaP");
+        Query query1 = (Query) entitymanager.createQuery("SELECT n.idn FROM NauczycieleEntity n JOIN n.uzytkownicyByIdus us WHERE us.login = :login");
+        Query query2 = (Query) entitymanager.createQuery("SELECT k.idk FROM KlasyEntity k WHERE k.nazwa = :nazwaK");
+        query.setParameter("nazwaP", nazwaP);
+        query1.setParameter("login", loginN);
+        query2.setParameter("nazwaK", nazwaK);
+        Long idp = (Long) query.getResultList().get(0);
+        Long idn = (Long) query1.getResultList().get(0);
+        Long idk = (Long) query2.getResultList().get(0);
+        Query query3 = (Query) entitymanager.createQuery("SELECT np FROM NauczycieleprzedmiotowEntity np JOIN PrzedmiotyklasEntity pk ON" +
+                " np.idp = pk.idp WHERE np.idn = :idn AND np.idp = :idp AND pk.idk = :idk");
+        query3.setParameter("idn", idn);
+        query3.setParameter("idp", idp);
+        query3.setParameter("idk", idk);
+        return !query3.getResultList().isEmpty();
+    }
+
+    public String findKlaseWychowawcy(String loginN) {
+        EntityManager entitymanager = FACTORY.createEntityManager();
+        Query query = (Query) entitymanager.createQuery("SELECT k.nazwa FROM KlasyEntity k WHERE k.nauczycieleByWychowawca.uzytkownicyByIdus.login = :login");
+        query.setParameter("login", loginN);
+        return (String) query.getResultList().get(0);
     }
 
 
