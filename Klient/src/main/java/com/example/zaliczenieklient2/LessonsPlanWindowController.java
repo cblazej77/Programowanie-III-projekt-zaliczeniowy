@@ -31,7 +31,7 @@ public class LessonsPlanWindowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
-        /*String[] days = new String[] {"MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"};
+        String[] days = new String[] {"MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY"};
         LocalDate localDate = LocalDate.now();
                 //System.out.println("LocalDate - System zone: " + localDate);
                 //System.out.println("Day of week: " + localDate.getDayOfWeek());
@@ -43,7 +43,7 @@ public class LessonsPlanWindowController implements Initializable {
         setMonday = String.valueOf(localDate).substring(0,8) + dayInt;
 
         System.out.println(localDate +" Poniedzialek wypada: " + setMonday);
-        */
+
         //SimpleDateFormat formatter= new SimpleDateFormat("yyyy-MM-dd");
         //Date date = new Date(System.currentTimeMillis());
         //System.out.println(formatter.format(date));
@@ -63,9 +63,6 @@ public class LessonsPlanWindowController implements Initializable {
 
           //  }
         //}
-        client = data.getClient();
-
-
     }
 
 }

@@ -74,9 +74,8 @@ public class ThreadForClient extends Thread{
                             reciveCase(br);
                             if(chooseCase == 4) nauczycielDane(bw,uLogin);
                             if(chooseCase == 5) //OcenyNauczycielaDane(bw,uLogin);ta funckja jest pusta
-                            if(chooseCase == 6) removeDane(br);
-                            if(chooseCase == 7) addDane(br);
-                            if(chooseCase == 8) {}//frekfencja
+                            if(chooseCase == 6) editDane(br);
+                            if(chooseCase == 8) {}//frekwencja
                         }
                     }
                 }
@@ -136,7 +135,7 @@ public class ThreadForClient extends Thread{
             e.printStackTrace();}
     }
 
-    private void removeDane(BufferedReader br) throws IOException, JSONException {
+    /*private void removeDane(BufferedReader br) throws IOException, JSONException {
         Querries querries = new Querries();
         JSONObject rc = null;
         rc = new JSONObject(br.readLine());
@@ -218,6 +217,90 @@ public class ThreadForClient extends Thread{
                 break;
             case 9:
                 //querries.removePrzedmiotKlasy(data);
+                break;
+            default:
+                break;
+        }
+    }*/
+
+    private void editDane(BufferedReader br) throws IOException, JSONException {
+        Querries querries = new Querries();
+        JSONObject rc = null;
+        rc = new JSONObject(br.readLine());
+        int which = rc.optInt("whichEdit");
+        switch (which){
+            case 0:
+                //przenies ucznia
+                break;
+            case 1:
+                querries.removeUzytkownikByLogin(rc.optString("data0"));
+                break;
+            case 2:
+                querries.addUzytkownik(rc.optString("data0"), rc.optString("data1"), rc.optString("data2"),
+                        rc.optString("data3"), rc.optString("data4"));
+                break;
+            case 3:
+                querries.removeUczenByLogin(rc.optString("data0"));
+                break;
+            case 4:
+                querries.addUczen(rc.optInt("data0"), rc.optLong("data1"), rc.optLong("data2"),
+                        rc.optLong("data3"));
+                break;
+            case 5:
+                querries.removeNauczycielByLogin(rc.optString("data0"));
+                break;
+            case 6:
+                querries.addNauczyciel(rc.optLong("data0"));
+                break;
+            case 7:
+                querries.removePrzedmiotByNazwa(rc.optString("data0"));
+                break;
+            case 8:
+                querries.addPrzedmiot(rc.optString("data0"));
+                break;
+            case 9:
+                querries.removeOcena(rc.optString("data0"), (float) rc.optDouble("data1"),
+                        rc.optString("data2"), rc.optString("data3"));
+                break;
+            case 10:
+                querries.addOcena(rc.optString("data0"), (float) rc.optDouble("data1"), rc.optLong("data2"),
+                        rc.optLong("data3"));
+                break;
+            case 11:
+                querries.removeLekcja(rc.optInt("data0"), rc.optString("data1"), rc.optString("data2"),
+                        rc.optString("data3"), Date.valueOf(rc.optString("data4")));
+                break;
+            case 12:
+                querries.addLekcja(rc.optInt("data0"), rc.optLong("data1"), rc.optLong("data2"),
+                        Date.valueOf(rc.optString("data3")), rc.optString("data4"));
+                break;
+            case 13:
+                querries.removeKlasaByNazwa("data0");
+                break;
+            case 14:
+                querries.addKlasa(rc.optString("data0"), Date.valueOf(rc.optString("data1")),
+                        rc.optLong("data2"));
+                break;
+            case 15:
+                querries.removeFrekwencja(rc.optString("data0"), rc.optString("data1"),
+                        Date.valueOf(rc.optString("data2")), rc.optInt("data3"), rc.optString("data4"));
+                break;
+            case 16:
+                querries.addFrekwencjaOnEverything(rc.optString("data0"), rc.optString("data1"),
+                        Date.valueOf(rc.optString("data2")), rc.optInt("data3"), rc.optString("data4"),
+                        rc.optString("data5"), rc.optString("data6"));
+                break;
+            case 17:
+                querries.removeNauczycielPrzedmiotow(rc.optString("data0"), rc.optString("data1"));
+                break;
+            case 18:
+                querries.addNauczycielePrzedmiotow(rc.optLong("data0"), rc.optLong("data1"));
+                break;
+            case 19:
+                querries.removePrzedmiotKlasy(rc.optString("data0"), rc.optString("data1"));
+                break;
+            case 20:
+                querries.addPrzedmiotKlasy(rc.optLong("data0"), rc.optLong("data1"));
                 break;
             default:
                 break;
