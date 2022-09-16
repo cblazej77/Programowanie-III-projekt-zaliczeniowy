@@ -66,7 +66,7 @@ public class AppWindowController implements Initializable {
     private void planlekcjiButton(ActionEvent event) throws JSONException, IOException {
         client.sendCase(2);
         FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPane("lessonsplanWindow");
+        Pane view = object.getPane("lessonsPlanWindow2");
         mainPane.setCenter(view);
     }
 

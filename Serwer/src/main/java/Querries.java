@@ -306,7 +306,8 @@ public class Querries {
         Long idk = (Long) query0.getResultList().get(0);
         query.setParameter("dzien", data);
         query.setParameter("idk", idk);
-        return query.getResultList(); }
+        return query.getResultList();
+    }
 
 
     public void addOcenaForUczen(String nazwa, Float ocena, Integer nrWDzienniku, String klasa,String przedmiot) {
@@ -370,7 +371,6 @@ public class Querries {
     }
 
     public void addFrekwencjaOnEverything(String nazwaP, String loginU, Date data, Integer godzina, String rodzaj, String klasa, String loginN) {
-
         EntityManager entityManager = FACTORY.createEntityManager();
         Query query1 = (Query) entityManager.createQuery("SELECT p.idp FROM PrzedmiotyEntity p WHERE p.nazwa = :nazwa");
         Query query = (Query) entityManager.createQuery("Select u.idu FROM UczniowieEntity u JOIN u.uzytkownicyByIdus us WHERE us.login = :loginU");
@@ -636,6 +636,14 @@ public class Querries {
     public List<String> findNazwiskaUczniowZKlasy(String klasa) {
         EntityManager entitymanager = FACTORY.createEntityManager();
         Query query = (Query) entitymanager.createQuery("SELECT u.uzytkownicyByIdus.nazwisko FROM KlasyEntity k " +
+                "JOIN UczniowieEntity u ON k.idk = u.idk WHERE k.nazwa = :klasa ORDER BY u.nrwdzienniku");
+        query.setParameter("klasa", klasa);
+        return query.getResultList();
+    }
+
+    public List<String> findLoginyUczniowZKlasy(String klasa) {
+        EntityManager entitymanager = FACTORY.createEntityManager();
+        Query query = (Query) entitymanager.createQuery("SELECT u.uzytkownicyByIdus.login FROM KlasyEntity k " +
                 "JOIN UczniowieEntity u ON k.idk = u.idk WHERE k.nazwa = :klasa ORDER BY u.nrwdzienniku");
         query.setParameter("klasa", klasa);
         return query.getResultList();

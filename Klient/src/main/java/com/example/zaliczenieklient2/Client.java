@@ -6,6 +6,7 @@ import org.json.JSONObject;
 
 import java.io.*;
 import java.net.Socket;
+import java.time.LocalDate;
 import java.util.List;
 
 public class Client {
@@ -67,6 +68,37 @@ public class Client {
             bw.newLine();
             bw.flush();
         }catch(IOException | JSONException e){e.printStackTrace();}
+    }
+
+    public void sendLessionPlan(Integer godzina, String klasa, String przedmiot, LocalDate date){
+        try {
+            json = new JSONObject();
+            json.put("godzina", godzina);
+            json.put("klasa", klasa);
+            json.put("przedmiot", przedmiot);
+            json.put("date", date);
+            bw.write(json.toString());
+            bw.newLine();
+            bw.flush();
+        } catch (IOException | JSONException e) {
+        e.printStackTrace();
+    }
+    }
+    public void sendFrequency(String przedmiot, String loginS, LocalDate data, int godzina, String rodzaj, String klasa) {
+        try {
+            json = new JSONObject();
+            json.put("przedmiot", przedmiot);
+            json.put("loginS", loginS);
+            json.put("LocalDate", data);
+            json.put("godzina", godzina);
+            json.put("rodzaj", rodzaj);
+            json.put("klasa", klasa);
+            bw.write(json.toString());
+            bw.newLine();
+            bw.flush();
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     /*public void SendRemoveSignal(List<String> Data, int i, int n){

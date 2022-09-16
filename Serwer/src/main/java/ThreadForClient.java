@@ -2,9 +2,11 @@ import Enitities.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import javax.xml.crypto.Data;
 import java.io.*;
 import java.net.Socket;
 import java.sql.Date;
+import java.time.LocalDate;
 import java.util.Iterator;
 import java.util.List;
 
@@ -53,12 +55,11 @@ public class ThreadForClient extends Thread{
                                 //sendMark(bw, "Muzyka");
                             }
                             else if(chooseCase == 2) {
-                                System.out.println("Wyswietlamy planLekcji");
-                                planlekcjiDane(bw,"Poniedzialek");
-                                //planlekcjiDane(bw,"Wtorek");
-                                //planlekcjiDane(bw,"Sroda");
-                                //planlekcjiDane(bw,"Czwartek");
-                                //planlekcjiDane(bw,"Piatek");
+                                for(int i=0; i<5; i++){
+                                    klient = new JSONObject(br.readLine());
+                                    Date data = Date.valueOf(klient.optString("data"));
+                                    planlekcjiDane(bw, data);
+                                }
                             }
                             else if(chooseCase == 3) uczenDane(bw, uLogin);
 
@@ -73,7 +74,9 @@ public class ThreadForClient extends Thread{
                             if(chooseCase == 6) editDane(br);
                             if(chooseCase == 8) {subjectSend(bw); findKlasy(bw);};//wysyla liste przedmiotow,
                             if(chooseCase == 9) {checkTeacher(br, bw);}//sprawdza czy dany nauczyciel uczy wybranego przez siebie przedmiotu
-                            if(chooseCase == 10) {sendAllClass(bw, br);}
+                            if(chooseCase == 10) {sendAllClass(bw, br);}//wysyla liste osob w klasie
+                            if(chooseCase == 11) {checkClasses(br, bw);}//sprawdza czy dany nauczyciel uczy wybranej klasy
+                            if(chooseCase == 12) {addFrequency(br);}//wstawia frekfencje dla danego ucznia
                         }
                     }
                 }
@@ -83,6 +86,27 @@ public class ThreadForClient extends Thread{
         } catch (IOException | JSONException e){throw new RuntimeException(e);
         }
     }
+
+    private void addFrequency(BufferedReader br){
+        JSONObject rc = null;
+        String przedmiotJ, loginSJ, rodzaj, klasa;
+        int godzina;
+        Date data;
+        try {
+            rc = new JSONObject(br.readLine());
+            przedmiotJ = rc.optString("przedmiot");
+            loginSJ = rc.optString("loginS");
+            rodzaj = rc.optString("rodzaj");
+            klasa = rc.optString("klasa");
+            godzina = rc.optInt("godzina");
+            data = Date.valueOf((rc.optString("LocalDate")));
+            Querries querries = new Querries();
+            querries.addFrekwencjaOnEverything(przedmiotJ, loginSJ, data ,godzina, rodzaj, klasa, uLogin);
+        } catch (IOException e) {e.printStackTrace();
+        }catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
     private void sendAllClass(BufferedWriter bw, BufferedReader br){
         JSONObject rc = null;
         JSONObject pd = new JSONObject();
@@ -90,8 +114,8 @@ public class ThreadForClient extends Thread{
         try {
             rc = new JSONObject(br.readLine());
             classView = rc.optString("data");
-            System.out.println(classView);
             Querries querries = new Querries();
+            List<String> loginU = querries.findLoginyUczniowZKlasy(classView);
             List<Integer> id = querries.findNumeryUczniowZKlasy(classView);
             List<String> name = querries.findImionaUczniowZKlasy(classView);
             List<String> surname = querries.findNazwiskaUczniowZKlasy(classView);
@@ -100,8 +124,8 @@ public class ThreadForClient extends Thread{
             bw.newLine();
             bw.flush();
             for(int i=0; i<name.size(); i++){
-                System.out.println(id.get(i) + name.get(i) + surname.get(i));
                 pd.put("id", id.get(i));
+                pd.put("login", loginU.get(i));
                 pd.put("name", name.get(i));
                 pd.put("surname", surname.get(i));
                 bw.write(pd.toString());
@@ -113,6 +137,23 @@ public class ThreadForClient extends Thread{
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+    private void checkClasses(BufferedReader br, BufferedWriter bw) {
+        JSONObject rc = null;
+        JSONObject pd = new JSONObject();
+        String classCheck;
+        try{
+            rc = new JSONObject(br.readLine());
+            classCheck = rc.optString("data");
+            Querries querries = new Querries();
+            Boolean aBoolean = querries.czyNauczycielUczyKlase(uLogin, classCheck);
+            if(aBoolean) pd.put("boolean", "Yes");
+            else pd.put("boolean", "No");
+            bw.write(pd.toString());
+            bw.newLine();
+            bw.flush();
+        }catch (IOException | JSONException e){
+            e.printStackTrace();}
     }
     private void checkTeacher(BufferedReader br, BufferedWriter bw){
         JSONObject rc = null;
@@ -136,7 +177,6 @@ public class ThreadForClient extends Thread{
             JSONObject pd = new JSONObject();
             Querries querries = new Querries();
             List<Float> oc = querries.countPrzedmioty();
-            System.out.println(oc.size());
             pd.put("count", oc.size());
             bw.write(pd.toString());
             bw.newLine();
@@ -478,31 +518,24 @@ public class ThreadForClient extends Thread{
         }
     }
 
-    private void planlekcjiDane(BufferedWriter bw, String day){
+    private void planlekcjiDane(BufferedWriter bw, Date day){
         try {
             JSONObject pd = new JSONObject();
             Querries querries = new Querries();
-            List<String> przedmioty = querries.findLekcjePrzedmiotForPrzedmiotByUserLogin(uLogin, Date.valueOf(day));
-            List<Integer> godziny = querries.findLekcjeGodzinaForPrzedmiotByUserLogin(uLogin, Date.valueOf(day));
-            pd.put("day",day);
-            //bw.write(pd.toString());
-            //bw.newLine();
-            //bw.flush();
-
-            System.out.println(przedmioty);
+            List<String> przedmioty = querries.findLekcjePrzedmiotForPrzedmiotByUserLogin(uLogin, day);
+            List<Integer> godziny = querries.findLekcjeGodzinaForPrzedmiotByUserLogin(uLogin, day);
             pd.put("size",przedmioty.size());
             bw.write(pd.toString());
             bw.newLine();
             bw.flush();
-            /*
-            for(int i=0;i<oc.size();i++){
-                pd.put("hour",oc1.get(i));
-                pd.put("lesson",oc.get(i));
+
+            for(int i=0;i<przedmioty.size();i++){
+                pd.put("hour",godziny.get(i));
+                pd.put("lesson",przedmioty.get(i));
                 bw.write(pd.toString());
                 bw.newLine();
                 bw.flush();
             }
-             */
         } catch (IOException | JSONException e) {
             e.printStackTrace();
         }

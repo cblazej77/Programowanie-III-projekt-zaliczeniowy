@@ -31,8 +31,11 @@
          <bottom>
             <Pane prefHeight="69.0" prefWidth="828.0" BorderPane.alignment="CENTER">
                <children>
-                  <Label fx:id="errorFrequency" layoutX="516.0" layoutY="26.0" prefHeight="17.0" prefWidth="218.0" textFill="RED" />
+                  <Label fx:id="errorFrequency" layoutX="610.0" layoutY="26.0" prefHeight="17.0" prefWidth="124.0" textFill="RED" />
                   <Button layoutX="734.0" layoutY="22.0" mnemonicParsing="false" onAction="#printSelected" prefHeight="25.0" prefWidth="55.0" text="Send" />
+                  <ChoiceBox fx:id="hoursCheckBox" layoutX="33.0" layoutY="31.0" prefWidth="150.0" />
+                  <Label fx:id="errorHourLabel" layoutX="40.0" layoutY="14.0" prefHeight="17.0" prefWidth="218.0" text="Wybierz godzinę lekcyjną" textFill="#0a0a0a" />
+                  <Button layoutX="194.0" layoutY="31.0" mnemonicParsing="false" onAction="#clickHourBox" text="check" />
                </children>
             </Pane>
          </bottom>
@@ -54,6 +57,7 @@
                            <children>
                               <Label fx:id="classerrorLabel" layoutX="568.0" layoutY="8.0" text="Wybierz klasę" />
                               <Label fx:id="subjecterrorLabel" layoutX="87.0" layoutY="6.0" text="Wybierz przedmiot" />
+                              <Label fx:id="dayErrorLabel" layoutX="349.0" layoutY="8.0" text="Wybierz Date" />
                            </children>
                         </Pane>
                      </children>

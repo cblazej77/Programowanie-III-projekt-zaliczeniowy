@@ -3,6 +3,8 @@ package com.example.zaliczenieklient2;
 import javafx.scene.control.CheckBox;
 
 public class FrequencyTable {
+
+    private String login;
     private String id;
     private String name;
     private String surname;
@@ -11,10 +13,11 @@ public class FrequencyTable {
     private CheckBox absent;
     private CheckBox exempt;
 
-    FrequencyTable(String fId, String fName, String fSurname, String vPresents, String vAbsent, String vExempt){
+    FrequencyTable(String fId, String fName, String fSurname, String fLogin, String vPresents, String vAbsent, String vExempt){
         this.id = fId;
         this.name = fName;
         this.surname = fSurname;
+        this.login = fLogin;
         this.presents = new CheckBox();
         this.absent = new CheckBox();
         this.exempt = new CheckBox();
@@ -31,6 +34,9 @@ public class FrequencyTable {
     public String getSurname() {return surname;}
 
     public void setSurname(String surname) {this.surname = surname;}
+
+    public String getLogin(){return login;}
+    public void setLogin(String login){this.login = login;}
 
     public CheckBox getPresents(){return presents;}
     public void setPresents(CheckBox presents){this.presents = presents;}
