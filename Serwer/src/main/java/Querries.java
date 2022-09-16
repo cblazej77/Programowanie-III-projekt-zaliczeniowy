@@ -591,7 +591,7 @@ public class Querries {
         return (PrzedmiotyklasEntity) query.getResultList();
     }
 
-    public void removeNauczycielPrzedmiotow(String nameP, String loginN) {
+    public void removeNauczycielPrzedmiotow(String loginN, String nameP) {
         EntityManager entitymanager = FACTORY.createEntityManager();
         EntityTransaction transaction = entitymanager.getTransaction();
         NauczycieleprzedmiotowEntity nauczycieleprzedmiotowEntity = findNauczycielPrzedmituByNameAndLogin(nameP, loginN);

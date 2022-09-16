@@ -44,7 +44,7 @@ public class ThreadForClient extends Thread{
                 if(access.equals("UCZEN")){
                     if (!check) {
                         while (wait) {
-                            reciveCase(br);
+                            receiveCase(br);
                             if (chooseCase == 0){//za kazdym dodanym tutaj przedmiotem trzeba zwiekszyc w kliencie, forze zmienna z o jeden wiecej
                                 countSubject(bw);
                                 sendMark(bw, "informatyka");
@@ -67,7 +67,7 @@ public class ThreadForClient extends Thread{
                 }else{
                     if (!check) {
                         while (wait) {
-                            reciveCase(br);
+                            receiveCase(br);
                             if(chooseCase == 4) nauczycielDane(bw,uLogin);
                             if(chooseCase == 5) //OcenyNauczycielaDane(bw,uLogin);ta funckja jest pusta
                             if(chooseCase == 6) editDane(br);
@@ -201,9 +201,7 @@ public class ThreadForClient extends Thread{
                 bw.newLine();
                 bw.flush();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
     }
@@ -222,9 +220,7 @@ public class ThreadForClient extends Thread{
                 bw.newLine();
                 bw.flush();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
 
@@ -245,15 +241,13 @@ public class ThreadForClient extends Thread{
                 bw.newLine();
                 bw.flush();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
     }
 
 
-    private void reciveCase(BufferedReader br) {
+    private void receiveCase(BufferedReader br) {
         JSONObject rc = null;
         try{
             rc = new JSONObject(br.readLine());
@@ -262,94 +256,6 @@ public class ThreadForClient extends Thread{
             wait = false;
             e.printStackTrace();}
     }
-
-    /*private void removeDane(BufferedReader br) throws IOException, JSONException {
-        Querries querries = new Querries();
-        JSONObject rc = null;
-        rc = new JSONObject(br.readLine());
-        //String data = rc.optString("data");
-        int which = rc.optInt("whichDelete");
-        switch (which){
-            case 0:
-                querries.removeUzytkownikByLogin(rc.optString("data0"));
-                break;
-            case 1:
-                querries.removeUczenByLogin(rc.optString("data0"));
-                break;
-            case 2:
-                querries.removeNauczycielByLogin(rc.optString("data0"));
-                break;
-            case 3:
-                querries.removePrzedmiotByNazwa(rc.optString("data0"));
-                break;
-            case 4:
-                querries.removeOcena(rc.optString("data0"), (float) rc.optDouble("data1"), rc.optString("data2"), rc.optString("data3"));
-                break;
-            case 5:
-                Integer godzina = rc.optInt("data0");
-                String klasa = rc.optString("data1");
-                String login = rc.optString("data2");
-                String nazwaP = rc.optString("data3");
-                Date data = Date.valueOf(rc.optString("data4"));
-                querries.removeLekcja(godzina,klasa,login,nazwaP,data);
-                //querries.removeLekcja(rc.optInt("data0"),rc.optString("data1"),rc.optString("data2"),rc.optString("data3"), Date.valueOf(rc.optString("data4")));
-                break;
-            case 6:
-                querries.removeKlasaByNazwa(rc.optString("data0"));
-                break;
-            case 7:
-                querries.removeFrekwencja(rc.optString("data0"),rc.optString("data1"),Date.valueOf(rc.optString("data2")),rc.optInt("data3"), rc.optString("data4"));
-                break;
-            case 8:
-                querries.removeNauczycielPrzedmiotow(rc.optString("data0"),rc.optString("data1"));
-                break;
-            case 9:
-                querries.removePrzedmiotKlasy(rc.optString("data0"),rc.optString("data1"));
-                break;
-            default:
-                break;
-        }
-    }
-
-    private void addDane(BufferedReader br) throws IOException, JSONException {
-        Querries querries = new Querries();
-        JSONObject rc = null;
-        rc = new JSONObject(br.readLine());
-        int which = rc.optInt("whichAdd");
-        switch (which){
-            case 0:
-                querries.addUzytkownik(rc.optString("data0"),rc.optString("data1"),rc.optString("data2"),rc.optString("data3"),rc.optString("data4"));
-                break;
-            case 1:
-                querries.addUczen(rc.optInt("data0"),rc.optLong("data1"),rc.optLong("data2"),rc.optLong("data3"));
-                break;
-            case 2:
-                querries.addNauczyciel(rc.optLong("data0"));
-                break;
-            case 3:
-                querries.addPrzedmiot(rc.optString("data0"));
-                break;
-            case 4:
-                break;
-            case 5:
-                //querries.removeLekcja(data);
-                break;
-            case 6:
-
-                break;
-            case 7:
-                //querries.removeFrekwencja(data);
-                break;
-            case 8:
-                //querries.removeNauczycielPrzedmiotu(data);
-                break;
-            case 9:
-                //querries.removePrzedmiotKlasy(data);
-                break;
-            default:
-                break;
-        }
-    }*/
 
     private void editDane(BufferedReader br) throws IOException, JSONException {
         Querries querries = new Querries();
