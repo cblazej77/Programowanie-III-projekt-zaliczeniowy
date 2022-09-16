@@ -109,30 +109,6 @@ public class Client {
         }
     }
 
-    /*public void SendRemoveSignal(List<String> Data, int i, int n){
-        try{
-            json = new JSONObject();
-            for(int j=0;j<n;j++){
-                json.put("data" + j, Data.get(j));
-            }
-            json.put("whichDelete", i);
-            bw.write(json.toString());
-            bw.newLine();
-            bw.flush();
-        }catch(IOException | JSONException e){e.printStackTrace();}
-    }
-
-    public void SendAddSignal(List<String> Data, int i, int n) throws JSONException, IOException {
-        json = new JSONObject();
-        for(int j=0;j<n;j++){
-            json.put("data" + j, Data.get(j));
-        }
-        json.put("whichAdd", i);
-        bw.write(json.toString());
-        bw.newLine();
-        bw.flush();
-    }*/
-
     public void SendEditSignal(List<String> Data, int i, int n) throws JSONException, IOException {
         json = new JSONObject();
         for(int j=0;j<n;j++){

@@ -264,7 +264,7 @@ public class ThreadForClient extends Thread{
         int which = rc.optInt("whichEdit");
         switch (which){
             case 0:
-                //przenies ucznia
+                querries.changeKlasaForUczen(rc.optString("data0"),rc.optString("data1"));
                 break;
             case 1:
                 querries.removeUzytkownikByLogin(rc.optString("data0"));
@@ -277,8 +277,8 @@ public class ThreadForClient extends Thread{
                 querries.removeUczenByLogin(rc.optString("data0"));
                 break;
             case 4:
-                querries.addUczen(rc.optInt("data0"), rc.optLong("data1"), rc.optLong("data2"),
-                        rc.optLong("data3"));
+                querries.addUczenByLogins(rc.optInt("data0"), rc.optString("data1"), rc.optString("data2"),
+                        rc.optString("data3"));
                 break;
             case 5:
                 querries.removeNauczycielByLogin(rc.optString("data0"));

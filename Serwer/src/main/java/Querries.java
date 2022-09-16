@@ -409,7 +409,7 @@ public class Querries {
         EntityTransaction transaction = entitymanager.getTransaction();
         NauczycieleEntity nauczycieleEntity = findNauczycielByLogin(login);
         transaction.begin();
-        //entitymanager.merge jest potrzebne do usuwania elementow
+        //entitymanager.merge() jest potrzebne do dodawania/usuwania elementow
         nauczycieleEntity = entitymanager.merge(nauczycieleEntity);
         entitymanager.remove(nauczycieleEntity);
         transaction.commit();
