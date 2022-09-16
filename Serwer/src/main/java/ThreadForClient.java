@@ -2,12 +2,9 @@ import Enitities.*;
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import javax.xml.crypto.Data;
 import java.io.*;
 import java.net.Socket;
 import java.sql.Date;
-import java.time.LocalDate;
-import java.util.Iterator;
 import java.util.List;
 
 public class ThreadForClient extends Thread{
@@ -18,6 +15,8 @@ public class ThreadForClient extends Thread{
     private boolean check;
     private boolean wait;
     private String access;
+
+    private String date;
 
     private int chooseCase;
 
@@ -522,8 +521,10 @@ public class ThreadForClient extends Thread{
         try {
             JSONObject pd = new JSONObject();
             Querries querries = new Querries();
+
             List<String> przedmioty = querries.findLekcjePrzedmiotForPrzedmiotByUserLogin(uLogin, day);
             List<Integer> godziny = querries.findLekcjeGodzinaForPrzedmiotByUserLogin(uLogin, day);
+
             pd.put("size",przedmioty.size());
             bw.write(pd.toString());
             bw.newLine();

@@ -657,6 +657,14 @@ public class Querries {
         return query.getResultList();
     }
 
+    public List<String> findLoginyUczniowZKlasy(String klasa) {
+        EntityManager entitymanager = FACTORY.createEntityManager();
+        Query query = (Query) entitymanager.createQuery("SELECT u.uzytkownicyByIdus.login FROM KlasyEntity k " +
+                "JOIN UczniowieEntity u ON k.idk = u.idk WHERE k.nazwa = :klasa ORDER BY u.nrwdzienniku");
+        query.setParameter("klasa", klasa);
+        return query.getResultList();
+    }
+
     public Boolean czyNauczycielUczyKlase(String loginN, String nazwaK) {
         EntityManager entitymanager = FACTORY.createEntityManager();
         Query query1 = (Query) entitymanager.createQuery("SELECT n.idn FROM NauczycieleEntity n JOIN n.uzytkownicyByIdus us WHERE us.login = :login");

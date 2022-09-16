@@ -9,6 +9,7 @@ import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -82,22 +83,6 @@ public class LessonsPlanWindowController implements Initializable {
         thursday.setCellValueFactory(new PropertyValueFactory<MarkTable, String>("thursday"));
         friday.setCellValueFactory(new PropertyValueFactory<MarkTable, String>("friday"));
         table.setItems(list);
-
-        //Integer n;
-        //client = data.getClient();
-        //for(int i=0;i<5;i++){
-          //  serwer = client.getData();
-            //String day = serwer.optString("day");
-            //System.out.println(day);
-            //n = serwer.optInt("size");
-            //for(int j=0;j<n;j++){
-                //serwer = client.getData();
-                //String s = serwer.optString("lesson");
-                //Integer h = serwer.optInt("hour");
-                //System.out.println(s);
-
-          //  }
-        //}
     }
 
 }
