@@ -641,14 +641,6 @@ public class Querries {
         return query.getResultList();
     }
 
-    public List<String> findLoginyUczniowZKlasy(String klasa) {
-        EntityManager entitymanager = FACTORY.createEntityManager();
-        Query query = (Query) entitymanager.createQuery("SELECT u.uzytkownicyByIdus.login FROM KlasyEntity k " +
-                "JOIN UczniowieEntity u ON k.idk = u.idk WHERE k.nazwa = :klasa ORDER BY u.nrwdzienniku");
-        query.setParameter("klasa", klasa);
-        return query.getResultList();
-    }
-
     public List<Integer> findNumeryUczniowZKlasy(String klasa) {
         EntityManager entitymanager = FACTORY.createEntityManager();
         Query query = (Query) entitymanager.createQuery("SELECT u.nrwdzienniku FROM KlasyEntity k " +
