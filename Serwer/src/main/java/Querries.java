@@ -158,37 +158,6 @@ public class Querries {
         addPrzedmiotKlasy(idp, idk);
     }
 
-    public List<FrekwencjaEntity> findFrekwencjaByNameOfSubject(String nameOfSubcject) {
-        EntityManager entityManager = FACTORY.createEntityManager();
-        Query query = (Query) entityManager.createQuery("SELECT f FROM FrekwencjaEntity f JOIN f.przedmiotyByIdp p WHERE p.nazwa = :name");
-        query.setParameter("name", nameOfSubcject);
-        return query.getResultList();
-    }
-
-    public List<FrekwencjaEntity> findFrekwencjaByNrWDzienniku(Integer nrWDzienniku, String nazwaKlasy) {
-        EntityManager entityManager = FACTORY.createEntityManager();
-        Query query = (Query) entityManager.createQuery("SELECT f FROM FrekwencjaEntity f JOIN f.uczniowieByIdu u JOIN u.klasyByIdk k WHERE u.nrwdzienniku = :nr AND k.nazwa = :nazwa");
-        query.setParameter("nr", nrWDzienniku);
-        query.setParameter("nazwa", nazwaKlasy);
-        return query.getResultList();
-    }
-
-    public List<FrekwencjaEntity> findFrekwencjaByLogin(String login, String nazwaKlasy) {
-        EntityManager entityManager = FACTORY.createEntityManager();
-        Query query = (Query) entityManager.createQuery("SELECT f FROM FrekwencjaEntity f JOIN f.uczniowieByIdu u JOIN u.klasyByIdk k JOIN u.uzytkownicyByIdus us WHERE us.login = :nr AND k.nazwa = :nazwa");
-        query.setParameter("nr", login);
-        query.setParameter("nazwa", nazwaKlasy);
-        return query.getResultList();
-    }
-
-    public List<FrekwencjaEntity> findFrekwencjaByImieINazwisko(String Imie, String Nazwisko) {
-        EntityManager entityManager = FACTORY.createEntityManager();
-        Query query = (Query) entityManager.createQuery("SELECT f FROM FrekwencjaEntity f JOIN f.uczniowieByIdu u JOIN u.uzytkownicyByIdus us WHERE us.imie = :imie AND us.nazwisko = :nazwisko");
-        query.setParameter("imie", Imie);
-        query.setParameter("nazwisko", Nazwisko);
-        return query.getResultList();
-    }
-
     public List<UczniowieEntity> findUczniowieByImie(String imie) {
         EntityManager entityManager = FACTORY.createEntityManager();
         Query query = (Query) entityManager.createQuery("SELECT u FROM UczniowieEntity u JOIN u.uzytkownicyByIdus us WHERE us.imie = :imie");
@@ -729,6 +698,39 @@ public class Querries {
         query.setParameter("login", loginN);
         return (String) query.getResultList().get(0);
     }
+
+
+    public List<String> findFrekwencjaRodzajOrderByGodzinaLekcji(String loginU, Date data) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT f.rodzaj FROM FrekwencjaEntity f " +
+                "JOIN UczniowieEntity u ON f.idu = u.idu JOIN LekcjeEntity l ON l.idl = f.idl WHERE l.data = :data " +
+                "AND u.uzytkownicyByIdus.login = :login ORDER BY l.godzina");
+        query.setParameter("data", data);
+        query.setParameter("login", loginU);
+        return query.getResultList();
+    }
+
+    public List<Integer> findFrekwencjaGodzinaOrderByGodzinaLekcji(String loginU, Date data) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT l.godzina FROM FrekwencjaEntity f " +
+                "JOIN UczniowieEntity u ON f.idu = u.idu JOIN LekcjeEntity l ON l.idl = f.idl WHERE l.data = :data " +
+                "AND u.uzytkownicyByIdus.login = :login ORDER BY l.godzina");
+        query.setParameter("data", data);
+        query.setParameter("login", loginU);
+        return query.getResultList();
+    }
+
+    public List<String> findFrekwencjaPrzedmiotOrderByGodzinaLekcji(String loginU, Date data) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT l.nauczycieleprzedmiotowByIdnp.przedmiotyByIdp.nazwa FROM FrekwencjaEntity f " +
+                "JOIN UczniowieEntity u ON f.idu = u.idu JOIN LekcjeEntity l ON l.idl = f.idl WHERE l.data = :data " +
+                "AND u.uzytkownicyByIdus.login = :login ORDER BY l.godzina");
+        query.setParameter("data", data);
+        query.setParameter("login", loginU);
+        return query.getResultList();
+    }
+
+
 
 
 }

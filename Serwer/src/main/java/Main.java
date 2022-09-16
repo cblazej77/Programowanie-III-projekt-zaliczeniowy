@@ -4,6 +4,7 @@ import jakarta.persistence.Persistence;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.sql.Date;
 
 public class Main {
 
@@ -11,7 +12,6 @@ public class Main {
 
     public static void main(String[] args) {
 
-        //Querries querries = new Querries();
 
         System.out.println("Czekam...");
         try{
