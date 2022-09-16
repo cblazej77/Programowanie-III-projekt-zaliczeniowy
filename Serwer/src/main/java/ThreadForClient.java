@@ -501,15 +501,34 @@ public class ThreadForClient extends Thread{
         try {
             Querries querries = new Querries();
             UzytkownicyEntity us = querries.findUzytkownikByLogin(uLogin);
-            //NauczycieleEntity tch = querries.findNauczycielByLogin(uLogin);
-            //KlasyEntity cls = querries.findKlasaByNauczyciel(String.valueOf(tch));
+            List<String> subjects = querries.findPrzedmiotyNauczanePrzezNauczyciela(uLogin);
+            List<String> findClass = querries.findKlaseWychowawcy(uLogin);
+            int countSubjects = subjects.size();
+            int countClass= findClass.size();
             JSONObject pd = new JSONObject();
             pd.put("imie", us.getImie());
             pd.put("nazwisko", us.getNazwisko());
-            //pd.put("klasa", cls.getNazwa());
+            pd.put("countSubjects", countSubjects);
             bw.write(pd.toString());
             bw.newLine();
             bw.flush();
+
+            for(int i=0; i<countSubjects; i++){
+                pd.put("subjects", subjects.get(i));
+                bw.write(pd.toString());
+                bw.newLine();
+                bw.flush();
+            }
+            pd.put("countClass", countClass);
+            bw.write(pd.toString());
+            bw.newLine();
+            bw.flush();
+            for(int i=0; i<countClass; i++){
+                pd.put("Class", findClass.get(i));
+                bw.write(pd.toString());
+                bw.newLine();
+                bw.flush();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {

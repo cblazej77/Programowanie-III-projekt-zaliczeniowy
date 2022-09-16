@@ -173,6 +173,15 @@ public class Querries {
         return query.getResultList();
     }
 
+    public List<FrekwencjaEntity> findFrekwencjaByLoginDate(String login, String nazwaKlasy, Date data){
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT f FROM FrekwencjaEntity f JOIN f.uczniowieByIdu u JOIN u.klasyByIdk k JOIN u.uzytkownicyByIdus us WHERE us.login = :nr AND k.nazwa = :nazwa");
+        query.setParameter("nr", login);
+        query.setParameter("nazwa", nazwaKlasy);
+        query.setParameter("data", data);
+        return query.getResultList();
+    }
+
     public List<FrekwencjaEntity> findFrekwencjaByLogin(String login, String nazwaKlasy) {
         EntityManager entityManager = FACTORY.createEntityManager();
         Query query = (Query) entityManager.createQuery("SELECT f FROM FrekwencjaEntity f JOIN f.uczniowieByIdu u JOIN u.klasyByIdk k JOIN u.uzytkownicyByIdus us WHERE us.login = :nr AND k.nazwa = :nazwa");
@@ -703,6 +712,12 @@ public class Querries {
         query2.setParameter("idn", idn);
         return query2.getResultList();
     }
+    public List<String> findKlaseWychowawcy(String loginN) {
+        EntityManager entitymanager = FACTORY.createEntityManager();
+        Query query = (Query) entitymanager.createQuery("SELECT k.nazwa FROM KlasyEntity k WHERE k.nauczycieleByWychowawca.uzytkownicyByIdus.login = :login");
+        query.setParameter("login", loginN);
+        return query.getResultList();
+    }
 
     public Boolean czyNauczycielUczyKlasePrzedmiotu(String loginN, String nazwaP, String nazwaK) {
         EntityManager entitymanager = FACTORY.createEntityManager();
@@ -723,12 +738,13 @@ public class Querries {
         return !query3.getResultList().isEmpty();
     }
 
-    public String findKlaseWychowawcy(String loginN) {
+    /*public String findKlaseWychowawcy(String loginN) {
         EntityManager entitymanager = FACTORY.createEntityManager();
         Query query = (Query) entitymanager.createQuery("SELECT k.nazwa FROM KlasyEntity k WHERE k.nauczycieleByWychowawca.uzytkownicyByIdus.login = :login");
         query.setParameter("login", loginN);
         return (String) query.getResultList().get(0);
     }
 
+     */
 
 }
