@@ -146,9 +146,7 @@ public class ThreadForClient extends Thread{
                 bw.newLine();
                 bw.flush();
             }
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
     }
@@ -195,9 +193,7 @@ public class ThreadForClient extends Thread{
             bw.write(pd.toString());
             bw.newLine();
             bw.flush();
-        } catch (IOException e) {
-            e.printStackTrace();
-        } catch (JSONException e) {
+        } catch (IOException | JSONException e) {
             e.printStackTrace();
         }
     }
@@ -418,7 +414,7 @@ public class ThreadForClient extends Thread{
         }
     }
 
-    private void nauczycielDane(BufferedWriter bw, String uLogin){
+    /*private void nauczycielDane(BufferedWriter bw, String uLogin){
         try {
             Querries querries = new Querries();
             UzytkownicyEntity us = querries.findUzytkownikByLogin(uLogin);
@@ -455,7 +451,52 @@ public class ThreadForClient extends Thread{
         } catch (JSONException e) {
             throw new RuntimeException(e);
         }
+    }*/
+
+    private void nauczycielDane(BufferedWriter bw, String uLogin){
+        try {
+            Querries querries = new Querries();
+            UzytkownicyEntity us = querries.findUzytkownikByLogin(uLogin);
+            List<String> subjects = null;
+            int countSubjects = 0;
+            if(querries.findPrzedmiotyNauczanePrzezNauczyciela(uLogin)!=null){
+                subjects = querries.findPrzedmiotyNauczanePrzezNauczyciela(uLogin);
+                countSubjects = subjects.size();
+            }
+            List<String> findClass = querries.findKlasyWychowawcy(uLogin);
+            System.out.println(countSubjects);
+            int countClass= findClass.size();
+            JSONObject pd = new JSONObject();
+            pd.put("imie", us.getImie());
+            pd.put("nazwisko", us.getNazwisko());
+            pd.put("countSubjects", countSubjects);
+            bw.write(pd.toString());
+            bw.newLine();
+            bw.flush();
+
+            for(int i=0; i<countSubjects; i++){
+                pd.put("subjects", subjects.get(i));
+                bw.write(pd.toString());
+                bw.newLine();
+                bw.flush();
+            }
+            pd.put("countClasses", countClass);
+            bw.write(pd.toString());
+            bw.newLine();
+            bw.flush();
+            for(int i=0; i<countClass; i++){
+                pd.put("class", findClass.get(i));
+                bw.write(pd.toString());
+                bw.newLine();
+                bw.flush();
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
     }
+
     private void FrekwencjaDane(BufferedWriter bw, Date day){
         try {
             JSONObject pd = new JSONObject();

@@ -22,10 +22,6 @@ public class teacherWindowController implements Initializable {
 
     @FXML
     private ListView<String> subjectsListView;
-    //@FXML
-    //private Text Tclass;
-    //@FXML
-    //private Text Tsubjects;
 
     private Client client;
     private JSONObject serwer;
@@ -41,25 +37,25 @@ public class teacherWindowController implements Initializable {
         classList = FXCollections.observableArrayList();
         Tname.setText(serwer.optString("imie"));
         Tsurname.setText(serwer.optString("nazwisko"));
-        loadDataLessions();
-        loadDataClass();
+        loadDataLessons();
+        loadDataClasses();
     }
 
-    private void loadDataClass() {
+    private void loadDataClasses() {
         serwer = client.getData();
-        int size = serwer.optInt("countClass");
+        int size = serwer.optInt("countClasses");
         classList.removeAll(classList);
         String findClass;
         for(int i=0; i<size; i++){
             serwer = client.getData();
-            findClass = serwer.optString("Class");
+            findClass = serwer.optString("class");
             classList.add(findClass);
         }
         if(size == 0) classList.add("Brak przypisanych klass");
         classListView.getItems().addAll(classList);
     }
 
-    private void loadDataLessions() {
+    private void loadDataLessons() {
         int size = serwer.optInt("countSubjects");
         subjectsList.removeAll(subjectsList);
         String subjects;

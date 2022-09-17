@@ -33,7 +33,7 @@
          </top>
          <center>
             <TabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="530.0" prefWidth="805.0" tabClosingPolicy="UNAVAILABLE" BorderPane.alignment="CENTER">
-              <tabs>
+               <tabs>
                   <Tab text="Przenieś ucznia">
                      <content>
                         <AnchorPane>
@@ -74,9 +74,9 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-                <Tab text="Użytkownicy">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                  <Tab text="Użytkownicy">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -180,11 +180,11 @@
                               </SplitPane>
                            </children>
                         </AnchorPane>
-                  </content>
-                </Tab>
-                <Tab text="Uczniowie">
-                  <content>
-                    <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     </content>
+                  </Tab>
+                  <Tab text="Uczniowie">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
                               <SplitPane dividerPositions="0.29797979797979796" prefHeight="502.0" prefWidth="835.0">
                                  <items>
@@ -277,8 +277,8 @@
                               </SplitPane>
                            </children>
                         </AnchorPane>
-                  </content>
-                </Tab>
+                     </content>
+                  </Tab>
                   <Tab text="Nauczyciele">
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
@@ -1100,7 +1100,7 @@
                         </AnchorPane>
                      </content>
                   </Tab>
-              </tabs>
+               </tabs>
             </TabPane>
          </center>
       </BorderPane>

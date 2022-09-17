@@ -194,7 +194,7 @@ public class frequencyTWindowController implements Initializable {
 
     private void loadHours(){//laduje do checkBox godziny lekcyjne
         hours.removeAll(hours);
-        for(int i = 0; i< 7; i++) hours.add(i);
+        for(int i = 0; i< 7; i++) hours.add(i+1);
         hoursCheckBox.setItems(hours);
     }
     private void loadSubject() {//laduje do checkBox przedmioty

@@ -6,6 +6,7 @@ import jakarta.persistence.Persistence;
 import org.hibernate.query.Query;
 
 import java.sql.Date;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -707,12 +708,19 @@ public class Querries {
         EntityManager entitymanager = FACTORY.createEntityManager();
         Query query1 = (Query) entitymanager.createQuery("SELECT n.idn FROM NauczycieleEntity n JOIN n.uzytkownicyByIdus us WHERE us.login = :login");
         query1.setParameter("login", loginN);
-        Long idn = (Long) query1.getResultList().get(0);
-        Query query2 = (Query) entitymanager.createQuery("SELECT np.przedmiotyByIdp.nazwa FROM NauczycieleprzedmiotowEntity np WHERE np.idn = :idn");
-        query2.setParameter("idn", idn);
-        return query2.getResultList();
+        if(query1.getResultList().size()>0){
+            Long idn = (Long) query1.getResultList().get(0);
+            Query query2 = (Query) entitymanager.createQuery("SELECT np.przedmiotyByIdp.nazwa FROM NauczycieleprzedmiotowEntity np WHERE np.idn = :idn");
+            query2.setParameter("idn", idn);
+            System.out.println(query2.getResultList());
+            return query2.getResultList();
+        }
+        else{
+            return query1.getResultList();
+        }
     }
-    public List<String> findKlaseWychowawcy(String loginN) {
+
+    public List<String> findKlasyWychowawcy(String loginN) {
         EntityManager entitymanager = FACTORY.createEntityManager();
         Query query = (Query) entitymanager.createQuery("SELECT k.nazwa FROM KlasyEntity k WHERE k.nauczycieleByWychowawca.uzytkownicyByIdus.login = :login");
         query.setParameter("login", loginN);
@@ -743,9 +751,8 @@ public class Querries {
         Query query = (Query) entitymanager.createQuery("SELECT k.nazwa FROM KlasyEntity k WHERE k.nauczycieleByWychowawca.uzytkownicyByIdus.login = :login");
         query.setParameter("login", loginN);
         return (String) query.getResultList().get(0);
-    }
+    }*/
 
-     */
 
     public List<String> findFrekwencjaRodzajOrderByGodzinaLekcji(String loginU, Date data) {
         EntityManager entityManager = FACTORY.createEntityManager();
