@@ -56,7 +56,7 @@ public class AppWindowController implements Initializable {
 
     @FXML
     private void frekwencjaButton(ActionEvent event) throws JSONException, IOException{
-        //client.sendCase(1);
+        client.sendCase(1);
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPane("frequencyWindow");
         mainPane.setCenter(view);

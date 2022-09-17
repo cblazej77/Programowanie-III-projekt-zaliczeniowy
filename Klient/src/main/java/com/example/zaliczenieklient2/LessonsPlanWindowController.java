@@ -21,22 +21,22 @@ public class LessonsPlanWindowController implements Initializable {
     private TableView<LessonsTable> table;
 
     @FXML
-    private TableColumn<MarkTable, String> hour;
+    private TableColumn<LessonsTable, String> hour;
 
     @FXML
-    private TableColumn<MarkTable, String> monday;
+    private TableColumn<LessonsTable, String> monday;
 
     @FXML
-    private TableColumn<MarkTable, String> thesday;
+    private TableColumn<LessonsTable, String> thesday;
 
     @FXML
-    private TableColumn<MarkTable, String> wednesday;
+    private TableColumn<LessonsTable, String> wednesday;
 
     @FXML
-    private TableColumn<MarkTable, String> thursday;
+    private TableColumn<LessonsTable, String> thursday;
 
     @FXML
-    private TableColumn<MarkTable, String> friday;
+    private TableColumn<LessonsTable, String> friday;
 
     private Client client;
     private JSONObject serwer;
@@ -83,12 +83,12 @@ public class LessonsPlanWindowController implements Initializable {
         for(int i=0; i<7; i++){
             list.addAll(new LessonsTable(hours[i], lessions[0][i], lessions[1][i], lessions[2][i], lessions[3][i], lessions[4][i]));
         }
-        hour.setCellValueFactory(new PropertyValueFactory<MarkTable, String>("hour"));
-        monday.setCellValueFactory(new PropertyValueFactory<MarkTable, String>("monday"));
-        thesday.setCellValueFactory(new PropertyValueFactory<MarkTable, String>("thesday"));
-        wednesday.setCellValueFactory(new PropertyValueFactory<MarkTable, String>("wednesday"));
-        thursday.setCellValueFactory(new PropertyValueFactory<MarkTable, String>("thursday"));
-        friday.setCellValueFactory(new PropertyValueFactory<MarkTable, String>("friday"));
+        hour.setCellValueFactory(new PropertyValueFactory<LessonsTable, String>("hour"));
+        monday.setCellValueFactory(new PropertyValueFactory<LessonsTable, String>("monday"));
+        thesday.setCellValueFactory(new PropertyValueFactory<LessonsTable, String>("thesday"));
+        wednesday.setCellValueFactory(new PropertyValueFactory<LessonsTable, String>("wednesday"));
+        thursday.setCellValueFactory(new PropertyValueFactory<LessonsTable, String>("thursday"));
+        friday.setCellValueFactory(new PropertyValueFactory<LessonsTable, String>("friday"));
         table.setItems(list);
 
     }

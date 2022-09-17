@@ -751,7 +751,7 @@ public class Querries {
         EntityManager entityManager = FACTORY.createEntityManager();
         Query query = (Query) entityManager.createQuery("SELECT f.rodzaj FROM FrekwencjaEntity f " +
                 "JOIN UczniowieEntity u ON f.idu = u.idu JOIN LekcjeEntity l ON l.idl = f.idl WHERE l.data = :data " +
-                "AND u.uzytkownicyByIdus.login = :login ORDER BY l.godzina");
+                "AND u.uzytkownicyByIdus.login = :login");
         query.setParameter("data", data);
         query.setParameter("login", loginU);
         return query.getResultList();

@@ -5,13 +5,16 @@ import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.sql.Date;
+import java.util.List;
 
 public class Main {
 
     private static final EntityManagerFactory FACTORY = Persistence.createEntityManagerFactory("MyUnit");
 
     public static void main(String[] args) {
-
+        //Querries querries = new Querries();
+        //List<String> frekwencja = querries.findFrekwencjaPrzedmiotOrderByGodzinaLekcji("KD001", Date.valueOf("01.01.2022"));
+        //System.out.println(frekwencja);
 
         System.out.println("Czekam...");
         try{
