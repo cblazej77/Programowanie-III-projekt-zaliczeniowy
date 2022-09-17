@@ -95,7 +95,7 @@ public class AppWindowController implements Initializable {
 
     @FXML
     private void ocenyTButton(ActionEvent event) throws JSONException, IOException {
-        client.sendCase(5);
+        //client.sendCase(5);
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPane("marksTWindow");
         mainPane.setCenter(view);

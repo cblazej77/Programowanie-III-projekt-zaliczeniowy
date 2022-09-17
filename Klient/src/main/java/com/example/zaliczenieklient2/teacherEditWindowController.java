@@ -107,25 +107,25 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     private TextField addLessonSubjectText;
-    
+
     @FXML
     private TextField removeLessonDateText;
 
     @FXML
     private TextField removeLessonHourText;
-    
+
     @FXML
     private TextField removeLessonClassText;
-    
+
     @FXML
     private TextField removeLessonTeacherLoginText;
-    
+
     @FXML
     private TextField removeLessonSubjectText;
-    
+
     @FXML
     private TextField removeUserLoginText;
-    
+
     @FXML
     private TextField removeFrequencyDateText;
 
@@ -242,7 +242,8 @@ public class teacherEditWindowController implements Initializable {
         String uName = addUserFirstNameText.getText();
         String uSurname = addUserSurnameText.getText();
         String uAccess = addUserAccessText.getText();
-        if(uLogin.length()>0&&uPassword.length()>0&&uName.length()>0&&uSurname.length()>0&&uAccess.length()>0){
+        if(uLogin.length() > 0 && uPassword.length() > 0 && uName.length() > 0 && uSurname.length() > 0 &&
+                uAccess.length() > 0){
             Data.add(uLogin);
             Data.add(uPassword);
             Data.add(uName);

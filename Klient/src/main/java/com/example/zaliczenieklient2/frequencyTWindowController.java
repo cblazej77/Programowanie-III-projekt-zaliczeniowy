@@ -223,14 +223,14 @@ public class frequencyTWindowController implements Initializable {
         classCheckBox.setItems(clasS);
     }
 
-    boolean checkCheckBoxes() {//sprawdza czy zaznaczylismy jeden stan obecnosci i kazdego ucznia
+    boolean checkCheckBoxes() { //sprawdza czy zaznaczylismy jeden stan obecnosci i kazdego ucznia
         for (FrequencyTable bean : list) {
             int suma = 0;
             if (bean.getExempt().isSelected()) suma++;
             if (bean.getPresents().isSelected()) suma++;
             if (bean.getAbsent().isSelected()) suma++;
             if (suma != 1) {
-                errorFrequency.setText("Źle zaznaczona frekfencja");
+                errorFrequency.setText("Źle zaznaczona frekwencja");
                 return false;
             } else errorFrequency.setText("");
         }

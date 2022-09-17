@@ -308,8 +308,8 @@ public class ThreadForClient extends Thread{
                         rc.optString("data2"), rc.optString("data3"));
                 break;
             case 10:
-                querries.addOcena(rc.optString("data0"), (float) rc.optDouble("data1"), rc.optLong("data2"),
-                        rc.optLong("data3"));
+                querries.addOcenaForUczen(rc.optString("data0"), (float) rc.optDouble("data1"), rc.optInt("data2"),
+                        rc.optString("data3"), rc.optString("data4"));
                 break;
             case 11:
                 querries.removeLekcja(rc.optInt("data0"), rc.optString("data1"), rc.optString("data2"),
@@ -464,7 +464,6 @@ public class ThreadForClient extends Thread{
                 countSubjects = subjects.size();
             }
             List<String> findClass = querries.findKlasyWychowawcy(uLogin);
-            System.out.println(countSubjects);
             int countClass= findClass.size();
             JSONObject pd = new JSONObject();
             pd.put("imie", us.getImie());

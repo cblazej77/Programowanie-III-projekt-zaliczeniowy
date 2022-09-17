@@ -49,7 +49,7 @@ public class teacherWindowController implements Initializable {
         for(int i=0; i<size; i++){
             serwer = client.getData();
             findClass = serwer.optString("class");
-            classList.add(findClass);
+            classList.add(findClass.substring(0,2));
         }
         if(size == 0) classList.add("Brak przypisanych klass");
         classListView.getItems().addAll(classList);
@@ -62,7 +62,12 @@ public class teacherWindowController implements Initializable {
         for(int i=0; i<size; i++){
             serwer = client.getData();
             subjects = serwer.optString("subjects");
-            subjectsList.add(subjects);
+            if(subjects.startsWith("Jezyk")){
+                subjectsList.add("Jezyk " + subjects.substring(5));
+            }
+            else{
+                subjectsList.add(subjects);
+            }
         }
         if(size == 0) subjectsList.add("Brak przypisanych przedmiotów");
         subjectsListView.getItems().addAll(subjectsList);

@@ -712,7 +712,6 @@ public class Querries {
             Long idn = (Long) query1.getResultList().get(0);
             Query query2 = (Query) entitymanager.createQuery("SELECT np.przedmiotyByIdp.nazwa FROM NauczycieleprzedmiotowEntity np WHERE np.idn = :idn");
             query2.setParameter("idn", idn);
-            System.out.println(query2.getResultList());
             return query2.getResultList();
         }
         else{
