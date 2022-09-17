@@ -61,7 +61,6 @@ public class ThreadForClient extends Thread{
                                 }
                             }
                             else if(chooseCase == 3) uczenDane(bw, uLogin);
-
                         }
                     }
                 }else{
@@ -76,6 +75,7 @@ public class ThreadForClient extends Thread{
                             if(chooseCase == 10) {sendAllClass(bw, br);}//wysyla liste osob w klasie
                             if(chooseCase == 11) {checkClasses(br, bw);}//sprawdza czy dany nauczyciel uczy wybranej klasy
                             if(chooseCase == 12) {addFrequency(br);}//wstawia frekfencje dla danego ucznia
+                            else if(chooseCase == 13) teacherLogin(bw);
                         }
                     }
                 }
@@ -84,6 +84,14 @@ public class ThreadForClient extends Thread{
 
         } catch (IOException | JSONException e){throw new RuntimeException(e);
         }
+    }
+
+    private void teacherLogin(BufferedWriter bw) throws JSONException, IOException {
+        JSONObject pd = new JSONObject();
+        pd.put("loginTeacher", uLogin);
+        bw.write(pd.toString());
+        bw.newLine();
+        bw.flush();
     }
 
     private void addFrequency(BufferedReader br){

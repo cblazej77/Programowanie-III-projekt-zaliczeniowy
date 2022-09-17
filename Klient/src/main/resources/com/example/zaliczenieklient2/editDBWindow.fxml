@@ -63,7 +63,7 @@
                                           <Insets />
                                        </opaqueInsets>
                                     </TextField>
-                                    <TextField fx:id="transerNewClassName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                                    <TextField fx:id="transferNewClassName" GridPane.columnIndex="1" GridPane.rowIndex="1" />
                                  </children>
                                  <padding>
                                     <Insets left="20.0" right="20.0" />

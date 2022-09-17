@@ -158,7 +158,7 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     private TextField addFrequencyClassText;
-    
+
     @FXML
     private TextField transferNewClassName;
 
@@ -185,6 +185,7 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     private TextField transferStudentLogin;
+
     private Client client;
     private JSONObject serwer;
 
@@ -194,10 +195,20 @@ public class teacherEditWindowController implements Initializable {
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         client = data.getClient();
+        try {
+            client.sendCase(13);
+            serwer = client.getData();
+            loginTeacher = serwer.optString("loginTeacher");
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         //serwer = client.getData();
         //odbior danych
         //idClass //czy nauczyciel opiekuje się tylko jedną klasą?
-        loginTeacher="";
+        //loginTeacher="";
         //jeszcze jakas lista/vektor czego uczy dany nauczyciel
         //druga lista/vektor jakie klasy uczy nauczyciel
     }
@@ -255,7 +266,8 @@ public class teacherEditWindowController implements Initializable {
     @FXML
     public void addStudentButton(ActionEvent event) throws JSONException, IOException {
         List<String> Data=null;
-        if(addStudentNumberText.getText().length()>0&&addStudentClassNameText.getText().length()>0&&addStudentUserLoginText.getText().length()>0&&addStudentParentLoginText.getText().length()>0){
+        if(addStudentNumberText.getText().length() > 0 && addStudentClassNameText.getText().length() > 0 &&
+                addStudentUserLoginText.getText().length() > 0 && addStudentParentLoginText.getText().length() > 0){
             Data.add(addStudentNumberText.getText());
             Data.add(addStudentClassNameText.getText());
             Data.add(addStudentUserLoginText.getText());
@@ -308,7 +320,9 @@ public class teacherEditWindowController implements Initializable {
     @FXML
     void removeMarkByID(ActionEvent event) throws JSONException, IOException {
         List<String> Data=null;
-        if(removeMarkNameText.getText().length()>0 && removeMarkValueText.getText().length()>0 && removeMarkUloginText.getText().length()>0 && removeMarkSubNameText.getText().length() >0 && removeMarkTeacherLoginText1.getText().length()> 0) {
+        if(removeMarkNameText.getText().length() > 0 && removeMarkValueText.getText().length() > 0 &&
+                removeMarkUloginText.getText().length() > 0 && removeMarkSubNameText.getText().length() > 0 &&
+                removeMarkTeacherLoginText1.getText().length() > 0) {
             if(loginTeacher.equals(removeMarkTeacherLoginText1.getText())) {//sprawdzic czy nauczyciel jest tym od tego przedmiotu
                 Data.add(removeMarkNameText.getText());
                 Data.add(removeMarkValueText.getText());
