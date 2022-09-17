@@ -46,7 +46,7 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="49.0" prefWidth="805.0" spacing="30.0">
                            <children>
-                              <ChoiceBox fx:id="subjectCheckBox" prefWidth="150.0" />
+                              <ChoiceBox fx:id="subjectCheckBox" onMouseExited="#clickSubjectBox" prefWidth="150.0" />
                               <Button mnemonicParsing="false" onAction="#clickSubjectBox" text="check" />
                               <DatePicker fx:id="frequencyDatePicker" />
                               <ChoiceBox fx:id="classCheckBox" prefWidth="150.0" />

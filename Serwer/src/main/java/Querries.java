@@ -158,6 +158,46 @@ public class Querries {
         addPrzedmiotKlasy(idp, idk);
     }
 
+    public List<FrekwencjaEntity> findFrekwencjaByNameOfSubject(String nameOfSubcject) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT f FROM FrekwencjaEntity f JOIN f.przedmiotyByIdp p WHERE p.nazwa = :name");
+        query.setParameter("name", nameOfSubcject);
+        return query.getResultList();
+    }
+
+    public List<FrekwencjaEntity> findFrekwencjaByNrWDzienniku(Integer nrWDzienniku, String nazwaKlasy) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT f FROM FrekwencjaEntity f JOIN f.uczniowieByIdu u JOIN u.klasyByIdk k WHERE u.nrwdzienniku = :nr AND k.nazwa = :nazwa");
+        query.setParameter("nr", nrWDzienniku);
+        query.setParameter("nazwa", nazwaKlasy);
+        return query.getResultList();
+    }
+
+    public List<FrekwencjaEntity> findFrekwencjaByLoginDate(String login, String nazwaKlasy, Date data){
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT f FROM FrekwencjaEntity f JOIN f.uczniowieByIdu u JOIN u.klasyByIdk k JOIN u.uzytkownicyByIdus us WHERE us.login = :nr AND k.nazwa = :nazwa");
+        query.setParameter("nr", login);
+        query.setParameter("nazwa", nazwaKlasy);
+        query.setParameter("data", data);
+        return query.getResultList();
+    }
+
+    public List<FrekwencjaEntity> findFrekwencjaByLogin(String login, String nazwaKlasy) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT f FROM FrekwencjaEntity f JOIN f.uczniowieByIdu u JOIN u.klasyByIdk k JOIN u.uzytkownicyByIdus us WHERE us.login = :nr AND k.nazwa = :nazwa");
+        query.setParameter("nr", login);
+        query.setParameter("nazwa", nazwaKlasy);
+        return query.getResultList();
+    }
+
+    public List<FrekwencjaEntity> findFrekwencjaByImieINazwisko(String Imie, String Nazwisko) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT f FROM FrekwencjaEntity f JOIN f.uczniowieByIdu u JOIN u.uzytkownicyByIdus us WHERE us.imie = :imie AND us.nazwisko = :nazwisko");
+        query.setParameter("imie", Imie);
+        query.setParameter("nazwisko", Nazwisko);
+        return query.getResultList();
+    }
+
     public List<UczniowieEntity> findUczniowieByImie(String imie) {
         EntityManager entityManager = FACTORY.createEntityManager();
         Query query = (Query) entityManager.createQuery("SELECT u FROM UczniowieEntity u JOIN u.uzytkownicyByIdus us WHERE us.imie = :imie");
@@ -672,6 +712,12 @@ public class Querries {
         query2.setParameter("idn", idn);
         return query2.getResultList();
     }
+    public List<String> findKlaseWychowawcy(String loginN) {
+        EntityManager entitymanager = FACTORY.createEntityManager();
+        Query query = (Query) entitymanager.createQuery("SELECT k.nazwa FROM KlasyEntity k WHERE k.nauczycieleByWychowawca.uzytkownicyByIdus.login = :login");
+        query.setParameter("login", loginN);
+        return query.getResultList();
+    }
 
     public Boolean czyNauczycielUczyKlasePrzedmiotu(String loginN, String nazwaP, String nazwaK) {
         EntityManager entitymanager = FACTORY.createEntityManager();
@@ -692,19 +738,20 @@ public class Querries {
         return !query3.getResultList().isEmpty();
     }
 
-    public String findKlaseWychowawcy(String loginN) {
+    /*public String findKlaseWychowawcy(String loginN) {
         EntityManager entitymanager = FACTORY.createEntityManager();
         Query query = (Query) entitymanager.createQuery("SELECT k.nazwa FROM KlasyEntity k WHERE k.nauczycieleByWychowawca.uzytkownicyByIdus.login = :login");
         query.setParameter("login", loginN);
         return (String) query.getResultList().get(0);
     }
 
+     */
 
     public List<String> findFrekwencjaRodzajOrderByGodzinaLekcji(String loginU, Date data) {
         EntityManager entityManager = FACTORY.createEntityManager();
         Query query = (Query) entityManager.createQuery("SELECT f.rodzaj FROM FrekwencjaEntity f " +
                 "JOIN UczniowieEntity u ON f.idu = u.idu JOIN LekcjeEntity l ON l.idl = f.idl WHERE l.data = :data " +
-                "AND u.uzytkownicyByIdus.login = :login ORDER BY l.godzina");
+                "AND u.uzytkownicyByIdus.login = :login");
         query.setParameter("data", data);
         query.setParameter("login", loginU);
         return query.getResultList();

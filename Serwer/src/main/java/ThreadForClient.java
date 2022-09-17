@@ -53,6 +53,13 @@ public class ThreadForClient extends Thread{
                                 sendMark(bw, "JezykPolski");
                                 //sendMark(bw, "Muzyka");
                             }
+                            else if(chooseCase == 1){
+                                for(int i=0; i<5; i++){
+                                    klient = new JSONObject(br.readLine());
+                                    Date data = Date.valueOf(klient.optString("data"));
+                                    FrekwencjaDane(bw, data);
+                                }
+                            }
                             else if(chooseCase == 2) {
                                 for(int i=0; i<5; i++){
                                     klient = new JSONObject(br.readLine());
@@ -415,19 +422,58 @@ public class ThreadForClient extends Thread{
         try {
             Querries querries = new Querries();
             UzytkownicyEntity us = querries.findUzytkownikByLogin(uLogin);
-            //NauczycieleEntity tch = querries.findNauczycielByLogin(uLogin);
-            //KlasyEntity cls = querries.findKlasaByNauczyciel(String.valueOf(tch));
+            List<String> subjects = querries.findPrzedmiotyNauczanePrzezNauczyciela(uLogin);
+            List<String> findClass = querries.findKlaseWychowawcy(uLogin);
+            int countSubjects = subjects.size();
+            int countClass= findClass.size();
             JSONObject pd = new JSONObject();
             pd.put("imie", us.getImie());
             pd.put("nazwisko", us.getNazwisko());
-            //pd.put("klasa", cls.getNazwa());
+            pd.put("countSubjects", countSubjects);
             bw.write(pd.toString());
             bw.newLine();
             bw.flush();
+
+            for(int i=0; i<countSubjects; i++){
+                pd.put("subjects", subjects.get(i));
+                bw.write(pd.toString());
+                bw.newLine();
+                bw.flush();
+            }
+            pd.put("countClass", countClass);
+            bw.write(pd.toString());
+            bw.newLine();
+            bw.flush();
+            for(int i=0; i<countClass; i++){
+                pd.put("Class", findClass.get(i));
+                bw.write(pd.toString());
+                bw.newLine();
+                bw.flush();
+            }
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
             throw new RuntimeException(e);
+        }
+    }
+    private void FrekwencjaDane(BufferedWriter bw, Date day){
+        try {
+            JSONObject pd = new JSONObject();
+            Querries querries = new Querries();
+
+            List<String> frekwencja = querries.findFrekwencjaRodzajOrderByGodzinaLekcji(uLogin, day);
+            pd.put("size", frekwencja.size());
+            bw.write(pd.toString());
+            bw.newLine();
+            bw.flush();
+            for(int i=0;i<frekwencja.size();i++){
+                pd.put("freqwency",frekwencja.get(i));
+                bw.write(pd.toString());
+                bw.newLine();
+                bw.flush();
+            }
+        } catch (IOException | JSONException e) {
+            e.printStackTrace();
         }
     }
 
@@ -437,7 +483,7 @@ public class ThreadForClient extends Thread{
             Querries querries = new Querries();
 
             List<String> przedmioty = querries.findLekcjePrzedmiotForPrzedmiotByUserLogin(uLogin, day);
-            List<Integer> godziny = querries.findLekcjeGodzinaForPrzedmiotByUserLogin(uLogin, day);
+            //List<Integer> godziny = querries.findLekcjeGodzinaForPrzedmiotByUserLogin(uLogin, day);
 
             pd.put("size",przedmioty.size());
             bw.write(pd.toString());
@@ -445,7 +491,7 @@ public class ThreadForClient extends Thread{
             bw.flush();
 
             for(int i=0;i<przedmioty.size();i++){
-                pd.put("hour",godziny.get(i));
+                //pd.put("hour",godziny.get(i));
                 pd.put("lesson",przedmioty.get(i));
                 bw.write(pd.toString());
                 bw.newLine();
