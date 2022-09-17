@@ -12,7 +12,6 @@
     <children>
         <BorderPane prefHeight="590.0" prefWidth="835.0">
             <top>
-                <Pane prefHeight="60.0" prefWidth="600.0" style="-fx-background-color: #23aea3;" BorderPane.alignment="CENTER">
                 <Pane prefHeight="53.0" prefWidth="835.0" style="-fx-background-color: #23aea3;" BorderPane.alignment="CENTER">
                     <children>
                         <Text fill="WHITE" layoutX="353.0" layoutY="41.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Plan Lekcji">
