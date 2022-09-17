@@ -70,12 +70,6 @@ public class teacherEditWindowController implements Initializable {
     private TextField addMarkValueText;
 
     @FXML
-    private TextField addMarkSubNameText;
-
-    @FXML
-    private TextField addMarkULoginText;
-
-    @FXML
     private TextField removeMarkNameText;
 
     @FXML
@@ -169,6 +163,27 @@ public class teacherEditWindowController implements Initializable {
     private TextField transferNewClassName;
 
     @FXML
+    private TextField editTeachersOfSubjectsTLoginText;
+
+    @FXML
+    private TextField editTeachersOfSubjectsSubjectNameText;
+
+    @FXML
+    private TextField editSubjectsOfClassesSubjectNameText;
+
+    @FXML
+    private TextField editSubjectsOfClassesClassNameText;
+
+    @FXML
+    private TextField addMarkDiaryNumberText;
+
+    @FXML
+    private TextField addMarkClassNameText;
+
+    @FXML
+    private TextField addMarkSubjectNameText;
+
+    @FXML
     private TextField transferStudentLogin;
     private Client client;
     private JSONObject serwer;
@@ -188,9 +203,20 @@ public class teacherEditWindowController implements Initializable {
     }
 
     @FXML
+    void transferStudentButton(ActionEvent event) throws JSONException, IOException {
+        List<String> Data = null;
+        if(transferStudentLogin.getText().length() > 0 && transferNewClassName.getText().length() > 0){
+            Data.add(transferStudentLogin.getText());
+            Data.add(transferNewClassName.getText());
+            client.sendCase(6);
+            client.SendEditSignal(Data, 0, 2);
+        }
+    }
+
+    @FXML
     void removeUserByLoginButton(ActionEvent event) throws JSONException, IOException {
-        List<String> Data=null;
-        if(removeUserLoginText.getText().length()>0){
+        List<String> Data = null;
+        if(removeUserLoginText.getText().length() > 0){
             Data.add(removeUserLoginText.getText());
             client.sendCase(6);
             client.SendEditSignal(Data, 1, 1);
@@ -297,15 +323,16 @@ public class teacherEditWindowController implements Initializable {
     @FXML
     void addMark(ActionEvent event) throws JSONException, IOException {
         List<String> Data=null;
-        if(addMarkNameText.getText().length()>0&&addMarkValueText.getText().length()>0&&addMarkULoginText.getText().length()>0&&addMarkSubNameText.getText().length()>0) {
-            if(loginTeacher.equals(removeMarkTeacherLoginText1.getText())) {//sprawdzic czy nauczyciel jest tym od tego przedmiotu
-                Data.add(addMarkNameText.getText());
-                Data.add(addMarkValueText.getText());
-                Data.add(addMarkULoginText.getText());
-                Data.add(addMarkSubNameText.getText());
-                client.sendCase(6);
-                client.SendEditSignal(Data, 10,4);
-            }
+        if(addMarkNameText.getText().length() > 0 && addMarkValueText.getText().length() > 0 &&
+                addMarkDiaryNumberText.getText().length() > 0 && addMarkClassNameText.getText().length() > 0 &&
+                addMarkSubjectNameText.getText().length() > 0) {
+            Data.add(addMarkNameText.getText());
+            Data.add(addMarkValueText.getText());
+            Data.add(addMarkDiaryNumberText.getText());
+            Data.add(addMarkClassNameText.getText());
+            Data.add(addMarkSubjectNameText.getText());
+            client.sendCase(6);
+            client.SendEditSignal(Data, 10,5);
         }
     }
 
@@ -366,7 +393,7 @@ public class teacherEditWindowController implements Initializable {
     }
 
     @FXML
-    void removeTurnoutByID(ActionEvent event) throws JSONException, IOException {
+    void removeFrequency(ActionEvent event) throws JSONException, IOException {
         List<String> Data = null;
         if(removeFrequencySubNameText.getText().length() > 0 && removeFrequencyULoginText.getText().length() > 0 &&
                 removeFrequencyDateText.getText().length() > 0 && removeFrequencyHourText.getText().length() > 0 &&
@@ -382,7 +409,7 @@ public class teacherEditWindowController implements Initializable {
     }
 
     @FXML
-    void addTurnout(ActionEvent event) throws JSONException, IOException {
+    void addFrequency(ActionEvent event) throws JSONException, IOException {
         List<String> Data = null;
         if(addFrequencySubNameText.getText().length() > 0 && addFrequencyStudentLoginText.getText().length() > 0 &&
                 addFrequencyDateText.getText().length() > 0 && addFrequencyHourText.getText().length() > 0 &&
@@ -396,6 +423,54 @@ public class teacherEditWindowController implements Initializable {
             Data.add(loginTeacher);
             client.sendCase(6);
             client.SendEditSignal(Data, 16, 7);
+        }
+    }
+
+    @FXML
+    void removeTeacherOfSubject(ActionEvent event) throws JSONException, IOException {
+        List<String> Data = null;
+        if(editTeachersOfSubjectsTLoginText.getText().length() > 0 &&
+                editTeachersOfSubjectsSubjectNameText.getText().length() > 0){
+            Data.add(editTeachersOfSubjectsTLoginText.getText());
+            Data.add(editTeachersOfSubjectsSubjectNameText.getText());
+            client.sendCase(6);
+            client.SendEditSignal(Data, 17, 2);
+        }
+    }
+
+    @FXML
+    void addTeacherOfSubject(ActionEvent event) throws JSONException, IOException {
+        List<String> Data = null;
+        if(editTeachersOfSubjectsTLoginText.getText().length() > 0 &&
+                editTeachersOfSubjectsSubjectNameText.getText().length() > 0){
+            Data.add(editTeachersOfSubjectsTLoginText.getText());
+            Data.add(editTeachersOfSubjectsSubjectNameText.getText());
+            client.sendCase(6);
+            client.SendEditSignal(Data, 18, 2);
+        }
+    }
+
+    @FXML
+    void removeSubjectOfClass(ActionEvent event) throws JSONException, IOException {
+        List<String> Data = null;
+        if(editSubjectsOfClassesSubjectNameText.getText().length() > 0 &&
+                editSubjectsOfClassesClassNameText.getText().length() > 0){
+            Data.add(editSubjectsOfClassesSubjectNameText.getText());
+            Data.add(editSubjectsOfClassesClassNameText.getText());
+            client.sendCase(6);
+            client.SendEditSignal(Data, 19, 2);
+        }
+    }
+
+    @FXML
+    void addSubjectOfClass(ActionEvent event) throws JSONException, IOException {
+        List<String> Data = null;
+        if(editSubjectsOfClassesSubjectNameText.getText().length() > 0 &&
+                editSubjectsOfClassesClassNameText.getText().length() > 0){
+            Data.add(editSubjectsOfClassesSubjectNameText.getText());
+            Data.add(editSubjectsOfClassesClassNameText.getText());
+            client.sendCase(6);
+            client.SendEditSignal(Data, 20, 2);
         }
     }
 }

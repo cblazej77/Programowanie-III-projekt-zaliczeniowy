@@ -449,7 +449,7 @@ public class Querries {
         EntityTransaction transaction = entitymanager.getTransaction();
         NauczycieleEntity nauczycieleEntity = findNauczycielByLogin(login);
         transaction.begin();
-        //entitymanager.merge jest potrzebne do usuwania elementow
+        //entitymanager.merge() jest potrzebne do dodawania/usuwania elementow
         nauczycieleEntity = entitymanager.merge(nauczycieleEntity);
         entitymanager.remove(nauczycieleEntity);
         transaction.commit();
@@ -600,7 +600,7 @@ public class Querries {
         return (PrzedmiotyklasEntity) query.getResultList();
     }
 
-    public void removeNauczycielPrzedmiotow(String nameP, String loginN) {
+    public void removeNauczycielPrzedmiotow(String loginN, String nameP) {
         EntityManager entitymanager = FACTORY.createEntityManager();
         EntityTransaction transaction = entitymanager.getTransaction();
         NauczycieleprzedmiotowEntity nauczycieleprzedmiotowEntity = findNauczycielPrzedmituByNameAndLogin(nameP, loginN);
@@ -746,5 +746,38 @@ public class Querries {
     }
 
      */
+
+    public List<String> findFrekwencjaRodzajOrderByGodzinaLekcji(String loginU, Date data) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT f.rodzaj FROM FrekwencjaEntity f " +
+                "JOIN UczniowieEntity u ON f.idu = u.idu JOIN LekcjeEntity l ON l.idl = f.idl WHERE l.data = :data " +
+                "AND u.uzytkownicyByIdus.login = :login ORDER BY l.godzina");
+        query.setParameter("data", data);
+        query.setParameter("login", loginU);
+        return query.getResultList();
+    }
+
+    public List<Integer> findFrekwencjaGodzinaOrderByGodzinaLekcji(String loginU, Date data) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT l.godzina FROM FrekwencjaEntity f " +
+                "JOIN UczniowieEntity u ON f.idu = u.idu JOIN LekcjeEntity l ON l.idl = f.idl WHERE l.data = :data " +
+                "AND u.uzytkownicyByIdus.login = :login ORDER BY l.godzina");
+        query.setParameter("data", data);
+        query.setParameter("login", loginU);
+        return query.getResultList();
+    }
+
+    public List<String> findFrekwencjaPrzedmiotOrderByGodzinaLekcji(String loginU, Date data) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT l.nauczycieleprzedmiotowByIdnp.przedmiotyByIdp.nazwa FROM FrekwencjaEntity f " +
+                "JOIN UczniowieEntity u ON f.idu = u.idu JOIN LekcjeEntity l ON l.idl = f.idl WHERE l.data = :data " +
+                "AND u.uzytkownicyByIdus.login = :login ORDER BY l.godzina");
+        query.setParameter("data", data);
+        query.setParameter("login", loginU);
+        return query.getResultList();
+    }
+
+
+
 
 }
