@@ -473,8 +473,8 @@ public class ThreadForClient extends Thread{
                 countSubjects = subjects.size();
             }
             List<String> findClass = querries.findKlasyWychowawcy(uLogin);
-            int sizeClass = findClass.size();
             JSONObject pd = new JSONObject();
+            int sizeClass = findClass.size();
             pd.put("imie", us.getImie());
             pd.put("nazwisko", us.getNazwisko());
             pd.put("countSubjects", countSubjects);
@@ -488,9 +488,8 @@ public class ThreadForClient extends Thread{
                 bw.newLine();
                 bw.flush();
             }
-            if(sizeClass == 0) pd.put("class", "Nie jesteś wychowacą!");
-            else pd.put("class", findClass.get(0));
-
+                 if(sizeClass == 0) pd.put("class", "Nie jesteś wychowacą!");
+                else pd.put("class", findClass.get(0));
                 bw.write(pd.toString());
                 bw.newLine();
                 bw.flush();
