@@ -17,7 +17,7 @@ import java.util.ResourceBundle;
 public class AppWindowController implements Initializable {
 
     @FXML
-    private Text welcome;
+    private Text welcome;//pokazuje imie i nazwisko uzytkownika
     @FXML
     private BorderPane mainPane;
 
@@ -29,8 +29,7 @@ public class AppWindowController implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         client = data.getClient();//dzieki temu mamy dostep do serwera poprzez gniazdo, nie tworzac nowego
-        serwer = client.getData();
-
+        serwer = client.getData();//odbiera dane z serwera
         String name = serwer.optString("imie");
         welcome.setText("Witaj " + name + "!");
     }

@@ -104,14 +104,12 @@ public class FrequencyWindowController implements Initializable {
     void previewButton() throws JSONException, IOException {
         localDate = localDate.minusDays(7);
         client.sendCase(1);
-        //dayInt -=7;
         displayFrequency();
     }
     @FXML
     void nextButton() throws JSONException, IOException {
         localDate = localDate.plusDays(7);
         client.sendCase(1);
-        //dayInt +=7;
         displayFrequency();
     }
 }

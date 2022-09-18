@@ -10,6 +10,8 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import org.json.JSONObject;
 
 import java.net.URL;
+import java.time.LocalDate;
+import java.util.Date;
 import java.util.ResourceBundle;
 
 public class MarksWindowController implements Initializable {
@@ -34,7 +36,7 @@ public class MarksWindowController implements Initializable {
     SendDataToContoller data = SendDataToContoller.getInstance();
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-
+        LocalDate[] hours = new LocalDate[]{LocalDate.parse("01.09.2021"), LocalDate.parse("31.01.2022"), LocalDate.parse("01.02.2022"), LocalDate.parse("01.09.2022")};
         client = data.getClient();
         serwer = client.getData();
         ObservableList<MarkTable> list = FXCollections.observableArrayList();
@@ -42,6 +44,8 @@ public class MarksWindowController implements Initializable {
         String subName;//Name of subject
         Integer n;//size for
         Integer countSubject = serwer.optInt("count");
+        LocalDate markDate;
+        boolean checkFirst = true;
         for(int z = 0; z < countSubject; z++) {
             serwer = client.getData();
             n = serwer.optInt("size");
@@ -50,10 +54,14 @@ public class MarksWindowController implements Initializable {
             String marksString = "";
             for (int i = 0; i < n; i++) {
                 serwer = client.getData();
-                if (i == 0) marksString = serwer.optString("id");
+
+                markDate = LocalDate.parse(serwer.optString("date"));
+
+                if (checkFirst) {marksString = serwer.optString("id"); checkFirst = false;}
                 else marksString = marksString + ", " + serwer.optString("id");
                 suma = suma + serwer.optInt("id");
             }
+            checkFirst = true;
             suma = suma * 1.0 / n;
             if(marksString.equals("")) {marksString = "brak ocen!"; suma = 0.0;};
             list.addAll(new MarkTable(subName, marksString, suma));
