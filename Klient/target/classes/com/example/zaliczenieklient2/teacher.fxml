@@ -71,10 +71,6 @@
                               <Font size="24.0" />
                            </font>
                         </Text>
-                        <ListView fx:id="classListView" prefHeight="68.0" prefWidth="284.0" style="-fx-view-order: 10;" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                           <GridPane.margin>
-                              <Insets bottom="10.0" left="30.0" right="30.0" top="20.0" />
-                           </GridPane.margin></ListView>
                         <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Nauczane przedmioty:" textAlignment="CENTER" wrappingWidth="320.716796875" GridPane.rowIndex="3">
                            <font>
                               <Font size="24.0" />
@@ -84,6 +80,14 @@
                            <GridPane.margin>
                               <Insets bottom="30.0" left="30.0" right="30.0" top="10.0" />
                            </GridPane.margin></ListView>
+                        <Text fx:id="ClassView" strokeType="OUTSIDE" strokeWidth="0.0" text="Text" textAlignment="CENTER" wrappingWidth="284.826171875" GridPane.columnIndex="1" GridPane.rowIndex="2">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                           <GridPane.margin>
+                              <Insets left="30.0" />
+                           </GridPane.margin>
+                        </Text>
                      </children>
                   </GridPane>
                </children>

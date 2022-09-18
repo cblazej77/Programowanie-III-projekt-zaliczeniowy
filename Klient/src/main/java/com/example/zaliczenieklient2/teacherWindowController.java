@@ -18,7 +18,7 @@ public class teacherWindowController implements Initializable {
     private Text Tsurname;
 
     @FXML
-    private ListView<String> classListView;
+    private Text ClassView;
 
     @FXML
     private ListView<String> subjectsListView;
@@ -27,20 +27,26 @@ public class teacherWindowController implements Initializable {
     private JSONObject serwer;
 
     SendDataToContoller data = SendDataToContoller.getInstance();
-    ObservableList classList, subjectsList;
+    ObservableList subjectsList;
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
         client = data.getClient();
         serwer = client.getData();
         subjectsList = FXCollections.observableArrayList();
-        classList = FXCollections.observableArrayList();
         Tname.setText(serwer.optString("imie"));
         Tsurname.setText(serwer.optString("nazwisko"));
         loadDataLessons();
         loadDataClasses();
     }
 
+    private void loadDataClasses(){
+        serwer = client.getData();
+        String findClass = serwer.optString("class");
+        if(findClass == null) ClassView.setText("Brak przypisanych klass");
+        else ClassView.setText(findClass);
+    }
+/*
     private void loadDataClasses() {
         serwer = client.getData();
         int size = serwer.optInt("countClasses");
@@ -54,6 +60,7 @@ public class teacherWindowController implements Initializable {
         if(size == 0) classList.add("Brak przypisanych klass");
         classListView.getItems().addAll(classList);
     }
+    */
 
     private void loadDataLessons() {
         int size = serwer.optInt("countSubjects");

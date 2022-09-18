@@ -736,7 +736,7 @@ public class Querries {
 
     public List<String> findKlasyWychowawcy(String loginN) {
         EntityManager entitymanager = FACTORY.createEntityManager();
-        Query query = (Query) entitymanager.createQuery("SELECT k.nazwa FROM KlasyEntity k WHERE k.nauczycieleByWychowawca.uzytkownicyByIdus.login = :login");
+        Query query = (Query) entitymanager.createQuery("SELECT k.nazwa FROM KlasyEntity k WHERE k.nauczycieleByWychowawca.uzytkownicyByIdus.login = :login ORDER BY k.datarozpoczecia DESC ");
         query.setParameter("login", loginN);
         return query.getResultList();
     }

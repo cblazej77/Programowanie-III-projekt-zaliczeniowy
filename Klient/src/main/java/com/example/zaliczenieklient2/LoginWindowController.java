@@ -59,7 +59,7 @@ public class LoginWindowController implements Initializable{
                 System.out.println("Login: " + aLogin.getText() + ", Password: " + aPassword.getText());
 
                 if (aPassword.getText().length() >= 1 && aLogin.getText().length() >= 1) {
-                    if (client.sendLogPassToSerwer(aLogin.getText(), aPassword.getText())){//wysyla login i haslo do serwera
+                    if (client.sendLogPassToSerwer(aLogin.getText(), aPassword.getText())) {//wysyla login i haslo do serwera
                         System.out.println("wyslano");
                         disconnected();
                         client = null;
@@ -68,14 +68,14 @@ public class LoginWindowController implements Initializable{
                             System.out.println("Zalogowal sie uzytkownik: " + aLogin.getText());
                             String acces = client.getData().optString("rola");
                             data.setClient(client);
-                            if(client != null){
-                                if(acces.equals("UCZEN") || acces.equals("RODZIC"))
-                                Application.setRoot("appWindow");
-                            }
-                            else {
-                                Application.setRoot("appTWindow");
-                            }
-                        } else labelError.setText("Podany login i/lub haslo sa nieprawidlowe");
+                            if (client != null) {
+                                if (acces.equals("UCZEN") || acces.equals("RODZIC")) {
+                                    Application.setRoot("appWindow");
+                                } else {
+                                    Application.setRoot("appTWindow");
+                                }
+                            } else labelError.setText("Podany login i/lub haslo sa nieprawidlowe");
+                        }
                     }
                 }
             } else disconnected();
