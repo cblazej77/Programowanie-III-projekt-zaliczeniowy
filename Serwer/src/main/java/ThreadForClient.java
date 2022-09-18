@@ -41,6 +41,10 @@ public class ThreadForClient extends Thread{
                 uLogin = klient.optString("login"); if (uLogin == klient.optString("login")){ System.out.println("Login taken from JSON"); }
                 uhaslo = klient.optString("haslo"); if(uhaslo == klient.optString("haslo")) {System.out.println("Haslo taken from JASON"); }
                 logowanieUzytkownika(bw);
+                /*if(access.equals("RODZIC")){
+                    access="UCZEN";
+                    uLogin =
+                }*/
                 if(access.equals("UCZEN")){
                     if (!check) {
                         while (wait) {
@@ -86,7 +90,6 @@ public class ThreadForClient extends Thread{
                         }
                     }
                 }
-
             }
 
         } catch (IOException | JSONException e){throw new RuntimeException(e);
@@ -150,6 +153,7 @@ public class ThreadForClient extends Thread{
             e.printStackTrace();
         }
     }
+
     private void checkClasses(BufferedReader br, BufferedWriter bw) {
         JSONObject rc = null;
         JSONObject pd = new JSONObject();

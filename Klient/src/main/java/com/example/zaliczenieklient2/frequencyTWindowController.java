@@ -252,11 +252,11 @@ public class frequencyTWindowController implements Initializable {
                     for (FrequencyTable bean : list) {
                         client.sendCase(12);
                         if (bean.getPresents().isSelected())
-                            client.sendFrequency(subjectCheckBox.getValue(), bean.getLogin(), localDate, 0, "O", classCheckBox.getValue());
+                            client.sendFrequency(subjectCheckBox.getValue(), bean.getLogin(), localDate, hoursCheckBox.getValue()+1, "O", classCheckBox.getValue());
                         if (bean.getAbsent().isSelected())
-                            client.sendFrequency(subjectCheckBox.getValue(), bean.getLogin(), localDate, 0, "NB", classCheckBox.getValue());
+                            client.sendFrequency(subjectCheckBox.getValue(), bean.getLogin(), localDate, hoursCheckBox.getValue()+1, "NB", classCheckBox.getValue());
                         if (bean.getExempt().isSelected())
-                            client.sendFrequency(subjectCheckBox.getValue(), bean.getLogin(), localDate, 0, "Z", classCheckBox.getValue());
+                            client.sendFrequency(subjectCheckBox.getValue(), bean.getLogin(), localDate, hoursCheckBox.getValue()+1, "Z", classCheckBox.getValue());
                     }
                     errorFrequency.setText("Wyslano poprawnie!");
                     //System.out.println("Obecni: " + presentsList);
