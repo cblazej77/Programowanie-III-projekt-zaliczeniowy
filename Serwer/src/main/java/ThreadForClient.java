@@ -488,11 +488,11 @@ public class ThreadForClient extends Thread{
                 bw.newLine();
                 bw.flush();
             }
-                 if(sizeClass == 0) pd.put("class", "Nie jesteś wychowacą!");
-                else pd.put("class", findClass.get(0));
-                bw.write(pd.toString());
-                bw.newLine();
-                bw.flush();
+            if(sizeClass == 0) pd.put("class", "Nie jesteś wychowacą!");
+            else pd.put("class", findClass.get(0));
+            bw.write(pd.toString());
+            bw.newLine();
+            bw.flush();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {

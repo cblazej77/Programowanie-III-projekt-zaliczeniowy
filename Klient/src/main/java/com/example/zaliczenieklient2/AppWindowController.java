@@ -25,6 +25,7 @@ public class AppWindowController implements Initializable {
 
     private Client client;
     private JSONObject serwer;
+    String access;
 
     SendDataToContoller data = SendDataToContoller.getInstance();
 
@@ -33,9 +34,10 @@ public class AppWindowController implements Initializable {
         client = data.getClient();//dzieki temu mamy dostep do serwera poprzez gniazdo, nie tworzac nowego
         serwer = client.getData();//odbiera dane z serwera
         String name = serwer.optString("imie");
-        String access = serwer.optString("rola");
+        access = serwer.optString("rola");
         welcome.setText("Witaj " + name + "!");
-        if(access.equals("RODZIC")) helloRola.setText("Zalogowano na konto rodzica.");
+        if(access.equals("ADMIN") || access.equals("DYREKTOR")) helloRola.setText("Zalogowano na konto dyrektora.");
+        else if(access.equals("RODZIC")) helloRola.setText("Zalogowano na konto rodzica.");
     }
 
     @FXML
@@ -104,12 +106,26 @@ public class AppWindowController implements Initializable {
         mainPane.setCenter(view);
     }
 
-    @FXML
+    /*@FXML
     private void daneTButton(ActionEvent event) throws JSONException, IOException {
         //client.sendCase(6); tutaj jest to nie potrzebne bo wysyylanie jest w klasie teacherEditWindowController
         FxmlLoader object = new FxmlLoader();
         Pane view = object.getPane("editDBWindow");
         mainPane.setCenter(view);
+        }
+    */
+    @FXML
+    private void daneTButton(ActionEvent event) throws JSONException, IOException {
+        if(access.equals("ADMIN") || access.equals("DYREKTOR")) {
+            FxmlLoader object = new FxmlLoader();
+            Pane view = object.getPane("editDBWindow");
+            mainPane.setCenter(view);
+        }
+        else{
+            FxmlLoader object = new FxmlLoader();
+            Pane view = object.getPane("editDBErrorWindow");
+            mainPane.setCenter(view);
+        }
     }
 }
 
