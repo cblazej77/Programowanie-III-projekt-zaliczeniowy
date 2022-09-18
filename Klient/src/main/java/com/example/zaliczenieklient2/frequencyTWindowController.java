@@ -245,24 +245,24 @@ public class frequencyTWindowController implements Initializable {
             dayErrorLabel.setText("Wybrano Poprawnie");
             if (goodSubject && goodClass) {
                 errorFrequency.setText("");
-                //ArrayList<String> presentsList = new ArrayList<>();
-                //ArrayList<String> absentList = new ArrayList<>();
-                //ArrayList<String> exemptList = new ArrayList<>();
-                if (checkCheckBoxes()) {
-                    for (FrequencyTable bean : list) {
-                        client.sendCase(12);
-                        if (bean.getPresents().isSelected())
-                            client.sendFrequency(subjectCheckBox.getValue(), bean.getLogin(), localDate, hoursCheckBox.getValue()+1, "O", classCheckBox.getValue());
-                        if (bean.getAbsent().isSelected())
-                            client.sendFrequency(subjectCheckBox.getValue(), bean.getLogin(), localDate, hoursCheckBox.getValue()+1, "NB", classCheckBox.getValue());
-                        if (bean.getExempt().isSelected())
-                            client.sendFrequency(subjectCheckBox.getValue(), bean.getLogin(), localDate, hoursCheckBox.getValue()+1, "Z", classCheckBox.getValue());
+                if(goodHour) {
+                    errorFrequency.setText("");
+                    if (checkCheckBoxes()) {
+                        for (FrequencyTable bean : list) {
+                            client.sendCase(12);
+                            if (bean.getPresents().isSelected())
+                                client.sendFrequency(subjectCheckBox.getValue(), bean.getLogin(), localDate, hoursCheckBox.getValue(), "O", classCheckBox.getValue());
+                            if (bean.getAbsent().isSelected())
+                                client.sendFrequency(subjectCheckBox.getValue(), bean.getLogin(), localDate, hoursCheckBox.getValue(), "NB", classCheckBox.getValue());
+                            if (bean.getExempt().isSelected())
+                                client.sendFrequency(subjectCheckBox.getValue(), bean.getLogin(), localDate, hoursCheckBox.getValue(), "Z", classCheckBox.getValue());
+                        }
+                        errorFrequency.setText("Wyslano poprawnie!");
+                        //System.out.println("Obecni: " + presentsList);
+                        //System.out.println("Nie Obecni: " + absentList);
+                        //System.out.println("Zwolnieni: " + exemptList);
                     }
-                    errorFrequency.setText("Wyslano poprawnie!");
-                    //System.out.println("Obecni: " + presentsList);
-                    //System.out.println("Nie Obecni: " + absentList);
-                    //System.out.println("Zwolnieni: " + exemptList);
-                }
+                }else errorFrequency.setText("Sprawdz dane!");
             }else errorFrequency.setText("Sprawdz dane!");
         }else {dayErrorLabel.setText("Nie wybrales Daty!");errorFrequency.setText("Sprawdz dane!");}
     }

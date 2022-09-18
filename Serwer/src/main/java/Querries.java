@@ -314,6 +314,14 @@ public class Querries {
         query.setParameter("data", data);
         return query.getResultList();
     }
+
+    public List<String> findLekcjeTematForPrzedmiotByUserLogin(String login, Date data) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT l.temat FROM LekcjeEntity l JOIN l.klasyByKlasa k JOIN k.uczniowiesByIdk u JOIN u.uzytkownicyByIdus us WHERE us.login = :login AND l.data = :data ORDER BY l.godzina");
+        query.setParameter("login", login);
+        query.setParameter("data", data);
+        return query.getResultList();
+    }
     public List<String> findLekcjePrzedmiotForPrzedmiotByUserLogin(String login, Date data) {
         EntityManager entityManager = FACTORY.createEntityManager();
         Query query0 = (Query) entityManager.createQuery("SELECT u.idk FROM UczniowieEntity u WHERE u.uzytkownicyByIdus.login = :login");

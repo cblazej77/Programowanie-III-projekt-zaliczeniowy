@@ -25,12 +25,12 @@
          <center>
             <TableView fx:id="table" prefHeight="530.0" prefWidth="835.0" BorderPane.alignment="CENTER">
               <columns>
-                <TableColumn fx:id="hour" prefWidth="100.0" text="Godzina" />
-                <TableColumn fx:id="monday" minWidth="147.0" prefWidth="147.0" text="Poniedzialek" />
-                  <TableColumn fx:id="thesday" minWidth="147.0" prefWidth="147.0" text="Wtorek" />
-                  <TableColumn fx:id="wednesday" minWidth="147.0" prefWidth="147.0" text="Środa" />
-                  <TableColumn fx:id="thursday" minWidth="147.0" prefWidth="147.0" text="Czwartek" />
-                  <TableColumn fx:id="friday" minWidth="147.0" prefWidth="147.0" text="Piątek" />
+                <TableColumn fx:id="hour" prefWidth="100.0" sortable="false" text="Godzina" />
+                <TableColumn fx:id="monday" minWidth="147.0" prefWidth="147.0" sortable="false" text="Poniedzialek" />
+                  <TableColumn fx:id="thesday" minWidth="147.0" prefWidth="147.0" sortable="false" text="Wtorek" />
+                  <TableColumn fx:id="wednesday" minWidth="147.0" prefWidth="147.0" sortable="false" text="Środa" />
+                  <TableColumn fx:id="thursday" minWidth="147.0" prefWidth="147.0" sortable="false" text="Czwartek" />
+                  <TableColumn fx:id="friday" minWidth="147.0" prefWidth="147.0" sortable="false" text="Piątek" />
               </columns>
             </TableView>
          </center>

@@ -10,6 +10,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -51,12 +52,14 @@ public class marksTWindowController implements Initializable {
             client.sendCase(9);
             client.SendString(Tsubject.getText());
             serwer = client.getData();
-            if(serwer.optBoolean("boolean")) {
+            String test = serwer.optString("boolean");
+            if(test.equals("Yes")) {
                 client.sendCase(11);
                 client.SendString(Tclass.getText());
                 serwer = client.getData();
-                if(serwer.optBoolean("boolean")) {
-                    List<String> Data = null;
+                test = serwer.optString("boolean");
+                if(test.equals("Yes")) {
+                    List<String> Data = new ArrayList<String>();
                     Data.add(Tname.getText());
                     Data.add(Tmark.getText());
                     Data.add(Tdiarynr.getText());
