@@ -249,7 +249,7 @@ public class Querries {
         return query.getResultList();
     }
 
-    public List<String> findDataOcenyByPrzedmiotforUczen(String nazwa, String login) {
+    public List<Date> findDataOcenyByPrzedmiotforUczen(String nazwa, String login) {
         EntityManager entityManager = FACTORY.createEntityManager();
         Query query = (Query) entityManager.createQuery("SELECT o.data FROM OcenyEntity o JOIN o.przedmiotyByIdp p JOIN o.uczniowieByIdu u JOIN u.uzytkownicyByIdus us WHERE p.nazwa = :naz AND us.login = :login");
         query.setParameter("naz", nazwa);

@@ -251,7 +251,7 @@ public class ThreadForClient extends Thread{
             bw.flush();
             for(int j=0;j<count.size();j++){
                 List<Float> oc = querries.findOcenyByPrzedmiotforUczen(subjects.get(j), uLogin);
-                List<String> lo = querries.findDataOcenyByPrzedmiotforUczen(subjects.get(j), uLogin);
+                List<Date> lo = querries.findDataOcenyByPrzedmiotforUczen(subjects.get(j), uLogin);
                 pd.put("size", oc.size());
                 pd.put("subject", subjects.get(j));
                 bw.write(pd.toString());
