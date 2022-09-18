@@ -36,11 +36,9 @@ public class MarksWindowController implements Initializable {
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //semestr ma wpisane 4 semestry od 1.09.2021 do 31.08.2023 -> wakacje zimowe i letnie są wliczone do semestru
-        String[] semestr = new String[]{"2021-09-01", "2022-01-31", "2022-02-01", "2022-08-31", "2022-09-01", "2023-01-31", "2023-02-01", "2023-08-31"};
+        //String[] semestr = new String[]{"2021-09-01", "2022-01-31", "2022-02-01", "2022-08-31", "2022-09-01", "2023-01-31", "2023-02-01", "2023-08-31"};
+        String[] semestr = new String[]{"2021-08-31", "2022-02-01", "2022-01-31", "2022-09-01", "2022-08-31", "2023-02-01", "2023-01-31", "2023-09-01"};
         LocalDate localDate = LocalDate.now();
-        //if(localDate.isAfter(LocalDate.parse(semestr[4])) && localDate.isBefore(LocalDate.parse(semestr[5]))) System.out.println("Tak");
-        //System.out.println(semestr[4] + " " + semestr[5]);
-        //System.out.println(localDate);
         client = data.getClient();
         serwer = client.getData();
         ObservableList<MarkTable> list = FXCollections.observableArrayList();
@@ -50,6 +48,7 @@ public class MarksWindowController implements Initializable {
         Integer countSubject = serwer.optInt("count");
         LocalDate markDate;
         boolean checkFirst = true;
+        int countMarks=0;
         for(int z = 0; z < countSubject; z++) {
             serwer = client.getData();
             n = serwer.optInt("size");
@@ -68,15 +67,17 @@ public class MarksWindowController implements Initializable {
                             }
                             else marksString = marksString + ", " + serwer.optString("id");
                             suma = suma + serwer.optInt("id");
+                            countMarks++;
                         }
                         j = 8;
                     }
                 }
             }
             checkFirst = true;
-            suma = suma * 1.0 / n;
+            suma = suma * 1.0 / countMarks;
             if(marksString.equals("")) {marksString = "brak ocen!"; suma = 0.0;};
             list.addAll(new MarkTable(subName, marksString, suma));
+            countMarks = 0;
         }
 
         subject.setCellValueFactory(new PropertyValueFactory<MarkTable, String>("subject"));
