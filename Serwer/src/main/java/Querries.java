@@ -51,7 +51,7 @@ public class Querries {
         transaction.commit();
     }
 
-    public void addOcena(String nazwa, Float ocena, Long idu, Long idp) {
+    public void addOcena(String nazwa, Float ocena, Long idu, Long idp, Long idn, Date data) {
         EntityManager entityManager = FACTORY.createEntityManager();
         EntityTransaction transaction = entityManager.getTransaction();
         transaction.begin();
@@ -60,6 +60,8 @@ public class Querries {
         ocenyEntity.setNazwa(nazwa);
         ocenyEntity.setIdu(idu);
         ocenyEntity.setIdp(idp);
+        ocenyEntity.setIdn(idn);
+        ocenyEntity.setData(data);
         entityManager.persist(ocenyEntity);
         transaction.commit();
     }
@@ -334,26 +336,29 @@ public class Querries {
     }
 
 
-    public void addOcenaForUczen(String nazwa, Float ocena, Integer nrWDzienniku, String klasa,String przedmiot) {
+    public void addOcenaForUczen(String nazwa, Float ocena, Integer nrWDzienniku, String klasa,String przedmiot, String loginN, Date data) {
         EntityManager entityManager = FACTORY.createEntityManager();
         Query query = (Query) entityManager.createQuery("Select u.idu FROM UczniowieEntity u WHERE u.nrwdzienniku = :nrWDzienniku AND u.klasyByIdk.nazwa = :klasa");
         Query query1 = (Query) entityManager.createQuery("SELECT p.idp FROM PrzedmiotyEntity p WHERE p.nazwa = :nazwa");
+        Query query2 = (Query) entityManager.createQuery("SELECT n.idn FROM NauczycieleEntity n JOIN UzytkownicyEntity u ON n.idus = u.idus WHERE u.login = :login");
+        query2.setParameter("login", loginN);
         query.setParameter("nrWDzienniku", nrWDzienniku);
         query.setParameter("klasa", klasa);
         query1.setParameter("nazwa", przedmiot);
         Long idu = (Long) query.getResultList().get(0);
         Long idp = (Long) query1.getResultList().get(0);
+        Long idn = (Long) query2.getResultList().get(0);
 
-        addOcena(nazwa, ocena, idu, idp);
+        addOcena(nazwa, ocena, idu, idp, idn, data);
         entityManager.close();
     }
 
     public void addNauczycielByLogin(String login) {
         EntityManager entityManager = FACTORY.createEntityManager();
-        Query query = (Query) entityManager.createQuery("Select n.idn FROM NauczycieleEntity n JOIN n.uzytkownicyByIdus us WHERE us.login = :login");
+        Query query = (Query) entityManager.createQuery("Select us.idus FROM UzytkownicyEntity us WHERE us.login = :login");
         query.setParameter("login", login);
-        Long idn = (Long) query.getResultList().get(0);
-        addNauczyciel(idn);
+        Long idus = (Long) query.getResultList().get(0);
+        addNauczyciel(idus);
         entityManager.close();
     }
 

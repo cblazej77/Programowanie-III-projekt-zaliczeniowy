@@ -178,8 +178,8 @@ public class ThreadForClient extends Thread{
             subjectCheck = rc.optString("data");
             Querries querries = new Querries();
             Boolean aBoolean = querries.czyNauczycielUczyPrzedmiotu(uLogin, subjectCheck);
-            if(aBoolean) pd.put("boolean", "Yes");
-            else pd.put("boolean", "No");
+            if(aBoolean) { pd.put("boolean", "Yes"); pd.put("loginN", uLogin);}
+            else {pd.put("boolean", "No"); pd.put("loginN", uLogin); }
             bw.write(pd.toString());
             bw.newLine();
             bw.flush();
@@ -318,7 +318,7 @@ public class ThreadForClient extends Thread{
                 break;
             case 10:
                 querries.addOcenaForUczen(rc.optString("data0"), (float) rc.optDouble("data1"), rc.optInt("data2"),
-                        rc.optString("data3"), rc.optString("data4"));
+                        rc.optString("data3"), rc.optString("data4"), rc.optString("data5"), Date.valueOf(rc.optString("data6")));
                 break;
             case 11:
                 querries.removeLekcja(rc.optInt("data0"), rc.optString("data1"), rc.optString("data2"),
