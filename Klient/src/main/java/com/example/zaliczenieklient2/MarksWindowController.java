@@ -11,7 +11,6 @@ import org.json.JSONObject;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.util.Date;
 import java.util.ResourceBundle;
 
 public class MarksWindowController implements Initializable {
@@ -37,8 +36,10 @@ public class MarksWindowController implements Initializable {
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //semestr ma wpisane 4 semestry od 1.09.2021 do 31.08.2023 -> wakacje zimowe i letnie są wliczone do semestru
-        //LocalDate[] semestr = new LocalDate[]{LocalDate.parse("01.09.2021"), LocalDate.parse("31.01.2022"), LocalDate.parse("01.02.2022"), LocalDate.parse("31.08.2022"), LocalDate.parse("01.09.2022"), LocalDate.parse("31.01.2023"), LocalDate.parse("01.02.2023"), LocalDate.parse("31.08.2023")};
-        //LocalDate localDate = LocalDate.now();
+        String[] semestr = new String[]{"2021-09-01", "2022-01-31", "2022-02-01", "2022-08-31", "2022-09-01", "2023-01-31", "2023-02-01", "2023-08-31"};
+        LocalDate localDate = LocalDate.now();
+        //if(localDate.isAfter(LocalDate.parse(semestr[4])) && localDate.isBefore(LocalDate.parse(semestr[5]))) System.out.println("Tak");
+        //System.out.println(semestr[4] + " " + semestr[5]);
         //System.out.println(localDate);
         client = data.getClient();
         serwer = client.getData();
@@ -55,16 +56,22 @@ public class MarksWindowController implements Initializable {
             subName = serwer.optString("subject");
             double suma = 0;
             String marksString = "";
-            for (int i = 0; i < n; i++) {
+            for (int i = 0; i < n; i++){
                 serwer = client.getData();
-                //markDate = LocalDate.parse(serwer.optString("date"));
-                if (checkFirst){
-                    marksString = serwer.optString("id");
-                    checkFirst = false;
+                for(int j = 0; j< 8; j+=2){
+                    if(localDate.isAfter(LocalDate.parse(semestr[j])) && localDate.isBefore(LocalDate.parse(semestr[j+1]))){
+                        markDate = LocalDate.parse(serwer.optString("date"));
+                        if(markDate.isAfter(LocalDate.parse(semestr[j])) && markDate.isBefore(LocalDate.parse(semestr[j+1]))){
+                            if (checkFirst){
+                                marksString = serwer.optString("id");
+                                checkFirst = false;
+                            }
+                            else marksString = marksString + ", " + serwer.optString("id");
+                            suma = suma + serwer.optInt("id");
+                        }
+                        j = 8;
+                    }
                 }
-                else marksString = marksString + ", " + serwer.optString("id");
-
-                suma = suma + serwer.optInt("id");
             }
             checkFirst = true;
             suma = suma * 1.0 / n;
