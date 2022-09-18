@@ -49,7 +49,7 @@ public class teacherWindowController implements Initializable {
         for(int i=0; i<size; i++){
             serwer = client.getData();
             findClass = serwer.optString("class");
-            classList.add(findClass.substring(0,2));
+            classList.add(findClass);
         }
         if(size == 0) classList.add("Brak przypisanych klass");
         classListView.getItems().addAll(classList);
