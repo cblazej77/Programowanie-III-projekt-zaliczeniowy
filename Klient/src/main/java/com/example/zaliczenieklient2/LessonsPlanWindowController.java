@@ -71,13 +71,13 @@ public class LessonsPlanWindowController implements Initializable {
             if(i == 0 || i == 4) week += setMonday;
             else if(i == 2) week += " - ";
             client.SendString(setMonday);
-            //System.out.println(setMonday);
             serwer = client.getData();
             int size = serwer.optInt("size");
             for(int j=0; j < size; j++){
                 serwer = client.getData();
+                int hour = serwer.optInt("hour");
                 String lekcja = serwer.optString("lesson");
-                lessions[i][j] = lekcja;
+                lessions[i][hour] = lekcja;
             }
         }
         for(int i=0; i<7; i++){

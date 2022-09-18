@@ -511,13 +511,14 @@ public class ThreadForClient extends Thread{
         try {
             JSONObject pd = new JSONObject();
             Querries querries = new Querries();
-            //Date data = Date.valueOf(day);
             List<String> frekwencja = querries.findFrekwencjaRodzajOrderByGodzinaLekcji(uLogin, day);
+            List<Integer> gFrekwencja = querries.findFrekwencjaGodzinaOrderByGodzinaLekcji(uLogin, day);
             pd.put("size", frekwencja.size());
             bw.write(pd.toString());
             bw.newLine();
             bw.flush();
             for(int i=0;i<frekwencja.size();i++){
+                pd.put("hour", gFrekwencja.get(i));
                 pd.put("freqwency",frekwencja.get(i));
                 bw.write(pd.toString());
                 bw.newLine();
@@ -534,7 +535,7 @@ public class ThreadForClient extends Thread{
             Querries querries = new Querries();
 
             List<String> przedmioty = querries.findLekcjePrzedmiotForPrzedmiotByUserLogin(uLogin, day);
-            //List<Integer> godziny = querries.findLekcjeGodzinaForPrzedmiotByUserLogin(uLogin, day);
+            List<Integer> godziny = querries.findLekcjeGodzinaForPrzedmiotByUserLogin(uLogin, day);
 
             pd.put("size",przedmioty.size());
             bw.write(pd.toString());
@@ -542,7 +543,7 @@ public class ThreadForClient extends Thread{
             bw.flush();
 
             for(int i=0;i<przedmioty.size();i++){
-                //pd.put("hour",godziny.get(i));
+                pd.put("hour",godziny.get(i));
                 pd.put("lesson",przedmioty.get(i));
                 bw.write(pd.toString());
                 bw.newLine();
