@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
@@ -76,6 +77,7 @@ public class marksTWindowController implements Initializable {
             client.SendString(subjectChoiceBox.getValue());
             serwer = client.getData();
             String test = serwer.optString("boolean");
+            loginTeacher = serwer.optString("loginN");
             if(test.equals("Yes")) {
                 client.sendCase(11);
                 client.SendString(classChoiceBox.getValue());
@@ -88,8 +90,10 @@ public class marksTWindowController implements Initializable {
                     Data.add(Tdiarynr.getText());
                     Data.add(classChoiceBox.getValue());
                     Data.add(subjectChoiceBox.getValue());
+                    Data.add(loginTeacher);
+                    Data.add(LocalDate.now().toString());
                     client.sendCase(6);
-                    client.SendEditSignal(Data, 10,5);
+                    client.SendEditSignal(Data, 10,7);
                     errorText.setText("Dodano ocenę!");
                 }
                 else{
