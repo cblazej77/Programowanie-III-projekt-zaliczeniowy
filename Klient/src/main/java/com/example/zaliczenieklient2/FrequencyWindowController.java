@@ -8,8 +8,10 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
@@ -49,14 +51,13 @@ public class FrequencyWindowController implements Initializable {
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle){
+        client = data.getClient();
         days = new String[] {"MONDAY", "TUESDAY", "WEDNESDAY", "THURSDAY", "FRIDAY", "SATURDAY", "SUNDAY"};
         localDate = LocalDate.now();
         for(int i =0; i<7; i++) if(String.valueOf(localDate.getDayOfWeek()).equals(days[i])) localDate = localDate.minusDays(i);//dayInt -= i;
         displayFrequency();
     }
     private void displayFrequency() {
-        client = data.getClient();
-
         String[] hours = new String[]{"8:00-8:45", "8:50-9:35", "9:40-10:25", "10:40-11:25", "11:35-12:20", "12:25-13:10", "13:15-14:00"};
         String[][] frequency = new String[5][7];
         String setDay = "";    //wskaze kiedy bedzie poniedzialek, a pozniej przetrzymuje date tygodnia
@@ -71,8 +72,8 @@ public class FrequencyWindowController implements Initializable {
 
         for (int i = 0; i < 5; i++) {
             if(i > 0) localDate = localDate.plusDays(1);
+            //if(i == 0) localDate = localDate.minusDays(7);
             setDay = String.valueOf(localDate);//.substring(0, 8) + (dayInt);
-            System.out.println(localDate);
             if (i == 0 || i == 4) week += setDay;
             else if (i == 2) week += " - ";
             client.SendString(setDay);
@@ -99,14 +100,16 @@ public class FrequencyWindowController implements Initializable {
 
     }
     @FXML
-    void previewButton(){
+    void previewButton() throws JSONException, IOException {
         localDate = localDate.minusDays(7);
+        client.sendCase(1);
         //dayInt -=7;
         displayFrequency();
     }
     @FXML
-    void nextButton(){
+    void nextButton() throws JSONException, IOException {
         localDate = localDate.plusDays(7);
+        client.sendCase(1);
         //dayInt +=7;
         displayFrequency();
     }

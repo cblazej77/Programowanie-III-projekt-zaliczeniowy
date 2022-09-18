@@ -53,15 +53,12 @@ public class ThreadForClient extends Thread{
                             if (chooseCase == 0){//za kazdym dodanym tutaj przedmiotem trzeba zwiekszyc w kliencie, forze zmienna z o jeden wiecej
                                 //countSubject(bw);
                                 sendMark(bw);
-                                /*sendMark(bw, "informatyka");
-                                sendMark(bw, "matematyka");
-                                sendMark(bw, "JezykAngielski");
-                                sendMark(bw, "JezykPolski");
-                                sendMark(bw, "Muzyka");*/
                             }
                             else if(chooseCase == 1){
                                 for(int i=0; i<5; i++){
                                     klient = new JSONObject(br.readLine());
+                                    //String clientData = klient.optString("data");
+                                    //System.out.println(clientData);
                                     Date data = Date.valueOf(klient.optString("data"));
                                     FrekwencjaDane(bw, data);
                                 }
@@ -514,7 +511,7 @@ public class ThreadForClient extends Thread{
         try {
             JSONObject pd = new JSONObject();
             Querries querries = new Querries();
-
+            //Date data = Date.valueOf(day);
             List<String> frekwencja = querries.findFrekwencjaRodzajOrderByGodzinaLekcji(uLogin, day);
             pd.put("size", frekwencja.size());
             bw.write(pd.toString());
