@@ -20,6 +20,8 @@ public class AppWindowController implements Initializable {
     private Text welcome;//pokazuje imie i nazwisko uzytkownika
     @FXML
     private BorderPane mainPane;
+    @FXML
+    private Text helloRola;
 
     private Client client;
     private JSONObject serwer;
@@ -31,7 +33,9 @@ public class AppWindowController implements Initializable {
         client = data.getClient();//dzieki temu mamy dostep do serwera poprzez gniazdo, nie tworzac nowego
         serwer = client.getData();//odbiera dane z serwera
         String name = serwer.optString("imie");
+        String access = serwer.optString("rola");
         welcome.setText("Witaj " + name + "!");
+        if(access.equals("RODZIC")) helloRola.setText("Zalogowano na konto rodzica.");
     }
 
     @FXML

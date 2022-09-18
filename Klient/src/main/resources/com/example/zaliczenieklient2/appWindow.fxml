@@ -11,7 +11,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zaliczenieklient2.AppWindowController">
+<AnchorPane prefHeight="700.0" prefWidth="1000.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zaliczenieklient2.AppWindowController">
 
    <children>
       <BorderPane fx:id="mainPane" prefHeight="700.0" prefWidth="1000.0">
@@ -115,7 +115,7 @@
          <bottom>
             <Pane prefHeight="35.0" prefWidth="642.0" style="-fx-background-color: #1c8b82;" BorderPane.alignment="CENTER">
                <children>
-                  <Text fill="WHITE" layoutX="833.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zalogowano na konto ucznia" />
+                  <Text fx:id="helloRola" fill="WHITE" layoutX="833.0" layoutY="22.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Zalogowano na konto ucznia" />
                </children></Pane>
          </bottom>
          <center>
