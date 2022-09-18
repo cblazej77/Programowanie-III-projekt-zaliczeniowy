@@ -81,7 +81,7 @@ public class FrequencyWindowController implements Initializable {
             int size = serwer.optInt("size");
             for (int j = 0; j < size; j++) {
                 serwer = client.getData();
-                int hour = serwer.optInt("hour");
+                Integer hour = serwer.optInt("hour");
                 String status = serwer.optString("freqwency");
                 frequency[i][hour] = status;
             }

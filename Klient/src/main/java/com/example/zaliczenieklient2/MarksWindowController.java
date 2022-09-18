@@ -36,7 +36,10 @@ public class MarksWindowController implements Initializable {
     SendDataToContoller data = SendDataToContoller.getInstance();
 
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        LocalDate[] hours = new LocalDate[]{LocalDate.parse("01.09.2021"), LocalDate.parse("31.01.2022"), LocalDate.parse("01.02.2022"), LocalDate.parse("01.09.2022")};
+        //semestr ma wpisane 4 semestry od 1.09.2021 do 31.08.2023 -> wakacje zimowe i letnie są wliczone do semestru
+        //LocalDate[] semestr = new LocalDate[]{LocalDate.parse("01.09.2021"), LocalDate.parse("31.01.2022"), LocalDate.parse("01.02.2022"), LocalDate.parse("31.08.2022"), LocalDate.parse("01.09.2022"), LocalDate.parse("31.01.2023"), LocalDate.parse("01.02.2023"), LocalDate.parse("31.08.2023")};
+        //LocalDate localDate = LocalDate.now();
+        //System.out.println(localDate);
         client = data.getClient();
         serwer = client.getData();
         ObservableList<MarkTable> list = FXCollections.observableArrayList();
@@ -54,11 +57,13 @@ public class MarksWindowController implements Initializable {
             String marksString = "";
             for (int i = 0; i < n; i++) {
                 serwer = client.getData();
-
-                markDate = LocalDate.parse(serwer.optString("date"));
-
-                if (checkFirst) {marksString = serwer.optString("id"); checkFirst = false;}
+                //markDate = LocalDate.parse(serwer.optString("date"));
+                if (checkFirst){
+                    marksString = serwer.optString("id");
+                    checkFirst = false;
+                }
                 else marksString = marksString + ", " + serwer.optString("id");
+
                 suma = suma + serwer.optInt("id");
             }
             checkFirst = true;
