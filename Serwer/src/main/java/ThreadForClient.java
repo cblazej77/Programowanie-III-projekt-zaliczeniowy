@@ -467,12 +467,12 @@ public class ThreadForClient extends Thread{
             Querries querries = new Querries();
             UzytkownicyEntity us = querries.findUzytkownikByLogin(uLogin);
             List<String> subjects = null;
+            List<String> findClass = null;
             int countSubjects = 0;
             if(querries.findPrzedmiotyNauczanePrzezNauczyciela(uLogin)!=null){
                 subjects = querries.findPrzedmiotyNauczanePrzezNauczyciela(uLogin);
                 countSubjects = subjects.size();
             }
-            List<String> findClass = querries.findKlasyWychowawcy(uLogin);
             JSONObject pd = new JSONObject();
             pd.put("imie", us.getImie());
             pd.put("nazwisko", us.getNazwisko());
@@ -487,10 +487,16 @@ public class ThreadForClient extends Thread{
                 bw.newLine();
                 bw.flush();
             }
+            if(querries.findKlasyWychowawcy(uLogin).size() > 0){
+                findClass = querries.findKlasyWychowawcy(uLogin);
                 pd.put("class", findClass.get(0));
-                bw.write(pd.toString());
-                bw.newLine();
-                bw.flush();
+            }
+            else{
+                pd.put("class", "Nie jestes wychowawca");
+            }
+            bw.write(pd.toString());
+            bw.newLine();
+            bw.flush();
         } catch (IOException e) {
             e.printStackTrace();
         } catch (JSONException e) {
