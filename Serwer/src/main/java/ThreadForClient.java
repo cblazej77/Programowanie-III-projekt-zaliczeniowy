@@ -305,7 +305,7 @@ public class ThreadForClient extends Thread{
                 querries.removeNauczycielByLogin(rc.optString("data0"));
                 break;
             case 6:
-                querries.addNauczyciel(rc.optLong("data0"));
+                querries.addNauczycielByLogin(rc.optString("data0"));
                 break;
             case 7:
                 querries.removePrzedmiotByNazwa(rc.optString("data0"));
@@ -326,15 +326,15 @@ public class ThreadForClient extends Thread{
                         rc.optString("data3"), Date.valueOf(rc.optString("data4")));
                 break;
             case 12:
-                querries.addLekcja(rc.optInt("data0"), rc.optLong("data1"), rc.optLong("data2"),
-                        Date.valueOf(rc.optString("data3")), rc.optString("data4"));
+                querries.addLekcjaByLoginAndNames(rc.optInt("data0"), rc.optString("data1"), rc.optString("data2"),
+                        rc.optString("data3"), Date.valueOf(rc.optString("data4")), rc.optString("data5"));
                 break;
             case 13:
                 querries.removeKlasaByNazwa("data0");
                 break;
             case 14:
-                querries.addKlasa(rc.optString("data0"), Date.valueOf(rc.optString("data1")),
-                        rc.optLong("data2"));
+                querries.addKlasaOnLoginN(rc.optString("data0"), Date.valueOf(rc.optString("data1")),
+                        rc.optString("data2"));
                 break;
             case 15:
                 querries.removeFrekwencja(rc.optString("data0"), rc.optString("data1"),
