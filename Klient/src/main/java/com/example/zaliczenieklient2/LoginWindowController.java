@@ -68,10 +68,11 @@ public class LoginWindowController implements Initializable{
                             System.out.println("Zalogowal sie uzytkownik: " + aLogin.getText());
                             String acces = client.getData().optString("rola");
                             data.setClient(client);
-                            if(client != null && acces.equals("UCZEN")){
+                            if(client != null){
+                                if(acces.equals("UCZEN") || acces.equals("RODZIC"))
                                 Application.setRoot("appWindow");
                             }
-                            else if(client != null) {
+                            else {
                                 Application.setRoot("appTWindow");
                             }
                         } else labelError.setText("Podany login i/lub haslo sa nieprawidlowe");

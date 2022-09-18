@@ -41,21 +41,23 @@ public class ThreadForClient extends Thread{
                 uLogin = klient.optString("login"); if (uLogin == klient.optString("login")){ System.out.println("Login taken from JSON"); }
                 uhaslo = klient.optString("haslo"); if(uhaslo == klient.optString("haslo")) {System.out.println("Haslo taken from JASON"); }
                 logowanieUzytkownika(bw);
-                /*if(access.equals("RODZIC")){
+                if(access.equals("RODZIC")){
                     access="UCZEN";
-                    uLogin =
-                }*/
+                    Querries querries = new Querries();
+                    uLogin = querries.findLoginUczniaByLoginRodzica(uLogin);
+                }
                 if(access.equals("UCZEN")){
                     if (!check) {
                         while (wait) {
                             receiveCase(br);
                             if (chooseCase == 0){//za kazdym dodanym tutaj przedmiotem trzeba zwiekszyc w kliencie, forze zmienna z o jeden wiecej
-                                countSubject(bw);
-                                sendMark(bw, "informatyka");
+                                //countSubject(bw);
+                                sendMark(bw);
+                                /*sendMark(bw, "informatyka");
                                 sendMark(bw, "matematyka");
                                 sendMark(bw, "JezykAngielski");
                                 sendMark(bw, "JezykPolski");
-                                //sendMark(bw, "Muzyka");
+                                sendMark(bw, "Muzyka");*/
                             }
                             else if(chooseCase == 1){
                                 for(int i=0; i<5; i++){
@@ -240,21 +242,29 @@ public class ThreadForClient extends Thread{
         }
 
     }
-    private void sendMark(BufferedWriter bw, String subject) {
+    private void sendMark(BufferedWriter bw) {
         try {
             JSONObject pd = new JSONObject();
             Querries querries = new Querries();
-            List<Float> oc = querries.findOcenyByPrzedmiotforUczen(subject, uLogin);
-            pd.put("size", oc.size());
-            pd.put("subject", subject);
+            List<Float> count = querries.countPrzedmioty();
+            List<String> subjects = querries.findPrzedmmioty();
+            pd.put("count", count.size());
             bw.write(pd.toString());
             bw.newLine();
             bw.flush();
-            for (int i = 0; i < oc.size(); i++) {
-                pd.put("id", oc.get(i));
+            for(int j=0;j<count.size();j++){
+                List<Float> oc = querries.findOcenyByPrzedmiotforUczen(subjects.get(j), uLogin);
+                pd.put("size", oc.size());
+                pd.put("subject", subjects.get(j));
                 bw.write(pd.toString());
                 bw.newLine();
                 bw.flush();
+                for (int i = 0; i < oc.size(); i++) {
+                    pd.put("id", oc.get(i));
+                    bw.write(pd.toString());
+                    bw.newLine();
+                    bw.flush();
+                }
             }
         } catch (IOException | JSONException e) {
             e.printStackTrace();

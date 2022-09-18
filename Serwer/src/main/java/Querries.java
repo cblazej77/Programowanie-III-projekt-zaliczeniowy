@@ -272,7 +272,6 @@ public class Querries {
         return (UzytkownicyEntity) query.getResultList().get(0);
     }
 
-
     public UzytkownicyEntity findRodzicByLogin(String login) {
         EntityManager entityManager = FACTORY.createEntityManager();
         Query query = (Query) entityManager.createQuery("SELECT us FROM UzytkownicyEntity us JOIN us.uczniowiesByIdus_0 u JOIN u.uzytkownicyByIdus usu WHERE usu.login = :login");
@@ -480,6 +479,14 @@ public class Querries {
         Query query = (Query) entityManager.createQuery("SELECT p FROM PrzedmiotyEntity p");
         return query.getResultList();
         }
+
+    public String findLoginUczniaByLoginRodzica(String loginR) {
+        EntityManager entityManager = FACTORY.createEntityManager();
+        Query query = (Query) entityManager.createQuery("SELECT uu.login FROM UzytkownicyEntity ur JOIN" +
+                " UczniowieEntity u ON u.idurodzica = ur.idus JOIN UzytkownicyEntity uu ON u.idus = uu.idus WHERE ur.login = :login");
+        query.setParameter("login", loginR);
+        return (String) query.getResultList().get(0);
+    }
 
     public KlasyEntity findKlasaByNazwa(String nazwa) {
         EntityManager entitymanager = FACTORY.createEntityManager();
