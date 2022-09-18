@@ -269,8 +269,6 @@ public class ThreadForClient extends Thread{
             e.printStackTrace();
         }
     }
-
-
     private void receiveCase(BufferedReader br) {
         JSONObject rc = null;
         try{
@@ -280,7 +278,6 @@ public class ThreadForClient extends Thread{
             wait = false;
             e.printStackTrace();}
     }
-
     private void editDane(BufferedReader br) throws IOException, JSONException {
         Querries querries = new Querries();
         JSONObject rc = null;
