@@ -349,13 +349,13 @@ public class ThreadForClient extends Thread{
                 querries.removeNauczycielPrzedmiotow(rc.optString("data0"), rc.optString("data1"));
                 break;
             case 18:
-                querries.addNauczycielePrzedmiotow(rc.optLong("data0"), rc.optLong("data1"));
+                querries.addNauczycielPrzedmiotuByNameAndLogin(rc.optString("data0"), rc.optString("data1"));
                 break;
             case 19:
                 querries.removePrzedmiotKlasy(rc.optString("data0"), rc.optString("data1"));
                 break;
             case 20:
-                querries.addPrzedmiotKlasy(rc.optLong("data0"), rc.optLong("data1"));
+                querries.addPrzedmiotKlasyByNames(rc.optString("data0"), rc.optString("data1"));
                 break;
             default:
                 break;
