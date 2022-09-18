@@ -23,7 +23,7 @@
                         <Insets bottom="20.0" top="15.0" />
                      </VBox.margin>
                      <font>
-                        <Font size="17.0" />
+                        <Font size="15.0" />
                      </font>
                      <graphic>
                         <ImageView fitHeight="32.0" fitWidth="31.0" pickOnBounds="true" preserveRatio="true">
@@ -44,7 +44,7 @@
                         <Font size="15.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="33.0" fitWidth="35.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="33.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@icons8-calendar-64.png" />
                            </image>
@@ -62,7 +62,7 @@
                         <Font size="15.0" />
                      </font>
                      <graphic>
-                        <ImageView fitHeight="36.0" fitWidth="45.0" pickOnBounds="true" preserveRatio="true">
+                        <ImageView fitHeight="38.0" fitWidth="32.0" pickOnBounds="true" preserveRatio="true">
                            <image>
                               <Image url="@icons8-calendar-100.png" />
                            </image>
@@ -72,9 +72,24 @@
                         <Insets right="25.0" />
                      </padding>
                   </Button>
+                  <Button mnemonicParsing="false" onAction="#tematyButton" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #23aea3;" text="Tematy" textFill="WHITE">
+                     <font>
+                        <Font size="15.0" />
+                     </font>
+                     <graphic>
+                        <ImageView fitHeight="45.0" fitWidth="40.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@icons8-wordbook-100.png" />
+                           </image>
+                        </ImageView>
+                     </graphic>
+                     <VBox.margin>
+                        <Insets right="40.0" />
+                     </VBox.margin>
+                  </Button>
                   <Button mnemonicParsing="false" onAction="#uczenButton" prefHeight="40.0" prefWidth="145.0" style="-fx-background-color: #23aea3;" text="Uczeń" textFill="WHITE">
                      <VBox.margin>
-                        <Insets bottom="20.0" right="10.0" top="5.0" />
+                        <Insets bottom="20.0" right="10.0" top="20.0" />
                      </VBox.margin>
                      <font>
                         <Font size="15.0" />
@@ -95,7 +110,7 @@
                         <Font size="11.0" />
                      </font>
                      <VBox.margin>
-                        <Insets bottom="5.0" left="40.0" right="40.0" top="280.0" />
+                        <Insets bottom="5.0" left="40.0" right="40.0" top="230.0" />
                      </VBox.margin>
                   </Button>
                </children>
