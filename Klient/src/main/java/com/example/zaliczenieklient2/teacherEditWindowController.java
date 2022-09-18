@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import java.io.IOException;
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -216,7 +217,7 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     void transferStudentButton(ActionEvent event) throws JSONException, IOException {
-        List<String> Data = null;
+        List<String> Data = new ArrayList<String>();
         if(transferStudentLogin.getText().length() > 0 && transferNewClassName.getText().length() > 0){
             Data.add(transferStudentLogin.getText());
             Data.add(transferNewClassName.getText());
@@ -227,7 +228,7 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     void removeUserByLoginButton(ActionEvent event) throws JSONException, IOException {
-        List<String> Data = null;
+        List<String> Data = new ArrayList<String>();
         if(removeUserLoginText.getText().length() > 0){
             Data.add(removeUserLoginText.getText());
             client.sendCase(6);
@@ -237,7 +238,7 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     void addUserButton(ActionEvent event) throws JSONException, IOException {
-        List<String> Data=null;
+        List<String> Data = new ArrayList<String>();
         String uLogin = addUserLoginText.getText();
         String uPassword = addUserPasswordText.getText();
         String uName = addUserFirstNameText.getText();
@@ -257,7 +258,7 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     void removeStudentByLoginButton(ActionEvent event) throws JSONException, IOException {
-        List<String> Data=null;
+        List<String> Data = new ArrayList<String>();
         if(removeStudentLoginText.getText().length()>0){
             Data.add(removeStudentLoginText.getText());
             client.sendCase(6);
@@ -267,7 +268,7 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     public void addStudentButton(ActionEvent event) throws JSONException, IOException {
-        List<String> Data=null;
+        List<String> Data = new ArrayList<String>();
         if(addStudentNumberText.getText().length() > 0 && addStudentClassNameText.getText().length() > 0 &&
                 addStudentUserLoginText.getText().length() > 0 && addStudentParentLoginText.getText().length() > 0){
             Data.add(addStudentNumberText.getText());
@@ -281,7 +282,7 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     void removeTeacherByLoginButton(ActionEvent event) throws JSONException, IOException {
-        List<String> Data=null;
+        List<String> Data = new ArrayList<String>();
         if(removeTeacherLoginText.getText().length()>0){
             Data.add(removeTeacherLoginText.getText());
             client.sendCase(6);
@@ -291,7 +292,7 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     void AddTeacherButton(ActionEvent event) throws JSONException, IOException {
-        List<String> Data=null;
+        List<String> Data = new ArrayList<String>();
         if(addTeacherUsLoginText.getText().length()>0){
             Data.add(addTeacherUsLoginText.getText());
             client.sendCase(6);
@@ -301,7 +302,7 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     void removeSubjectByNameButton(ActionEvent event) throws JSONException, IOException {
-        List<String> Data=null;
+        List<String> Data = new ArrayList<String>();
         if(removeSubjectNameText.getText().length()>0){
             Data.add(removeSubjectNameText.getText());
             client.sendCase(6);
@@ -311,7 +312,7 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     void addSubjectButton(ActionEvent event) throws JSONException, IOException {
-        List<String> Data=null;
+        List<String> Data = new ArrayList<String>();
         if(addSubjectNameText.getText().length()>0){
             Data.add(addSubjectNameText.getText());
             client.sendCase(6);
@@ -321,7 +322,7 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     void removeMarkByID(ActionEvent event) throws JSONException, IOException {
-        List<String> Data=null;
+        List<String> Data = new ArrayList<String>();
         if(removeMarkNameText.getText().length() > 0 && removeMarkValueText.getText().length() > 0 &&
                 removeMarkUloginText.getText().length() > 0 && removeMarkSubNameText.getText().length() > 0 &&
                 removeMarkTeacherLoginText1.getText().length() > 0) {
@@ -338,7 +339,7 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     void addMark(ActionEvent event) throws JSONException, IOException {
-        List<String> Data=null;
+        List<String> Data = new ArrayList<String>();
         if(addMarkNameText.getText().length() > 0 && addMarkValueText.getText().length() > 0 &&
                 addMarkDiaryNumberText.getText().length() > 0 && addMarkClassNameText.getText().length() > 0 &&
                 addMarkSubjectNameText.getText().length() > 0) {
@@ -356,7 +357,7 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     void removeLessonByID(ActionEvent event) throws JSONException, IOException{
-        List<String> Data=null;
+        List<String> Data = new ArrayList<String>();
         if(removeLessonDateText.getText().length() > 0 && removeLessonHourText.getText().length() > 0 &&
                 removeLessonClassText.getText().length() > 0 && removeLessonTeacherLoginText.getText().length() > 0 &&
                 removeLessonSubjectText.getText().length() > 0){
@@ -372,7 +373,7 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     void addLesson(ActionEvent event) throws JSONException, IOException {
-        List<String> Data = null;
+        List<String> Data = new ArrayList<String>();
         if(addLessonHourText.getText().length() > 0 && addLessonClassText.getText().length() > 0 &&
                 addLessonTeacherText.getText().length() > 0 && addLessonSubjectText.getText().length() > 0 &&
                 addLessonDateText.getText().length() > 0 && addLessonThemeText.getText().length() > 0){
@@ -389,7 +390,7 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     void removeClassByName(ActionEvent event) throws JSONException, IOException {
-        List<String> Data=null;
+        List<String> Data = new ArrayList<String>();
             if(removeClassLoginText.getText().length()>0){
                 Data.add(removeClassLoginText.getText());
                 client.sendCase(6);
@@ -399,7 +400,7 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     void addClass(ActionEvent event) throws JSONException, IOException {
-        List<String> Data = null;
+        List<String> Data = new ArrayList<String>();
         if(addClassNameText.getText().length() > 0 && addClassDateText.getText().length() > 0 &&
                 addClassTeacherText.getText().length() > 0){
             Data.add(addClassNameText.getText());
@@ -412,7 +413,7 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     void removeFrequency(ActionEvent event) throws JSONException, IOException {
-        List<String> Data = null;
+        List<String> Data = new ArrayList<String>();
         if(removeFrequencySubNameText.getText().length() > 0 && removeFrequencyULoginText.getText().length() > 0 &&
                 removeFrequencyDateText.getText().length() > 0 && removeFrequencyHourText.getText().length() > 0 &&
                 removeFrequencyClassText.getText().length() > 0){
@@ -428,7 +429,7 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     void addFrequency(ActionEvent event) throws JSONException, IOException {
-        List<String> Data = null;
+        List<String> Data = new ArrayList<String>();
         if(addFrequencySubNameText.getText().length() > 0 && addFrequencyStudentLoginText.getText().length() > 0 &&
                 addFrequencyDateText.getText().length() > 0 && addFrequencyHourText.getText().length() > 0 &&
                 addFrequencyTypeText.getText().length() > 0 && addFrequencyClassText.getText().length() > 0){
@@ -446,7 +447,7 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     void removeTeacherOfSubject(ActionEvent event) throws JSONException, IOException {
-        List<String> Data = null;
+        List<String> Data = new ArrayList<String>();
         if(editTeachersOfSubjectsTLoginText.getText().length() > 0 &&
                 editTeachersOfSubjectsSubjectNameText.getText().length() > 0){
             Data.add(editTeachersOfSubjectsTLoginText.getText());
@@ -458,7 +459,7 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     void addTeacherOfSubject(ActionEvent event) throws JSONException, IOException {
-        List<String> Data = null;
+        List<String> Data = new ArrayList<String>();
         if(editTeachersOfSubjectsTLoginText.getText().length() > 0 &&
                 editTeachersOfSubjectsSubjectNameText.getText().length() > 0){
             Data.add(editTeachersOfSubjectsTLoginText.getText());
@@ -470,7 +471,7 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     void removeSubjectOfClass(ActionEvent event) throws JSONException, IOException {
-        List<String> Data = null;
+        List<String> Data = new ArrayList<String>();
         if(editSubjectsOfClassesSubjectNameText.getText().length() > 0 &&
                 editSubjectsOfClassesClassNameText.getText().length() > 0){
             Data.add(editSubjectsOfClassesSubjectNameText.getText());
@@ -482,7 +483,7 @@ public class teacherEditWindowController implements Initializable {
 
     @FXML
     void addSubjectOfClass(ActionEvent event) throws JSONException, IOException {
-        List<String> Data = null;
+        List<String> Data = new ArrayList<String>();
         if(editSubjectsOfClassesSubjectNameText.getText().length() > 0 &&
                 editSubjectsOfClassesClassNameText.getText().length() > 0){
             Data.add(editSubjectsOfClassesSubjectNameText.getText());
