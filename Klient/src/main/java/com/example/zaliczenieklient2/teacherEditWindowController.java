@@ -9,6 +9,7 @@ import org.json.JSONObject;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ResourceBundle;
 
@@ -346,8 +347,10 @@ public class teacherEditWindowController implements Initializable {
             Data.add(addMarkDiaryNumberText.getText());
             Data.add(addMarkClassNameText.getText());
             Data.add(addMarkSubjectNameText.getText());
+            Data.add(loginTeacher);
+            Data.add(LocalDate.now().toString());
             client.sendCase(6);
-            client.SendEditSignal(Data, 10,5);
+            client.SendEditSignal(Data, 10,7);
         }
     }
 
