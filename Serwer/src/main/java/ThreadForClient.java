@@ -77,7 +77,7 @@ public class ThreadForClient extends Thread{
                         while (wait) {
                             receiveCase(br);
                             if(chooseCase == 4) nauczycielDane(bw,uLogin);
-                            if(chooseCase == 5) //OcenyNauczycielaDane(bw,uLogin);ta funckja jest pusta
+                            if(chooseCase == 5) addMarkData(bw);
                             if(chooseCase == 6) editDane(br);
                             if(chooseCase == 8) {subjectSend(bw); findKlasy(bw);};//wysyla liste przedmiotow,
                             if(chooseCase == 9) {checkTeacher(br, bw);}//sprawdza czy dany nauczyciel uczy wybranego przez siebie przedmiotu
@@ -546,10 +546,31 @@ public class ThreadForClient extends Thread{
             e.printStackTrace();
         }
     }
-    private void OcenyNauczycielaDane(BufferedWriter bw, String uLogin){
-
-
-
+    private void addMarkData(BufferedWriter bw) throws JSONException, IOException {
+        Querries querries = new Querries();
+        JSONObject pd = new JSONObject();
+        List<String> kl = querries.findKlasy();
+        List<String> pr = querries.findPrzedmmioty();
+        pd.put("classcount",kl.size());
+        bw.write(pd.toString());
+        bw.newLine();
+        bw.flush();
+        for(int i=0;i<kl.size();i++){
+            pd.put("class",kl.get(i));
+            bw.write(pd.toString());
+            bw.newLine();
+            bw.flush();
+        }
+        pd.put("subjectcount",pr.size());
+        bw.write(pd.toString());
+        bw.newLine();
+        bw.flush();
+        for(int i=0;i<pr.size();i++){
+            pd.put("subject",pr.get(i));
+            bw.write(pd.toString());
+            bw.newLine();
+            bw.flush();
+        }
     }
 
     private void autoryzacjaKlienta(String status, BufferedWriter bw) {

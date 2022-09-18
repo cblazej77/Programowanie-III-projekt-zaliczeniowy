@@ -72,7 +72,7 @@
                         <Insets right="25.0" />
                      </padding>
                   </Button>
-                  <Button mnemonicParsing="false" onAction="#tematyButton" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #23aea3;" text="Tematy" textFill="WHITE">
+                  <Button mnemonicParsing="false" prefHeight="40.0" prefWidth="155.0" style="-fx-background-color: #23aea3;" text="Tematy" textFill="WHITE">
                      <font>
                         <Font size="15.0" />
                      </font>
