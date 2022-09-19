@@ -14,7 +14,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane minHeight="590.0" minWidth="805.0" prefHeight="366.0" prefWidth="805.0" xmlns="http://javafx.com/javafx/16" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zaliczenieklient2.frequencyTWindowController">
+<AnchorPane minHeight="590.0" minWidth="805.0" prefHeight="366.0" prefWidth="805.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zaliczenieklient2.frequencyTWindowController">
    <children>
       <BorderPane prefHeight="590.0" prefWidth="805.0">
          <top>
@@ -35,7 +35,6 @@
                   <Button layoutX="734.0" layoutY="22.0" mnemonicParsing="false" onAction="#printSelected" prefHeight="25.0" prefWidth="55.0" text="Send" />
                   <ChoiceBox fx:id="hoursCheckBox" layoutX="33.0" layoutY="31.0" prefWidth="150.0" />
                   <Label fx:id="errorHourLabel" layoutX="40.0" layoutY="14.0" prefHeight="17.0" prefWidth="218.0" text="Wybierz godzinę lekcyjną" textFill="#0a0a0a" />
-                  <Button layoutX="194.0" layoutY="31.0" mnemonicParsing="false" onAction="#clickHourBox" text="check" />
                </children>
             </Pane>
          </bottom>
@@ -46,17 +45,15 @@
                      <children>
                         <HBox alignment="CENTER" prefHeight="49.0" prefWidth="805.0" spacing="30.0">
                            <children>
-                              <ChoiceBox fx:id="subjectCheckBox" onMouseExited="#clickSubjectBox" prefWidth="150.0" />
-                              <Button mnemonicParsing="false" onAction="#clickSubjectBox" text="check" />
+                              <ChoiceBox fx:id="subjectCheckBox" prefWidth="150.0" />
                               <DatePicker fx:id="frequencyDatePicker" />
                               <ChoiceBox fx:id="classCheckBox" prefWidth="150.0" />
-                              <Button mnemonicParsing="false" onAction="#clickClassBox" text="check" />
                            </children>
                         </HBox>
                         <Pane layoutY="35.0" prefHeight="31.0" prefWidth="799.0">
                            <children>
-                              <Label fx:id="classerrorLabel" layoutX="568.0" layoutY="8.0" text="Wybierz klasę" />
-                              <Label fx:id="subjecterrorLabel" layoutX="87.0" layoutY="6.0" text="Wybierz przedmiot" />
+                              <Label fx:id="classerrorLabel" layoutX="555.0" layoutY="6.0" text="Wybierz klasę" />
+                              <Label fx:id="subjecterrorLabel" layoutX="148.0" layoutY="6.0" text="Wybierz przedmiot" />
                               <Label fx:id="dayErrorLabel" layoutX="349.0" layoutY="8.0" text="Wybierz Date" />
                            </children>
                         </Pane>

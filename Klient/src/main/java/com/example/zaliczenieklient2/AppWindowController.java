@@ -106,14 +106,6 @@ public class AppWindowController implements Initializable {
         mainPane.setCenter(view);
     }
 
-    /*@FXML
-    private void daneTButton(ActionEvent event) throws JSONException, IOException {
-        //client.sendCase(6); tutaj jest to nie potrzebne bo wysyylanie jest w klasie teacherEditWindowController
-        FxmlLoader object = new FxmlLoader();
-        Pane view = object.getPane("editDBWindow");
-        mainPane.setCenter(view);
-        }
-    */
     @FXML
     private void daneTButton(ActionEvent event) throws JSONException, IOException {
         if(access.equals("ADMIN") || access.equals("DYREKTOR")) {

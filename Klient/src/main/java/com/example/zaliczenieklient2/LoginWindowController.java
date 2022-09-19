@@ -74,8 +74,8 @@ public class LoginWindowController implements Initializable{
                                 } else {
                                     Application.setRoot("appTWindow");
                                 }
-                            } else labelError.setText("Podany login i/lub haslo sa nieprawidlowe");
-                        }
+                            }
+                        } else labelError.setText("Podany login i/lub haslo sa nieprawidlowe");
                     }
                 }
             } else disconnected();

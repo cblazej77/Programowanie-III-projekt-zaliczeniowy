@@ -810,7 +810,44 @@ public class Querries {
         return query.getResultList();
     }
 
-
+    public Boolean czyNauczycielUczyKlasePrzedmiotuDnia(String loginN, String nazwaP, String nazwaK, Date data) {
+        EntityManager entitymanager = FACTORY.createEntityManager();
+        Query query = (Query) entitymanager.createQuery("SELECT p.idp FROM PrzedmiotyEntity p WHERE p.nazwa = :nazwaP");
+        Query query1 = (Query) entitymanager.createQuery("SELECT n.idn FROM NauczycieleEntity n JOIN n.uzytkownicyByIdus us WHERE us.login = :login");
+        Query query2 = (Query) entitymanager.createQuery("SELECT k.idk FROM KlasyEntity k WHERE k.nazwa = :nazwaK");
+        query.setParameter("nazwaP", nazwaP);
+        query1.setParameter("login", loginN);
+        query2.setParameter("nazwaK", nazwaK);
+        Long idp = (Long) query.getResultList().get(0);
+        Long idn = (Long) query1.getResultList().get(0);
+        Long idk = (Long) query2.getResultList().get(0);
+        Query query3 = (Query) entitymanager.createQuery("SELECT l.idl FROM LekcjeEntity l JOIN NauczycieleprzedmiotowEntity np ON l.idnp  = np.idnp " +
+                "WHERE l.klasa = :idk AND l.data = :data AND np.idn = :idn AND np.idp = :idp");
+        query3.setParameter("idn", idn);
+        query3.setParameter("idp", idp);
+        query3.setParameter("idk", idk);
+        query3.setParameter("data", data);
+        return !query3.getResultList().isEmpty();
+    }
+    public List<Integer> findGodzinaOfLekcjaByTLoginSubjectClassAndDate(String loginN, String nazwaP, String nazwaK, Date data) {
+        EntityManager entitymanager = FACTORY.createEntityManager();
+        Query query = (Query) entitymanager.createQuery("SELECT p.idp FROM PrzedmiotyEntity p WHERE p.nazwa = :nazwaP");
+        Query query1 = (Query) entitymanager.createQuery("SELECT n.idn FROM NauczycieleEntity n JOIN n.uzytkownicyByIdus us WHERE us.login = :login");
+        Query query2 = (Query) entitymanager.createQuery("SELECT k.idk FROM KlasyEntity k WHERE k.nazwa = :nazwaK");
+        query.setParameter("nazwaP", nazwaP);
+        query1.setParameter("login", loginN);
+        query2.setParameter("nazwaK", nazwaK);
+        Long idp = (Long) query.getResultList().get(0);
+        Long idn = (Long) query1.getResultList().get(0);
+        Long idk = (Long) query2.getResultList().get(0);
+        Query query3 = (Query) entitymanager.createQuery("SELECT l.godzina FROM LekcjeEntity l JOIN NauczycieleprzedmiotowEntity np ON l.idnp  = np.idnp " +
+                "WHERE l.klasa = :idk AND l.data = :data AND np.idn = :idn AND np.idp = :idp");
+        query3.setParameter("idn", idn);
+        query3.setParameter("idp", idp);
+        query3.setParameter("idk", idk);
+        query3.setParameter("data", data);
+        return query3.getResultList();
+    }
 
 
 }

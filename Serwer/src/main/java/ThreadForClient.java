@@ -5,6 +5,8 @@ import org.json.JSONObject;
 import java.io.*;
 import java.net.Socket;
 import java.sql.Date;
+import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 public class ThreadForClient extends Thread{
@@ -79,7 +81,9 @@ public class ThreadForClient extends Thread{
                             if(chooseCase == 4) nauczycielDane(bw,uLogin);
                             if(chooseCase == 5) addMarkData(bw);
                             if(chooseCase == 6) editDane(br);
-                            if(chooseCase == 8) {subjectSend(bw); findKlasy(bw);};//wysyla liste przedmiotow,
+                            if(chooseCase == 8) {subjectSend(bw); }//findKlasy(bw);};//wysyla liste przedmiotow
+                            if(chooseCase == 20) classSend(bw, br);
+                            if(chooseCase == 21) setHourLesson(bw, br);
                             if(chooseCase == 9) {checkTeacher(br, bw);}//sprawdza czy dany nauczyciel uczy wybranego przez siebie przedmiotu
                             if(chooseCase == 10) {sendAllClass(bw, br);}//wysyla liste osob w klasie
                             if(chooseCase == 11) {checkClasses(br, bw);}//sprawdza czy dany nauczyciel uczy wybranej klasy
@@ -119,6 +123,73 @@ public class ThreadForClient extends Thread{
             querries.addFrekwencjaOnEverything(przedmiotJ, loginSJ, data ,godzina, rodzaj, klasa, uLogin);
         } catch (IOException e) {e.printStackTrace();
         }catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
+    private  void setHourLesson(BufferedWriter bw, BufferedReader br){
+        try{
+        JSONObject fromClient = null;
+        JSONObject fromSerwer = new JSONObject();
+        String subject;
+        Date dateClient;
+        String classClient;
+        fromClient = new JSONObject(br.readLine());
+        subject = fromClient.optString("data");
+        fromClient = new JSONObject(br.readLine());
+        dateClient = Date.valueOf(fromClient.optString("data"));
+        fromClient = new JSONObject(br.readLine());
+        classClient = fromClient.optString("data");
+        Querries querries = new Querries();
+        List<Integer> hourList = querries.findGodzinaOfLekcjaByTLoginSubjectClassAndDate(uLogin, subject, classClient, dateClient);
+        int size = hourList.size();
+        fromSerwer.put("size", hourList.size());
+        bw.write(fromSerwer.toString());
+        bw.newLine();
+        bw.flush();
+        for(int i = 0; i< size; i++){
+            fromSerwer.put("hour", hourList.get(0));
+            System.out.println(hourList.get(0));
+            bw.write(fromSerwer.toString());
+            bw.newLine();
+            bw.flush();
+        }
+
+
+    }catch (IOException | JSONException e) {
+        e.printStackTrace();
+    }
+
+    }
+    private void classSend(BufferedWriter bw, BufferedReader br) throws IOException {
+        try {
+            JSONObject fromClient = null;
+            JSONObject fromSerwer = new JSONObject();
+            List<String> classList = new ArrayList<String>();
+            String subject;
+            Date dateClient;
+            fromClient = new JSONObject(br.readLine());
+            subject = fromClient.optString("data");
+            fromClient = new JSONObject(br.readLine());
+            dateClient = Date.valueOf(fromClient.optString("data"));
+            Querries querries = new Querries();
+            List<String> Class = querries.findKlasy();
+            for (int i = 0; i < Class.size(); i++) {
+                if (querries.czyNauczycielUczyKlasePrzedmiotuDnia(uLogin, subject, Class.get(i), dateClient)) {//sprawdzamy czy nauczyciel uczy klase tego dnia
+                    classList.add(Class.get(i));
+                }
+            }
+            //System.out.println(classList);
+            fromSerwer.put("size", classList.size());
+            bw.write(fromSerwer.toString());
+            bw.newLine();
+            bw.flush();
+            for (int i = 0; i < classList.size(); i++) {
+                fromSerwer.put("class", classList.get(i));
+                bw.write(fromSerwer.toString());
+                bw.newLine();
+                bw.flush();
+            }
+        }catch (IOException | JSONException e) {
             e.printStackTrace();
         }
     }
@@ -222,7 +293,7 @@ public class ThreadForClient extends Thread{
         try{
             JSONObject pd = new JSONObject();
             Querries querries = new Querries();
-            List<String> subject = querries.findPrzedmmioty();
+            List<String> subject = querries.findPrzedmiotyNauczanePrzezNauczyciela(uLogin);
             pd.put("size", subject.size());
             bw.write(pd.toString());
             bw.newLine();
