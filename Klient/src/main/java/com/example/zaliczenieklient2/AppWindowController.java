@@ -119,5 +119,12 @@ public class AppWindowController implements Initializable {
             mainPane.setCenter(view);
         }
     }
+
+    @FXML
+    private void marksViewButton(ActionEvent event){
+        FxmlLoader object = new FxmlLoader();
+        Pane view = object.getPane("marksViewWindow");
+        mainPane.setCenter(view);
+    }
 }
 

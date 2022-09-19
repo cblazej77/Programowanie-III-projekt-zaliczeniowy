@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/18" xmlns:fx="http://javafx.com/fxml/1" fx:controller="com.example.zaliczenieklient2.marksViewWindowController">
+   <children>
+      <BorderPane layoutY="-3.0" prefHeight="590.0" prefWidth="805.0">
+         <top>
+            <Pane prefHeight="70.0" prefWidth="805.0" style="-fx-background-color: #23aea3;" BorderPane.alignment="CENTER">
+               <children>
+                  <Text fill="WHITE" layoutX="283.0" layoutY="49.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Oceny uczniów">
+                     <font>
+                        <Font size="36.0" />
+                     </font>
+                  </Text>
+               </children>
+            </Pane>
+         </top>
+         <center>
+            <SplitPane dividerPositions="0.14814814814814814" orientation="VERTICAL" prefHeight="481.0" prefWidth="805.0" BorderPane.alignment="CENTER">
+               <items>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="121.0" prefWidth="803.0">
+                     <children>
+                        <HBox alignment="CENTER" prefHeight="49.0" prefWidth="805.0" spacing="30.0">
+                           <children>
+                              <ChoiceBox fx:id="subjectChoiceBox" prefWidth="150.0" />
+                              <ChoiceBox fx:id="classChoiceBox" prefWidth="150.0" />
+                              <Button fx:id="showMarksButton" mnemonicParsing="false" text="Wyświetl" />
+                           </children>
+                        </HBox>
+                        <Pane layoutY="35.0" prefHeight="31.0" prefWidth="799.0">
+                           <children>
+                              <Label layoutX="411.0" layoutY="9.0" text="Wybierz klasę" />
+                              <Label layoutX="220.0" layoutY="9.0" text="Wybierz przedmiot" />
+                              <Label fx:id="infoLabel" layoutX="568.0" layoutY="9.0" />
+                           </children>
+                        </Pane>
+                     </children>
+                  </AnchorPane>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="100.0" prefWidth="160.0">
+                     <children>
+                        <TableView fx:id="table" layoutX="-1.0" layoutY="2.0" prefHeight="444.0" prefWidth="805.0">
+                           <columns>
+                              <TableColumn fx:id="student" prefWidth="122.0" text="Uczeń" />
+                              <TableColumn fx:id="marks" prefWidth="540.0" text="Oceny" />
+                              <TableColumn fx:id="avgMarks" minWidth="0.0" prefWidth="172.0" text="Średnia" />
+                           </columns>
+                        </TableView>
+                     </children>
+                  </AnchorPane>
+               </items>
+            </SplitPane>
+         </center>
+      </BorderPane>
+   </children>
+</AnchorPane>
